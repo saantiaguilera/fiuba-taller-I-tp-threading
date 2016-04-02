@@ -27,15 +27,15 @@ template<class T> void List<T>::add(T element) {
 
 template<class T> void List<T>::add(T element, unsigned int pos) {
     if ((pos > 0) && (pos <= this->count + 1)) {
-        Node<T>* nuevo = new Node<T>(element);
+        Node<T>* newNode = new Node<T>(element);
 
         if (pos == 1) {
-            nuevo->setNext(this->first);
-            this->first = nuevo;
+        	newNode->setNext(this->first);
+            this->first = newNode;
         } else {
-            Node<T>* anterior = this->getNode(pos - 1);
-            nuevo->setNext(anterior->next());
-            anterior->setNext(nuevo);
+            Node<T>* previousNode = this->getNode(pos - 1);
+            newNode->setNext(previousNode->next());
+            previousNode->setNext(newNode);
         }
 
         this->count++;
@@ -66,9 +66,9 @@ template<class T> void List<T>::remove(unsigned int pos) {
         	nodeToRemove = this->first;
             this->first = nodeToRemove->next();
         } else {
-            Node<T>* anterior = this->getNode(pos - 1);
-            nodeToRemove = anterior->next();
-            anterior->cambiarSiguiente(nodeToRemove->next());
+            Node<T>* previousNode = this->getNode(pos - 1);
+            nodeToRemove = previousNode->next();
+            previousNode->setNext(nodeToRemove->next());
         }
 
         delete nodeToRemove;

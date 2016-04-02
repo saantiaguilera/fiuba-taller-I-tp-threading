@@ -27,3 +27,8 @@ template<class T> Node<T> * Node<T>::next() {
 template<class T> void Node<T>::setNext(Node<T> *node) {
     this->nextNode = node;
 }
+
+template<class T> Node<T>::~Node() {
+	this->element = NULL;
+	this->nextNode = NULL;
+}

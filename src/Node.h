@@ -21,6 +21,7 @@ template<class T> class Node {
         void setElement(T element);
         Node<T>* next();
         void setNext(Node<T>* node);
+        virtual ~Node();
 };
 
 #endif /* NODO_H_ */
