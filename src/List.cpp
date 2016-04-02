@@ -7,11 +7,8 @@
 
 #include "List.h"
 
-template<class T> List<T>::List() {
-    this->first = NULL;
-    this->count = 0;
-    this->c = NULL;
-}
+template<class T> List<T>::List() :
+	first(NULL) , count(0), c(NULL) {}
 
 template<class T> bool List<T>::isEmpty() {
     return (this->count == 0);

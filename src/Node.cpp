@@ -7,10 +7,8 @@
 
 #include "Node.h"
 
-template<class T> Node<T>::Node(T data) {
-    this->element = data;
-    this->nextNode = NULL;
-}
+template<class T> Node<T>::Node(T data) :
+	element(data), nextNode(NULL) { }
 
 template<class T> T Node<T>::get() {
     return this->element;
