@@ -7,8 +7,6 @@
 
 #include "Expression.h"
 
-Expression::Expression(std::string line) {
-	parse(line);
-}
+Expression::Expression(UserRuntimeExpressionsInterface &listener) : listener(listener) {}
 
 Expression::~Expression() {}
