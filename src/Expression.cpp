@@ -7,6 +7,14 @@
 
 #include "Expression.h"
 
-Expression::Expression(UserRuntimeExpressionsInterface &listener) : listener(listener) {}
+Expression::Expression(std::list<Expression*> &runtimeExpressions) {
+	this->runtimeExpressions = runtimeExpressions;
+}
 
-Expression::~Expression() {}
+std::list<Element> Expression::getValues() {
+	return this->values;
+}
+
+void Expression::setEnvironment(std::list<Expression*> expressions) {
+	this->environment = expressions; //Todo check if this wont give a mem leak
+}

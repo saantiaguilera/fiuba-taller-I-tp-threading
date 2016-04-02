@@ -9,20 +9,21 @@
 #define LISPPARSER_H_
 
 #include "Expression.h"
-#include "UserRuntimeExpressionsInterface.h"
+#include <iostream>
+#include <sstream>
 
-class LispParser : public UserRuntimeExpressionsInterface {
+//Not to sure if it has to be private. Because from outside people shouldnt be able to call getUserExpressions. But if someone
+//Has the interface they should be able to retrieve them, but its weird since the user can just cast it and get them....
+class LispParser {
 	private:
-		FILE *inputFile;
-		std::map<std::string, Expression> userExpressions; //This will be all the expressions created in runtime
+		std::istringstream buffer;
+		std::list<Expression*> runtimeExpressions; //This will be all the expressions created in runtime
+		Expression * parseLine();
 
 	public:
-		LispParser(std::string fileName);
-		virtual ~LispParser();
-		Expression parseLine();
-		virtual std::map<std::string, Expression> getUserExpressions() {
-			return userExpressions;
-		}
+		LispParser(std::string &fileName);
+		~LispParser();
+		void run();
 };
 
 #endif /* LISPPARSER_H_ */

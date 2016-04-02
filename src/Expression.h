@@ -8,7 +8,8 @@
 #ifndef EXPRESSION_H_
 #define EXPRESSION_H_
 
-#include "List.h"
+#include "string"
+#include <list>
 
 /**
  * My elements will always be strings.
@@ -23,20 +24,18 @@ typedef std::string Element;
 
 class Expression {
 	private:
-		List<Expression> environment;
-		UserRuntimeExpressionsInterface listener;
-		List<Element> values;
-
-		List<Expression> getRuntimeExpressions(); //Should do listener.getUserExpressions() (@see LispParser.h)
+		std::list<Expression*> environment;
+		std::list<Element> values;
+		std::list<Expression*> runtimeExpressions;
 
 	public:
-		Expression(UserRuntimeExpressionsInterface &listener);
-		virtual ~Expression();
-		virtual std::string getTag(); //known method ? NULL : runtime name tag
-		List<Element> getValues();
-		virtual void parse(std::string line, void *params);
-		virtual Expression evaluate();
-		void setEnvironment(List<Expression> environment);
+		Expression(std::list<Expression*> &runtimeExpressions);
+		virtual ~Expression() = 0;
+		virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
+		std::list<Element> getValues();
+		virtual void parse(std::string line, void *params) = 0;
+		virtual Expression * evaluate() = 0;
+		void setEnvironment(std::list<Expression*> environment);
 		/**
 		 * if we have
 		 * defunc func1 (list) (+ list) //Sum the list

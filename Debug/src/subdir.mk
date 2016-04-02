@@ -4,18 +4,18 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/List.cpp \
-../src/Node.cpp \
+../src/Expression.cpp \
+../src/LispParser.cpp \
 ../src/tp.cpp 
 
 OBJS += \
-./src/List.o \
-./src/Node.o \
+./src/Expression.o \
+./src/LispParser.o \
 ./src/tp.o 
 
 CPP_DEPS += \
-./src/List.d \
-./src/Node.d \
+./src/Expression.d \
+./src/LispParser.d \
 ./src/tp.d 
 
 
