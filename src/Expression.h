@@ -10,6 +10,7 @@
 
 #include "string"
 #include <list>
+#include "RuntimeExpressionInterface.h"
 
 /**
  * My elements will always be strings.
@@ -26,10 +27,10 @@ class Expression {
 	private:
 		std::list<Expression*> environment;
 		std::list<Element> values;
-		std::list<Expression*> runtimeExpressions;
+		RuntimeExpressionInterface *listener;
 
 	public:
-		Expression(std::list<Expression*> &runtimeExpressions);
+		Expression(RuntimeExpressionInterface *listener);
 		virtual ~Expression() = 0;
 		virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
 		std::list<Element> getValues();

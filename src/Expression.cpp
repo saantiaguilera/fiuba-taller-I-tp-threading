@@ -7,8 +7,8 @@
 
 #include "Expression.h"
 
-Expression::Expression(std::list<Expression*> &runtimeExpressions) {
-	this->runtimeExpressions = runtimeExpressions;
+Expression::Expression(RuntimeExpressionInterface *listener) {
+	this->listener = listener;
 }
 
 std::list<Element> Expression::getValues() {

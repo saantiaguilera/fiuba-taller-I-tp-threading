@@ -10,6 +10,10 @@
 LispParser::LispParser(std::string &fileName) : buffer(fileName) {
 }
 
+std::list<Expression*> LispParser::getRuntimeExpressions() {
+	return this->runtimeExpressions;
+}
+
 LispParser::~LispParser() {
 	this->buffer.clear();
 }
