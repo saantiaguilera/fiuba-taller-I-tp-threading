@@ -27,7 +27,7 @@ void LispParser::run() { //TODO. FOR NOW BUFFER WILL BE A SINGLE LINE
 
 Expression * LispParser::expressionFromKnownStrings(std::string &string) {
 	if (string == "+")
-		return 0;
+		return new ExpressionSum(this);
 	if (string == "-")
 		return 0;
 	if (string == "*")
@@ -80,72 +80,12 @@ Expression * LispParser::parseLine(std::string &line) { //TODO ONCE WORKING REFA
 	Expression *expression = getExpressionFor(function);
 	std::cout << "Function to parse is: " << function << std::endl;
 
-	int count = 0;
-	int start = -1;
-	int end = -1;
-	bool stop = false;
+	std::string stuff = line.substr(line.find(function) + function.length(), line.find_last_of(")") - line.find(function) - function.length());
 
-	for (std::string::size_type i = 1; i < line.size() && !stop; ++i) {
-		if (line[i] == '('){
-			if (count == 0)
-				start = i;
-			count++;
-		}
+	std::cout << "Stuff that receives is: " << stuff << std::endl;
+	if (expression != 0)
+		expression->parse(stuff, 0); //0 Should be a virtual method of expression. That overrides only the ones interested
 
-		if (line[i] == ')') {
-			count--;
-			if (count == 0) {
-				end = i;
-				stop = true;
-			}
-		}
-	}
-
-	if (end != -1 && start != -1) {
-		std::string stuff = line.substr(start, end - start + 1);
-		std::cout << "Params are: " << stuff << std::endl;
-		parseLine(stuff);
-	} else {
-		int start = line.find(function) + function.length();
-		int end = line.find_last_of(")") - start;
-		std::cout << "Cut reached, stuff to join with func is " << line.substr(start, end) << std::endl;
-		std::cout << "Checking if second params are available" << std::endl;
-		return 0;
-		//No more parenthesis. Cut condition here
-	}
-
-	//Since max params are 2, enter recursivness here again.
-	if (line.find("(", end) != std::string::npos) {
-		int newStart = end + 1;
-		count = 0;
-		start = -1;
-		end = -1;
-		stop = false;
-
-		for (std::string::size_type i = newStart; i < line.size() && !stop; ++i) {
-			if (line[i] == '('){
-				if (count == 0)
-					start = i;
-				count++;
-			}
-
-			if (line[i] == ')') {
-				count--;
-				if (count == 0) {
-					end = i;
-					stop = true;
-				}
-			}
-		}
-
-		if (end != -1 && start != -1) {
-			std::string stuff = line.substr(start, end - start + 1);
-			std::cout << "Params are: " << stuff << std::endl;
-			parseLine(stuff);
-		} else {
-			//No more parenthesis. Cut condition here for second one
-		}
-	} else std::cout << "No second params found" << std::endl;
 
 	return 0;
 }

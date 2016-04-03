@@ -8,10 +8,8 @@
 #ifndef LISPPARSER_H_
 #define LISPPARSER_H_
 
+#include "ExpressionSum.h"
 #include "Expression.h"
-#include "RuntimeExpressionInterface.h"
-#include <iostream>
-#include <sstream>
 #include "KnownFunctions.h"
 
 

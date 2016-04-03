@@ -12,7 +12,7 @@
 int main() {
 	std::cout << "!!!Hello World!!!" << std::endl; // prints !!!Hello World!!!
 
-	std::string a = "(+ (* (list 3 4 5)) (- 9 6))";
+	std::string a = "(+ (+ 3 4 5) (+ 9 6))";
 
 	std::cout << "Lets parse: " << a << std::endl;
 

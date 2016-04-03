@@ -12,6 +12,8 @@
 #include <list>
 #include "RuntimeExpressionInterface.h"
 #include <cstdio>
+#include <stdlib.h>
+#include <iostream>
 
 /**
  * My elements will always be strings.
@@ -25,14 +27,14 @@
 typedef std::string Element;
 
 class Expression {
-	private:
+	protected:
 		std::list<Expression*> environment;
 		std::list<Element> values;
 		RuntimeExpressionInterface *listener;
 
 	public:
 		Expression(RuntimeExpressionInterface *listener);
-		virtual ~Expression() = 0;
+		virtual ~Expression() {};
 		virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
 		std::list<Element> getValues();
 		virtual void parse(std::string &line, void *params) = 0;
