@@ -12,18 +12,23 @@
 #include "RuntimeExpressionInterface.h"
 #include <iostream>
 #include <sstream>
+#include "KnownFunctions.h"
+
 
 //Not to sure if it has to be private. Because from outside people shouldnt be able to call getUserExpressions. But if someone
 //Has the interface they should be able to retrieve them, but its weird since the user can just cast it and get them....
 class LispParser : private RuntimeExpressionInterface {
 	private:
-		std::istringstream buffer;
+		std::string buffer;
 		std::list<Expression*> runtimeExpressions; //This will be all the expressions created in runtime
-		Expression * parseLine();
+
+		Expression * getExpressionFor(std::string &function);
+		Expression * expressionFromKnownStrings(std::string &string);
+		Expression * parseLine(std::string &line);
 		virtual std::list<Expression*> getRuntimeExpressions();
 
 	public:
-		LispParser(std::string &fileName);
+		LispParser(std::string &code);
 		~LispParser();
 		void run();
 };

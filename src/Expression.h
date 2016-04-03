@@ -8,9 +8,10 @@
 #ifndef EXPRESSION_H_
 #define EXPRESSION_H_
 
-#include "string"
+#include <string>
 #include <list>
 #include "RuntimeExpressionInterface.h"
+#include <cstdio>
 
 /**
  * My elements will always be strings.
@@ -34,7 +35,7 @@ class Expression {
 		virtual ~Expression() = 0;
 		virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
 		std::list<Element> getValues();
-		virtual void parse(std::string line, void *params) = 0;
+		virtual void parse(std::string &line, void *params) = 0;
 		virtual Expression * evaluate() = 0;
 		void setEnvironment(std::list<Expression*> environment);
 		/**
