@@ -5,6 +5,15 @@
  *      Author: santiago
  */
 
+#include <string>
+#include <list>
+#include "KnownFunctions.h"
+
+class Expression;
+
+#include "RuntimeExpressionInterface.h"
+#include "ParserUtils.h"
+#include "Expression.h"
 #include "LispParser.h"
 
 #define CHECKSUM_THRESHOLD 65536

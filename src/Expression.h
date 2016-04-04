@@ -8,12 +8,6 @@
 #ifndef EXPRESSION_H_
 #define EXPRESSION_H_
 
-#include <string>
-#include <list>
-#include <cstdio>
-#include <stdlib.h>
-#include <iostream>
-
 /**
  * My elements will always be strings.
  * This means if you create
@@ -23,7 +17,6 @@
  * If later we need to make the Element more complex, we will have to change it into
  * an own class
  */
-class ParserUtils;
 
 typedef std::string Element;
 

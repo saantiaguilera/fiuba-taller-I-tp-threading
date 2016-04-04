@@ -5,6 +5,16 @@
  *      Author: santiago
  */
 
+#include <string>
+#include <list>
+#include <cstdio>
+#include <stdlib.h>
+#include <iostream>
+
+class Expression;
+
+#include "RuntimeExpressionInterface.h"
+#include "ParserUtils.h"
 #include "Expression.h"
 
 Expression::Expression(ParserUtils *parserUtils) : parserUtils(parserUtils) {

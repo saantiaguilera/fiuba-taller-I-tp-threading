@@ -8,40 +8,17 @@
 #ifndef EXPRESSIONSUM_H_
 #define EXPRESSIONSUM_H_
 
-#include "Expression.h"
-
 class ExpressionSum : public Expression {
 	private:
 		ExpressionSum(const ExpressionSum&);
 		ExpressionSum& operator=(const ExpressionSum&);
 
 	public:
-		ExpressionSum(ParserUtils *parserUtils) : Expression(parserUtils) { }
-
-		virtual ~ExpressionSum() {};
-
-		virtual Expression * evaluate() {
-			int result = 0;
-			for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
-				std::list<Element> values = ((*expressionIterator)->evaluate())->getValues();
-				for (std::list<Element>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
-					result += atoi((*elementIterator).c_str());
-				}
-			}
-
-			std::cout << "Function of tag " + getTag() << " has value: " << result << std::endl;
-			return 0;
-		}
-
-		virtual void parseBody(std::string &line, void *params) {
-			std::cout << "PARSEBODY:: " << line << std::endl;
-
-
-		}
-
-		virtual std::string getTag() {
-			return "+";
-		}
+		ExpressionSum(ParserUtils *parserUtils);
+		virtual ~ExpressionSum();
+		virtual Expression * evaluate();
+		virtual void parseBody(std::string &line, void *params);
+		virtual std::string getTag();
 
 };
 
