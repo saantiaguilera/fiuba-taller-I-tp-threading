@@ -45,12 +45,21 @@ Expression * LispParser::parseLine(std::string &line) { //TODO ONCE WORKING REFA
 	//Eg (+ (* (list 3 4 5)) (- 9 6))
 	//Eg (+ 4 6)
 	Expression *expression = parserUtils->parseExpression(line);
+	std::cout << std::endl;
 
-	std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
-	std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
-	std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
+	std::cout << "LINE:: " << line << std::endl;
+
+	std::cout << std::endl;
+	std::cout << "------------------------------------------------------------" << std::endl;
+	std::cout << "------------------------------------------------------------" << std::endl;
+	std::cout << "--------------------------EVALUATING------------------------" << std::endl;
+	std::cout << "------------------------------------------------------------" << std::endl;
+	std::cout << "------------------------------------------------------------" << std::endl;
+	std::cout << std::endl;
 
 	expression->evaluate();
+
+	std::cout << "FINAL VALUE:: " << *(expression->getValues().front()) << std::endl;
 
 	return 0;
 }
