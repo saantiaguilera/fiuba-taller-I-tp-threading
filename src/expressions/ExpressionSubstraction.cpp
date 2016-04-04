@@ -25,22 +25,8 @@ ExpressionSubstraction::ExpressionSubstraction(ParserUtils *parserUtils) : Expre
 
 ExpressionSubstraction::~ExpressionSubstraction() {}
 
-Expression * ExpressionSubstraction::evaluate() {
-	int result = 0;
-	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
-		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
-		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
-			result -= atoi((**elementIterator).c_str());
-		}
-	}
-
-    std::ostringstream os ;
-    os << result;
-	getValues().push_back(new Element(os.str()));
-
-	std::cout << "Function of tag " + getTag() << " has value: " << result << std::endl;
-
-	return this;
+int ExpressionSubstraction::operate(int dest, int src) {
+	return dest - src;
 }
 
 std::string ExpressionSubstraction::getTag() {

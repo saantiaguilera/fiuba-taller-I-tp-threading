@@ -16,7 +16,7 @@ class ExpressionMultiply : public ExpressionArithmetic {
 	public:
 		ExpressionMultiply(ParserUtils *parserUtils);
 		virtual ~ExpressionMultiply();
-		virtual Expression * evaluate();
+		virtual int operate(int dest, int src);
 		virtual std::string getTag();
 
 };

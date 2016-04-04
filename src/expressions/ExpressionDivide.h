@@ -16,7 +16,7 @@ class ExpressionDivide : public ExpressionArithmetic {
 	public:
 		ExpressionDivide(ParserUtils *parserUtils);
 		virtual ~ExpressionDivide();
-		virtual Expression * evaluate();
+		virtual int operate(int dest, int src);
 		virtual std::string getTag();
 
 };

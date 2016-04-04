@@ -16,7 +16,7 @@ class ExpressionSubstraction : public ExpressionArithmetic {
 	public:
 		ExpressionSubstraction(ParserUtils *parserUtils);
 		virtual ~ExpressionSubstraction();
-		virtual Expression * evaluate();
+		virtual int operate(int dest, int src);
 		virtual std::string getTag();
 
 };

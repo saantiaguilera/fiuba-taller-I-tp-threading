@@ -24,6 +24,24 @@ ExpressionArithmetic::ExpressionArithmetic(ParserUtils *parserUtils) : Expressio
 
 ExpressionArithmetic::~ExpressionArithmetic() {}
 
+Expression * ExpressionArithmetic::evaluate() {
+	int result = 0;
+	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
+		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
+		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
+			result = operate(result, atoi((**elementIterator).c_str()));
+		}
+	}
+
+    std::ostringstream os ;
+    os << result;
+	getValues().push_back(new Element(os.str()));
+
+	std::cout << "Function of tag " + getTag() << " has value: " << result << std::endl;
+
+	return this;
+}
+
 void ExpressionArithmetic::parseBody(std::string &line, void *params) {
 	std::cout << "PARSEBODY:: " << line << std::endl;
 	std::string temp = line;

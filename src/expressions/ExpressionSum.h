@@ -16,7 +16,7 @@ class ExpressionSum : public ExpressionArithmetic {
 	public:
 		ExpressionSum(ParserUtils *parserUtils);
 		virtual ~ExpressionSum();
-		virtual Expression * evaluate();
+		virtual int operate(int dest, int src);
 		virtual std::string getTag();
 
 };
