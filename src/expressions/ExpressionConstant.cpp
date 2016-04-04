@@ -24,7 +24,7 @@ ExpressionConstant::ExpressionConstant(ParserUtils *parserUtils) : Expression(pa
 ExpressionConstant::~ExpressionConstant() {}
 
 Expression * ExpressionConstant::evaluate() {
-	getValues().push_back(this->value);
+	getValues().push_back(new Element(this->value));
 	std::cout << "Function of tag " + getTag() << " has value: " << this->value << std::endl;
 	return this;
 }

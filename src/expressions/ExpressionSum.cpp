@@ -28,16 +28,15 @@ ExpressionSum::~ExpressionSum() {}
 Expression * ExpressionSum::evaluate() {
 	int result = 0;
 	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
-		std::list<Element> values = ((*expressionIterator)->evaluate())->getValues();
-		std::cout << "VALUES:: " << values.size() << std::endl;
-		for (std::list<Element>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
-			result += atoi((*elementIterator).c_str());
+		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
+		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
+			result += atoi((**elementIterator).c_str());
 		}
 	}
 
     std::ostringstream os ;
     os << result;
-	getValues().push_back(os.str());
+	getValues().push_back(new Element(os.str()));
 
 	std::cout << "Function of tag " + getTag() << " has value: " << result << std::endl;
 

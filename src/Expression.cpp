@@ -20,12 +20,14 @@ class Expression;
 Expression::Expression(ParserUtils *parserUtils) : parserUtils(parserUtils) {}
 
 Expression::~Expression() {
-	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
+	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator)
 		delete (*expressionIterator);
-	}
+
+	for (std::list<Element*>::const_iterator valuesIterator = values.begin(); valuesIterator != values.end(); ++valuesIterator)
+		delete (*valuesIterator);
 }
 
-std::list<Element> Expression::getValues() {
+std::list<Element*> &Expression::getValues() {
 	return this->values;
 }
 
