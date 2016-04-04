@@ -26,7 +26,7 @@ ExpressionConstant::~ExpressionConstant() {}
 Expression * ExpressionConstant::evaluate() {
 	getValues().push_back(this->value);
 	std::cout << "Function of tag " + getTag() << " has value: " << this->value << std::endl;
-	return 0;
+	return this;
 }
 
 std::string ExpressionConstant::getTag() {

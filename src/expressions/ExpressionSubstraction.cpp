@@ -39,7 +39,8 @@ Expression * ExpressionSubstraction::evaluate() {
 	getValues().push_back(os.str());
 
 	std::cout << "Function of tag " + getTag() << " has value: " << result << std::endl;
-	return 0;
+
+	return this;
 }
 
 std::string ExpressionSubstraction::getTag() {

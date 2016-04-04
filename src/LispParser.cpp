@@ -6,6 +6,11 @@
  */
 
 #include <string>
+#include <cstdio>
+#include <stdlib.h>
+#include <cstdlib>
+#include <iostream>
+#include <sstream>
 #include <list>
 #include "KnownFunctions.h"
 
@@ -39,7 +44,13 @@ void LispParser::run() { //TODO. FOR NOW BUFFER WILL BE A SINGLE LINE
 Expression * LispParser::parseLine(std::string &line) { //TODO ONCE WORKING REFACTOR IT TO SIMPLER FORM (REPEATING CODE)
 	//Eg (+ (* (list 3 4 5)) (- 9 6))
 	//Eg (+ 4 6)
-	parserUtils->parseExpression(line);
+	Expression *expression = parserUtils->parseExpression(line);
+
+	std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
+	std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
+	std::cout << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
+
+	expression->evaluate();
 
 	return 0;
 }

@@ -29,6 +29,7 @@ Expression * ExpressionSum::evaluate() {
 	int result = 0;
 	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
 		std::list<Element> values = ((*expressionIterator)->evaluate())->getValues();
+		std::cout << "VALUES:: " << values.size() << std::endl;
 		for (std::list<Element>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
 			result += atoi((*elementIterator).c_str());
 		}
@@ -39,7 +40,8 @@ Expression * ExpressionSum::evaluate() {
 	getValues().push_back(os.str());
 
 	std::cout << "Function of tag " + getTag() << " has value: " << result << std::endl;
-	return 0;
+
+	return this;
 }
 
 std::string ExpressionSum::getTag() {
