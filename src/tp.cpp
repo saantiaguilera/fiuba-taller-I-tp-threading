@@ -21,7 +21,7 @@ class Expression;
 int main() {
 	std::cout << "!!!Hello World!!!" << std::endl; // prints !!!Hello World!!!
 
-	std::string a = "(+ (* 2 3) (- 1 2))";
+	std::string a = "(+ 2 3 (* 5 2) (- 2 (/ 6 3)))";
 
 	std::cout << "Lets parse: " << a << std::endl;
 

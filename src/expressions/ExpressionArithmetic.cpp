@@ -25,11 +25,19 @@ ExpressionArithmetic::ExpressionArithmetic(ParserUtils *parserUtils) : Expressio
 ExpressionArithmetic::~ExpressionArithmetic() {}
 
 Expression * ExpressionArithmetic::evaluate() {
+	bool start = true;
 	int result = 0;
+
 	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
 		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
+
 		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
-			result = operate(result, atoi((**elementIterator).c_str()));
+			if (start) {
+				result = atoi((**elementIterator).c_str());
+				start = false;
+			} else {
+				result = operate(result, atoi((**elementIterator).c_str()));
+			}
 		}
 	}
 
