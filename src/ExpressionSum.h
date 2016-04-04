@@ -12,6 +12,8 @@
 
 class ExpressionSum : public Expression {
 	private:
+		ExpressionSum(const ExpressionSum&);
+		ExpressionSum& operator=(const ExpressionSum&);
 
 	public:
 		ExpressionSum(RuntimeExpressionInterface *listener) : Expression(listener) { }
@@ -31,70 +33,9 @@ class ExpressionSum : public Expression {
 			return 0;
 		}
 
-		virtual void parse(std::string &line, void *params) {
-			int count = 0;
-			int start = -1;
-			int end = -1;
-			bool stop = false;
+		virtual void parseBody(std::string &line, void *params) {
+			std::cout << "PARSEBODY:: " << line << std::endl;
 
-			for (std::string::size_type i = 1; i < line.size() && !stop; ++i) {
-				if (line[i] == '('){
-					if (count == 0)
-						start = i;
-					count++;
-				}
-					if (line[i] == ')') {
-						count--;
-						if (count == 0) {
-							end = i;
-							stop = true;
-						}
-					}
-				}
-			if (end != -1 && start != -1) {
-				std::string stuff = line.substr(start, end - start + 1);
-				std::cout << "Params are: " << stuff << std::endl;
-				parse(stuff, params);
-			} else {
-				int start = 0;
-				int end = line.find_last_of(")") - start;
-				std::cout << "Cut reached, stuff to join with func is " << line.substr(start, end) << std::endl;
-				std::cout << "Checking if second params are available" << std::endl;
-				return;
-				//No more parenthesis. Cut condition here
-			}
-			//Since max params are 2, enter recursivness here again.
-			if (line.find("(", end) != std::string::npos) {
-				int newStart = end + 1;
-				count = 0;
-				start = -1;
-				end = -1;
-				stop = false;
-
-				for (std::string::size_type i = newStart; i < line.size() && !stop; ++i) {
-					if (line[i] == '('){
-						if (count == 0)
-							start = i;
-						count++;
-					}
-
-					if (line[i] == ')') {
-						count--;
-						if (count == 0) {
-							end = i;
-							stop = true;
-						}
-					}
-				}
-
-				if (end != -1 && start != -1) {
-					std::string stuff = line.substr(start, end - start + 1);
-					std::cout << "Params are: " << stuff << std::endl;
-					parse(stuff, params);
-				} else {
-					//No more parenthesis. Cut condition here for second one
-				}
-			} else std::cout << "No second params found" << std::endl;
 
 		}
 

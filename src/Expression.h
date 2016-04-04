@@ -27,6 +27,10 @@
 typedef std::string Element;
 
 class Expression {
+	private:
+		Expression(const Expression&);
+		Expression& operator=(const Expression&);
+
 	protected:
 		std::list<Expression*> environment;
 		std::list<Element> values;
@@ -37,7 +41,7 @@ class Expression {
 		virtual ~Expression() {};
 		virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
 		std::list<Element> getValues();
-		virtual void parse(std::string &line, void *params) = 0;
+		virtual void parseBody(std::string &line, void *params) = 0;
 		virtual Expression * evaluate() = 0;
 		void setEnvironment(std::list<Expression*> environment);
 		/**

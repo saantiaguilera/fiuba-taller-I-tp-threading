@@ -1,6 +1,6 @@
 src/tp.o: ../src/tp.cpp ../src/LispParser.h ../src/ExpressionSum.h \
  ../src/Expression.h ../src/RuntimeExpressionInterface.h \
- ../src/KnownFunctions.h
+ ../src/KnownFunctions.h ../src/ParserUtils.h
 
 ../src/LispParser.h:
 
@@ -11,3 +11,5 @@ src/tp.o: ../src/tp.cpp ../src/LispParser.h ../src/ExpressionSum.h \
 ../src/RuntimeExpressionInterface.h:
 
 ../src/KnownFunctions.h:
+
+../src/ParserUtils.h:
