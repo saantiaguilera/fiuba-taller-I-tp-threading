@@ -19,6 +19,9 @@ class Expression;
 #include "expressions/ExpressionArithmetic.h"
 #include "expressions/ExpressionSum.h"
 #include "expressions/ExpressionConstant.h"
+#include "expressions/ExpressionMultiply.h"
+#include "expressions/ExpressionDivide.h"
+#include "expressions/ExpressionSubstraction.h"
 
 ParserUtils::ParserUtils(RuntimeExpressionInterface *listener) : listener(listener) { }
 
@@ -26,11 +29,11 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 	if (string == "+")
 		return new ExpressionSum(this);
 	if (string == "-")
-		return 0;
+		return new ExpressionSubstraction(this);
 	if (string == "*")
-		return 0;
+		return new ExpressionMultiply(this);
 	if (string == "/")
-		return 0;
+		return new ExpressionDivide(this);
 	if (string == "=")
 		return 0;
 	if (string == ">")
