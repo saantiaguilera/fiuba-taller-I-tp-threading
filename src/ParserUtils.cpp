@@ -16,6 +16,7 @@ class Expression;
 #include "RuntimeExpressionInterface.h"
 #include "ParserUtils.h"
 #include "Expression.h"
+#include "ExpressionArithmetic.h"
 #include "ExpressionSum.h"
 #include "ExpressionConstant.h"
 

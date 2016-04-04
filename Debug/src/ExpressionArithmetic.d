@@ -1,6 +1,6 @@
-src/ExpressionSum.o: ../src/ExpressionSum.cpp \
+src/ExpressionArithmetic.o: ../src/ExpressionArithmetic.cpp \
  ../src/RuntimeExpressionInterface.h ../src/ParserUtils.h \
- ../src/Expression.h ../src/ExpressionArithmetic.h ../src/ExpressionSum.h
+ ../src/Expression.h ../src/ExpressionArithmetic.h
 
 ../src/RuntimeExpressionInterface.h:
 
@@ -9,5 +9,3 @@ src/ExpressionSum.o: ../src/ExpressionSum.cpp \
 ../src/Expression.h:
 
 ../src/ExpressionArithmetic.h:
-
-../src/ExpressionSum.h:

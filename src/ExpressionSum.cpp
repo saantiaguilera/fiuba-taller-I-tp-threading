@@ -18,9 +18,10 @@ class Expression;
 #include "RuntimeExpressionInterface.h"
 #include "ParserUtils.h"
 #include "Expression.h"
+#include "ExpressionArithmetic.h"
 #include "ExpressionSum.h"
 
-ExpressionSum::ExpressionSum(ParserUtils *parserUtils) : Expression(parserUtils) { }
+ExpressionSum::ExpressionSum(ParserUtils *parserUtils) : ExpressionArithmetic(parserUtils) { }
 
 ExpressionSum::~ExpressionSum() {}
 
@@ -43,60 +44,4 @@ Expression * ExpressionSum::evaluate() {
 
 std::string ExpressionSum::getTag() {
 	return "+";
-}
-
-void ExpressionSum::parseBody(std::string &line, void *params) {
-	std::cout << "PARSEBODY:: " << line << std::endl;
-	std::string temp = line;
-
-	//+. Iterate while there are data in the line
-	while (temp.find_first_not_of(' ') != std::string::npos) {
-		int count = 0;
-		int start = -1;
-		int end = -1;
-		bool stop = false;
-
-		//Find an inner expression if existing
-		if (temp.find('(') != std::string::npos) {
-			for (std::string::size_type i = 0; i < temp.size() && !stop; ++i) {
-				if (temp[i] == '('){
-					if (count == 0)
-						start = i;
-					count++;
-				}
-				if (temp[i] == ')') {
-					count--;
-					if (count == 0) {
-						end = i;
-						stop = true;
-					}
-				}
-			}
-		}
-
-		//Inner expression found
-		if (end != -1 && start != -1) {
-			//Get recursive and continue for this new expression
-			std::cout << "There is an inner expression. Parse it" << std::endl;
-			std::string stuff = temp.substr(start, end - start + 1);
-			std::cout << "FIRST PARAM:: " << stuff << std::endl;
-			environment.push_back(parserUtils->parseExpression(stuff));
-
-			//Remove the expression and start again
-			std::cout << "REMOVING EXPRESSION." << std::endl;
-		    temp.replace(start, stuff.length(), "");
-		} else { //Just constants
-			std::cout << "Cut reached, adding constants" << std::endl;
-
-			std::istringstream iss(temp);
-			std::string value;
-			while( iss >> value ) {
-				std::cout << "CONSTANT:: " << value << std::endl;
-				environment.push_back(parserUtils->expressionFromConstant(value));
-			}
-
-			//No more parenthesis. Cut condition here
-			temp = "";
-		}
-	}
 }
