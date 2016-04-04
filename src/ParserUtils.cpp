@@ -17,6 +17,7 @@ class Expression;
 #include "ParserUtils.h"
 #include "Expression.h"
 #include "ExpressionSum.h"
+#include "ExpressionConstant.h"
 
 ParserUtils::ParserUtils(RuntimeExpressionInterface *listener) : listener(listener) { }
 
@@ -54,7 +55,7 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 	if (string == "sync")
 		return 0;
 
-	return 0; //constant, lets say 4 or "hello"
+	return new ExpressionConstant(this); //constant, lets say 4 or "hello"
 }
 
 Expression * ParserUtils::expressionFromFunction(std::string &line) {
@@ -73,7 +74,7 @@ Expression * ParserUtils::expressionFromFunction(std::string &line) {
 
 std::string ParserUtils::bodyToString(std::string &line) {
 	std::string function = functionToString(line);
-	return line.substr(line.find(function) + function.length() + 1, line.find_last_of(")") - line.find(function) - function.length());
+	return line.substr(line.find(function) + function.length() + 1, line.find_last_of(")") - line.find(function) - function.length() - 1);
 }
 
 std::string ParserUtils::functionToString(std::string &line) {
@@ -84,13 +85,23 @@ Expression * ParserUtils::parseExpression(std::string &line) {
 	//Get the expression according to the symbol (+)
 	std::string function = functionToString(line);
 
+	//Here we should get a ExpressionSum instance
 	Expression *expression = expressionFromFunction(function);
 
+	//get the body
 	std::string stuff = bodyToString(line);
 
+	//Ask the expression to parse it (since it can depend
 	std::cout << "Stuff that receives is: " << stuff << std::endl;
 	if (expression != 0)
 		expression->parseBody(stuff, 0); //0 Should be a virtual method of expression. That overrides only the ones interested
+
+	return expression;
+}
+
+Expression * ParserUtils::expressionFromConstant(std::string &line) {
+	Expression *expression = new ExpressionConstant(this);
+	expression->parseBody(line, 0);
 
 	return expression;
 }

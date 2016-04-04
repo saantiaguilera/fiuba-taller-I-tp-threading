@@ -32,7 +32,7 @@ class Expression {
 
 	public:
 		Expression(ParserUtils *parserUtils);
-		virtual ~Expression() {};
+		virtual ~Expression();
 		virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
 		std::list<Element> getValues();
 		virtual void parseBody(std::string &line, void *params) = 0;

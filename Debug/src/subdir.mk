@@ -5,6 +5,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../src/Expression.cpp \
+../src/ExpressionConstant.cpp \
 ../src/ExpressionSum.cpp \
 ../src/LispParser.cpp \
 ../src/ParserUtils.cpp \
@@ -13,6 +14,7 @@ CPP_SRCS += \
 
 OBJS += \
 ./src/Expression.o \
+./src/ExpressionConstant.o \
 ./src/ExpressionSum.o \
 ./src/LispParser.o \
 ./src/ParserUtils.o \
@@ -21,6 +23,7 @@ OBJS += \
 
 CPP_DEPS += \
 ./src/Expression.d \
+./src/ExpressionConstant.d \
 ./src/ExpressionSum.d \
 ./src/LispParser.d \
 ./src/ParserUtils.d \

@@ -8,7 +8,9 @@
 #include <string>
 #include <cstdio>
 #include <stdlib.h>
+#include <cstdlib>
 #include <iostream>
+#include <sstream>
 #include <list>
 
 class Expression;
@@ -31,6 +33,10 @@ Expression * ExpressionSum::evaluate() {
 		}
 	}
 
+    std::ostringstream os ;
+    os << result;
+	getValues().push_back(os.str());
+
 	std::cout << "Function of tag " + getTag() << " has value: " << result << std::endl;
 	return 0;
 }
@@ -41,37 +47,56 @@ std::string ExpressionSum::getTag() {
 
 void ExpressionSum::parseBody(std::string &line, void *params) {
 	std::cout << "PARSEBODY:: " << line << std::endl;
+	std::string temp = line;
 
-	//+. Parse first param
-	int count = 0;
-	int start = -1;
-	int end = -1;
-	bool stop = false;
+	//+. Iterate while there are data in the line
+	while (temp.find_first_not_of(' ') != std::string::npos) {
+		int count = 0;
+		int start = -1;
+		int end = -1;
+		bool stop = false;
 
-	for (std::string::size_type i = 0; i < line.size() && !stop; ++i) {
-		if (line[i] == '('){
-			if (count == 0)
-				start = i;
-			count++;
-		}
-			if (line[i] == ')') {
-				count--;
-				if (count == 0) {
-					end = i;
-					stop = true;
+		//Find an inner expression if existing
+		if (temp.find('(') != std::string::npos) {
+			for (std::string::size_type i = 0; i < temp.size() && !stop; ++i) {
+				if (temp[i] == '('){
+					if (count == 0)
+						start = i;
+					count++;
+				}
+				if (temp[i] == ')') {
+					count--;
+					if (count == 0) {
+						end = i;
+						stop = true;
+					}
 				}
 			}
 		}
-	if (end != -1 && start != -1) {
-		std::string stuff = line.substr(start, end - start + 1);
-		std::cout << "FIRST PARAM:: " << stuff << std::endl;
-		parserUtils->bodyToString(stuff);
-	} else {
-		int start = 0;
-		int end = line.find_last_of(")") - start;
-		std::cout << "Cut reached, stuff to join with func is " << line.substr(start, end) << std::endl;
-		std::cout << "Checking if second params are available" << std::endl;
-		return;
-		//No more parenthesis. Cut condition here
+
+		//Inner expression found
+		if (end != -1 && start != -1) {
+			//Get recursive and continue for this new expression
+			std::cout << "There is an inner expression. Parse it" << std::endl;
+			std::string stuff = temp.substr(start, end - start + 1);
+			std::cout << "FIRST PARAM:: " << stuff << std::endl;
+			environment.push_back(parserUtils->parseExpression(stuff));
+
+			//Remove the expression and start again
+			std::cout << "REMOVING EXPRESSION." << std::endl;
+		    temp.replace(start, stuff.length(), "");
+		} else { //Just constants
+			std::cout << "Cut reached, adding constants" << std::endl;
+
+			std::istringstream iss(temp);
+			std::string value;
+			while( iss >> value ) {
+				std::cout << "CONSTANT:: " << value << std::endl;
+				environment.push_back(parserUtils->expressionFromConstant(value));
+			}
+
+			//No more parenthesis. Cut condition here
+			temp = "";
+		}
 	}
 }

@@ -17,7 +17,12 @@ class Expression;
 #include "ParserUtils.h"
 #include "Expression.h"
 
-Expression::Expression(ParserUtils *parserUtils) : parserUtils(parserUtils) {
+Expression::Expression(ParserUtils *parserUtils) : parserUtils(parserUtils) {}
+
+Expression::~Expression() {
+	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
+		delete (*expressionIterator);
+	}
 }
 
 std::list<Element> Expression::getValues() {
