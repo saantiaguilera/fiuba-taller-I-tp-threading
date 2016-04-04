@@ -9,6 +9,7 @@
 #define PARSERUTILS_H_
 
 #include <list>
+#include "RuntimeExpressionInterface.h"
 
 class ParserUtils {
 	private:
@@ -19,7 +20,7 @@ class ParserUtils {
 
 		Expression * expressionFromKnownStrings(std::string &string) {
 			if (string == "+")
-				return new ExpressionSum(listener);
+				return new ExpressionSum(this);
 			if (string == "-")
 				return 0;
 			if (string == "*")

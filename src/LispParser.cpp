@@ -9,7 +9,8 @@
 
 #define CHECKSUM_THRESHOLD 65536
 
-LispParser::LispParser(std::string &code) : buffer(code), parserUtils(this) {
+LispParser::LispParser(std::string &code) : buffer(code) {
+	parserUtils = new ParserUtils(this);
 }
 
 std::list<Expression*> LispParser::getRuntimeExpressions() {
@@ -18,6 +19,7 @@ std::list<Expression*> LispParser::getRuntimeExpressions() {
 
 LispParser::~LispParser() {
 	this->buffer.clear();
+	delete parserUtils;
 }
 
 void LispParser::run() { //TODO. FOR NOW BUFFER WILL BE A SINGLE LINE
@@ -28,7 +30,7 @@ void LispParser::run() { //TODO. FOR NOW BUFFER WILL BE A SINGLE LINE
 Expression * LispParser::parseLine(std::string &line) { //TODO ONCE WORKING REFACTOR IT TO SIMPLER FORM (REPEATING CODE)
 	//Eg (+ (* (list 3 4 5)) (- 9 6))
 	//Eg (+ 4 6)
-	parserUtils.parseExpression(line);
+	parserUtils->parseExpression(line);
 
 	return 0;
 }

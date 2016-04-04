@@ -16,7 +16,7 @@ class ExpressionSum : public Expression {
 		ExpressionSum& operator=(const ExpressionSum&);
 
 	public:
-		ExpressionSum(RuntimeExpressionInterface *listener) : Expression(listener) { }
+		ExpressionSum(ParserUtils *parserUtils) : Expression(parserUtils) { }
 
 		virtual ~ExpressionSum() {};
 

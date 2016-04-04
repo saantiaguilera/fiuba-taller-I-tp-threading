@@ -19,7 +19,7 @@ class LispParser : private RuntimeExpressionInterface {
 	private:
 		std::string buffer;
 		std::list<Expression*> runtimeExpressions; //This will be all the expressions created in runtime
-		ParserUtils parserUtils;
+		ParserUtils *parserUtils;
 
 		Expression * parseLine(std::string &line);
 		virtual std::list<Expression*> getRuntimeExpressions();

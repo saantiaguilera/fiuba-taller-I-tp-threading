@@ -10,7 +10,6 @@
 
 #include <string>
 #include <list>
-#include "RuntimeExpressionInterface.h"
 #include <cstdio>
 #include <stdlib.h>
 #include <iostream>
@@ -24,6 +23,8 @@
  * If later we need to make the Element more complex, we will have to change it into
  * an own class
  */
+class ParserUtils;
+
 typedef std::string Element;
 
 class Expression {
@@ -33,11 +34,11 @@ class Expression {
 
 	protected:
 		std::list<Expression*> environment;
+		ParserUtils *parserUtils;
 		std::list<Element> values;
-		RuntimeExpressionInterface *listener;
 
 	public:
-		Expression(RuntimeExpressionInterface *listener);
+		Expression(ParserUtils *parserUtils);
 		virtual ~Expression() {};
 		virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
 		std::list<Element> getValues();
