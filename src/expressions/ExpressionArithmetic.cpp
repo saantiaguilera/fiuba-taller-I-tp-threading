@@ -15,9 +15,9 @@
 
 class Expression;
 
-#include "RuntimeExpressionInterface.h"
-#include "ParserUtils.h"
-#include "Expression.h"
+#include "../RuntimeExpressionInterface.h"
+#include "../ParserUtils.h"
+#include "../Expression.h"
 #include "ExpressionArithmetic.h"
 
 ExpressionArithmetic::ExpressionArithmetic(ParserUtils *parserUtils) : Expression(parserUtils) { }
