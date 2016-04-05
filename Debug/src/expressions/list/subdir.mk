@@ -4,13 +4,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/expressions/list/ExpressionList.cpp 
+../src/expressions/list/ExpressionFrontList.cpp \
+../src/expressions/list/ExpressionList.cpp \
+../src/expressions/list/ExpressionTailList.cpp 
 
 OBJS += \
-./src/expressions/list/ExpressionList.o 
+./src/expressions/list/ExpressionFrontList.o \
+./src/expressions/list/ExpressionList.o \
+./src/expressions/list/ExpressionTailList.o 
 
 CPP_DEPS += \
-./src/expressions/list/ExpressionList.d 
+./src/expressions/list/ExpressionFrontList.d \
+./src/expressions/list/ExpressionList.d \
+./src/expressions/list/ExpressionTailList.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

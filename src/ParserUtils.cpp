@@ -31,6 +31,9 @@ class Expression;
 #include "expressions/logical/ExpressionEquals.h"
 #include "expressions/logical/ExpressionLower.h"
 #include "expressions/logical/ExpressionHigher.h"
+#include "expressions/list/ExpressionFrontList.h"
+#include "expressions/list/ExpressionList.h"
+#include "expressions/list/ExpressionTailList.h"
 
 ParserUtils::ParserUtils(RuntimeExpressionInterface *listener) : listener(listener) { }
 
@@ -50,11 +53,11 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 	if (string == "<")
 		return new ExpressionLower(this);
 	if (string == "list")
-		return 0;
+		return new ExpressionList(this);
 	if (string == "car")
-		return 0;
+		return new ExpressionFrontList(this);
 	if (string == "cdr")
-		return 0;
+		return new ExpressionTailList(this);
 	if (string == "append")
 		return 0;
 	if (string == "if")
