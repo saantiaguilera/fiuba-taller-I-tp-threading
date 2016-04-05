@@ -15,10 +15,10 @@
 
 class Expression;
 
-#include "../RuntimeExpressionInterface.h"
-#include "../ParserUtils.h"
-#include "../Expression.h"
-#include "ExpressionCommon.h"
+#include "../../RuntimeExpressionInterface.h"
+#include "../../ParserUtils.h"
+#include "../../Expression.h"
+#include "../ExpressionCommon.h"
 #include "ExpressionArithmetic.h"
 #include "ExpressionSum.h"
 

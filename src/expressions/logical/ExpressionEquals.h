@@ -8,7 +8,7 @@
 #ifndef EXPRESSIONS_EXPRESSIONEQUALS_H_
 #define EXPRESSIONS_EXPRESSIONEQUALS_H_
 
-class ExpressionEquals : public ExpressionCommon {
+class ExpressionEquals : public ExpressionLogical {
 	private:
 		ExpressionEquals(const ExpressionEquals&);
 		ExpressionEquals& operator=(const ExpressionEquals&);
@@ -16,7 +16,7 @@ class ExpressionEquals : public ExpressionCommon {
 	public:
 		ExpressionEquals(ParserUtils *parserUtils);
 		virtual ~ExpressionEquals();
-		virtual Expression * evaluate();
+		virtual bool operate(int leftValue, int rightValue);
 		virtual std::string getTag();
 
 };

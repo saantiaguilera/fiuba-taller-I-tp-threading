@@ -4,34 +4,16 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/expressions/ExpressionArithmetic.cpp \
 ../src/expressions/ExpressionCommon.cpp \
-../src/expressions/ExpressionConstant.cpp \
-../src/expressions/ExpressionDivide.cpp \
-../src/expressions/ExpressionEquals.cpp \
-../src/expressions/ExpressionMultiply.cpp \
-../src/expressions/ExpressionSubstraction.cpp \
-../src/expressions/ExpressionSum.cpp 
+../src/expressions/ExpressionConstant.cpp 
 
 OBJS += \
-./src/expressions/ExpressionArithmetic.o \
 ./src/expressions/ExpressionCommon.o \
-./src/expressions/ExpressionConstant.o \
-./src/expressions/ExpressionDivide.o \
-./src/expressions/ExpressionEquals.o \
-./src/expressions/ExpressionMultiply.o \
-./src/expressions/ExpressionSubstraction.o \
-./src/expressions/ExpressionSum.o 
+./src/expressions/ExpressionConstant.o 
 
 CPP_DEPS += \
-./src/expressions/ExpressionArithmetic.d \
 ./src/expressions/ExpressionCommon.d \
-./src/expressions/ExpressionConstant.d \
-./src/expressions/ExpressionDivide.d \
-./src/expressions/ExpressionEquals.d \
-./src/expressions/ExpressionMultiply.d \
-./src/expressions/ExpressionSubstraction.d \
-./src/expressions/ExpressionSum.d 
+./src/expressions/ExpressionConstant.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

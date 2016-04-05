@@ -1,31 +1,32 @@
 /*
- * ExpressionEquals.cpp
+ * ExpressionLogical.cpp
  *
  *  Created on: Apr 4, 2016
  *      Author: santiago
  */
 
+
 #include <string>
 #include <cstdio>
 #include <stdlib.h>
 #include <cstdlib>
-#include <sstream>
 #include <iostream>
+#include <sstream>
 #include <list>
 
 class Expression;
 
-#include "../RuntimeExpressionInterface.h"
-#include "../ParserUtils.h"
-#include "../Expression.h"
-#include "ExpressionCommon.h"
-#include "ExpressionEquals.h"
+#include "../../RuntimeExpressionInterface.h"
+#include "../../ParserUtils.h"
+#include "../../Expression.h"
+#include "../ExpressionCommon.h"
+#include "ExpressionLogical.h"
 
-ExpressionEquals::ExpressionEquals(ParserUtils *parserUtils) : ExpressionCommon(parserUtils) { }
+ExpressionLogical::ExpressionLogical(ParserUtils *parserUtils) : ExpressionCommon(parserUtils) { }
 
-ExpressionEquals::~ExpressionEquals() {}
+ExpressionLogical::~ExpressionLogical() {}
 
-Expression * ExpressionEquals::evaluate() {
+Expression * ExpressionLogical::evaluate() {
 	bool start = true;
 	bool different = false;
 	int result = 0;
@@ -38,7 +39,7 @@ Expression * ExpressionEquals::evaluate() {
 				result = atoi((**elementIterator).c_str());
 				start = false;
 			} else {
-				if (result != atoi((**elementIterator).c_str()))
+				if (operate(result, atoi((**elementIterator).c_str())))
 					different = true;
 			}
 		}
@@ -50,8 +51,4 @@ Expression * ExpressionEquals::evaluate() {
 	std::cout << "Function of tag " + getTag() << " has value: " << (different ? "1" : "()") << std::endl;
 
 	return this;
-}
-
-std::string ExpressionEquals::getTag() {
-	return "=";
 }

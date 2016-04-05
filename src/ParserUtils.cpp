@@ -15,14 +15,22 @@ class Expression;
 
 #include "RuntimeExpressionInterface.h"
 #include "ParserUtils.h"
+
 #include "Expression.h"
+
 #include "expressions/ExpressionCommon.h"
-#include "expressions/ExpressionArithmetic.h"
-#include "expressions/ExpressionSum.h"
+
+#include "expressions/logical/ExpressionLogical.h"
+#include "expressions/arithmetic/ExpressionArithmetic.h"
+
+#include "expressions/arithmetic/ExpressionSum.h"
 #include "expressions/ExpressionConstant.h"
-#include "expressions/ExpressionMultiply.h"
-#include "expressions/ExpressionDivide.h"
-#include "expressions/ExpressionSubstraction.h"
+#include "expressions/arithmetic/ExpressionMultiply.h"
+#include "expressions/arithmetic/ExpressionDivide.h"
+#include "expressions/arithmetic/ExpressionSubstraction.h"
+#include "expressions/logical/ExpressionEquals.h"
+#include "expressions/logical/ExpressionLower.h"
+#include "expressions/logical/ExpressionHigher.h"
 
 ParserUtils::ParserUtils(RuntimeExpressionInterface *listener) : listener(listener) { }
 
@@ -36,11 +44,11 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 	if (string == "/")
 		return new ExpressionDivide(this);
 	if (string == "=")
-		return 0;
+		return new ExpressionEquals(this);
 	if (string == ">")
-		return 0;
+		return new ExpressionHigher(this);
 	if (string == "<")
-		return 0;
+		return new ExpressionLower(this);
 	if (string == "car")
 		return 0;
 	if (string == "cdr")

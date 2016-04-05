@@ -25,4 +25,6 @@ C_UPPER_DEPS :=
 SUBDIRS := \
 src \
 src/expressions \
+src/expressions/arithmetic \
+src/expressions/logical \
 
