@@ -33,7 +33,8 @@ int main() {
 	//std::string a = "(list 5 2 3 4 (+ 1 2) (* 8 7))"; //Returns size 6
 	//std::string a = "(car 5 2 3 4 (+ 1 2) (* 8 7))"; //Returns size 1
 	//std::string a = "(cdr 5 2 3 4 (+ 1 2) (* 8 7))"; //Returns size 5
-	std::string a = "(append (list 50 12 43 84 (- 159 208)) (list 1 (* 2 5) 3 4))"; //Returns size 9
+	//std::string a = "(append (list 50 12 43 84 (- 159 208)) (list 1 (* 2 5) 3 4))"; //Returns size 9
+	std::string a = "(append (car (list 1 (* 2 4) 3 4)) (cdr 4 5 (- 8 4)))"; //Return size 3
 
 	std::cout << "Lets parse: " << a << std::endl;
 
