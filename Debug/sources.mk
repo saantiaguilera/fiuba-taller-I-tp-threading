@@ -26,5 +26,6 @@ SUBDIRS := \
 src \
 src/expressions \
 src/expressions/arithmetic \
+src/expressions/list \
 src/expressions/logical \
 

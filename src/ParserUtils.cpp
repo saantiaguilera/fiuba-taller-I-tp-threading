@@ -49,6 +49,8 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 		return new ExpressionHigher(this);
 	if (string == "<")
 		return new ExpressionLower(this);
+	if (string == "list")
+		return 0;
 	if (string == "car")
 		return 0;
 	if (string == "cdr")
@@ -62,8 +64,6 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 	if (string == "print")
 		return 0;
 	if (string == "setq")
-		return 0;
-	if (string == "list")
 		return 0;
 	if (string == "sync")
 		return 0;
