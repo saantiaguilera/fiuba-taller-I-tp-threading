@@ -75,7 +75,6 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 }
 
 Expression * ParserUtils::expressionFromFunction(std::string &line) {
-	std::cout << "Function to parse is: " << line << std::endl;
 
 	std::list<Expression*> runtimeExpressions = listener->getRuntimeExpressions();
 
@@ -108,7 +107,6 @@ Expression * ParserUtils::parseExpression(std::string &line) {
 	std::string stuff = bodyToString(line);
 
 	//Ask the expression to parse it (since it can depend
-	std::cout << "Stuff that receives is: " << stuff << std::endl;
 	if (expression != 0)
 		expression->parseBody(stuff, 0); //0 Should be a virtual method of expression. That overrides only the ones interested
 

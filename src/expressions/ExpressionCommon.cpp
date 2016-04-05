@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
+#include <cctype>
 #include <list>
 
 class Expression;
@@ -20,62 +21,115 @@ class Expression;
 #include "../Expression.h"
 #include "ExpressionCommon.h"
 
+enum MODE { INNER_EXPRESSION, VALUE, UNDEFINED, DEFINED };
+
 ExpressionCommon::ExpressionCommon(ParserUtils *parserUtils) : Expression(parserUtils) { }
 
 ExpressionCommon::~ExpressionCommon() {}
 
 void ExpressionCommon::parseBody(std::string &line, void *params) {
-	std::cout << "PARSEBODY:: " << line << std::endl;
+	std::cout << "BODY:: " << line << std::endl;
 	std::string temp = line;
 
 	//+. Iterate while there are data in the line
-	while (temp.find_first_not_of(' ') != std::string::npos) {
+	while (temp.size() > 0) {
 		int count = 0;
 		int start = -1;
 		int end = -1;
-		bool stop = false;
 
-		//Find an inner expression if existing
-		if (temp.find('(') != std::string::npos) {
-			for (std::string::size_type i = 0; i < temp.size() && !stop; ++i) {
-				if (temp[i] == '('){
-					if (count == 0)
-						start = i;
-					count++;
-				}
-				if (temp[i] == ')') {
-					count--;
-					if (count == 0) {
-						end = i;
-						stop = true;
+		MODE mode = UNDEFINED;
+
+		for (std::string::size_type i = 0; i < temp.size() && mode != DEFINED; ++i) {
+			switch (mode) {
+				case UNDEFINED:
+					if (temp[i] == '('){
+						if (count == 0)
+							start = i;
+						count++;
+
+						mode = INNER_EXPRESSION;
 					}
-				}
+
+					if (isdigit(temp[i]) || isalpha(temp[i])) {
+						start = i;
+						mode = VALUE;
+					}
+
+					break;
+
+				case INNER_EXPRESSION:
+					if (temp[i] == '('){
+						if (count == 0)
+							start = i;
+						count++;
+					}
+					if (temp[i] == ')') {
+						count--;
+						if (count == 0) {
+							end = i;
+
+							//Get recursive and continue for this new expression
+							std::string stuff = temp.substr(start, end - start + 1);
+							std::cout << "INNER EXPRESSION:: " << stuff << std::endl;
+							environment.push_back(parserUtils->parseExpression(stuff));
+
+							//Remove the expression and start again
+							temp.replace(start, stuff.length(), "");
+
+							mode = DEFINED;
+						}
+					}
+					break;
+
+				case VALUE:
+					if (!isdigit(temp[i]) && !isalpha(temp[i])) {
+						end = i;
+
+						//Get recursive and continue for this value
+						std::string value = temp.substr(start, end - start + 1);
+						std::cout << "CONSTANT:: " << value << std::endl;
+						environment.push_back(parserUtils->expressionFromConstant(value));
+
+						//Remove the expression and start again
+						temp.replace(start, value.length(), "");
+
+						mode = DEFINED;
+					}
+					break;
+
+				case DEFINED: //To avoid -W
+					break;
 			}
 		}
 
-		//Inner expression found
-		if (end != -1 && start != -1) {
-			//Get recursive and continue for this new expression
-			std::cout << "There is an inner expression. Parse it" << std::endl;
-			std::string stuff = temp.substr(start, end - start + 1);
-			std::cout << "FIRST PARAM:: " << stuff << std::endl;
-			environment.push_back(parserUtils->parseExpression(stuff));
+		if (mode != DEFINED) {
+			if (start != -1) {
+				//There was a last char at the end. Parse it as value
+				std::string value = temp.substr(start, temp.size());
 
-			//Remove the expression and start again
-			std::cout << "REMOVING EXPRESSION." << std::endl;
-		    temp.replace(start, stuff.length(), "");
-		} else { //Just constants
-			std::cout << "Cut reached, adding constants" << std::endl;
+				switch (mode) {
+					case UNDEFINED: //1 char or lots of spaces
+					case VALUE:
+						environment.push_back(parserUtils->expressionFromConstant(value));
+						std::cout << "CONSTANT:: " << value << std::endl;
+						break;
 
-			std::istringstream iss(temp);
-			std::string value;
-			while( iss >> value ) {
-				std::cout << "CONSTANT:: " << value << std::endl;
-				environment.push_back(parserUtils->expressionFromConstant(value));
+					case INNER_EXPRESSION:
+						environment.push_back(parserUtils->parseExpression(value));
+						std::cout << "INNER EXPRESSION:: " << value << std::endl;
+						break;
+
+					case DEFINED:
+						break;
+				}
+
+				mode = UNDEFINED;
+				temp = "";
+			} else {
+				if (temp.length() > 0)
+					temp = "";
 			}
-
-			//No more parenthesis. Cut condition here
-			temp = "";
 		}
 	}
+
 }

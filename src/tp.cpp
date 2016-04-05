@@ -22,17 +22,17 @@ int main() {
 	std::cout << "!!!Hello World!!!" << std::endl; // prints !!!Hello World!!!
 
 	//arithmetic
-	//std::string a = "(+ 2 3 (* 5 2) (- 2 (/ 6 3)))";
+	//std::string a = "(+ 2 3 (* 5 2) (- 2 (/ 6 3)))"; //Returns 15
 
 	//logicals
-	//std::string a = "(= (+ 5 7) (* 6 2) (- 24 10))"; //logic that fails
-	//std::string a = "(= (+ 5 7) (* 6 2) (- 24 12))"; //logic that is good
-	//std::string a = "(< (* 5 10000) (* 4 2))"; //Change brackets to see failing or good
+	//std::string a = "(= (+ 5 7) (* 6 2) (- 24 10))"; //Returns ()
+	//std::string a = "(= (+ 5 7) (* 6 2) (- 24 12))"; //Returns 1
+	//std::string a = "(> (* 5 10000) (* 4 2))"; //< Returns () ; > Returns 1
 
 	//lists
-	//std::string a = "(list 5 2 3 4 (+ 1 2) (* 8 7))"; //6 elements
-	std::string a = "(car 5 2 3 4 (+ 1 2) (* 8 7))"; //1 elements
-	//std::string a = "(cdr 5 2 3 4 (+ 1 2) (* 8 7))"; //5 elements
+	//std::string a = "(list 5 2 3 4 (+ 1 2) (* 8 7))"; //Returns size 6
+	//std::string a = "(car 5 2 3 4 (+ 1 2) (* 8 7))"; //Returns size 1
+	std::string a = "(cdr 5 2 3 4 (+ 1 2) (* 8 7))"; //Returns size 5
 
 	std::cout << "Lets parse: " << a << std::endl;
 
