@@ -27,7 +27,7 @@ ExpressionFrontList::ExpressionFrontList(ParserUtils *parserUtils) : ExpressionC
 ExpressionFrontList::~ExpressionFrontList() {}
 
 Expression * ExpressionFrontList::evaluate() {
-	std::string element = "";
+	int hardcodedCount = 0;
 
 	std::list<Expression*>::const_iterator expressionIterator = environment.begin();
 
@@ -37,11 +37,11 @@ Expression * ExpressionFrontList::evaluate() {
 
 		if (elementIterator != values.end()) {
 			getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
-			element = (**elementIterator);
+			hardcodedCount++;
 		}
 	}
 
-	std::cout << "Function of tag " + getTag() << " has size: " << element << std::endl;
+	std::cout << "Function of tag " + getTag() << " has size: " << hardcodedCount << std::endl;
 
 	return this;
 }
