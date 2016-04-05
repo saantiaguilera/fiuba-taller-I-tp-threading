@@ -37,6 +37,3 @@ void ExpressionConstant::parseBody(std::string &line, void *params) {
 	std::cout << getTag() << " PARSEBODY:: " << line << std::endl;
 	this->value = line;
 }
-
-
-

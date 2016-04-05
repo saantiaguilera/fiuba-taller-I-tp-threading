@@ -8,7 +8,7 @@
 #ifndef EXPRESSIONARITHMETIC_H_
 #define EXPRESSIONARITHMETIC_H_
 
-class ExpressionArithmetic : public Expression {
+class ExpressionArithmetic : public ExpressionCommon {
 	private:
 		ExpressionArithmetic(const ExpressionArithmetic&);
 		ExpressionArithmetic& operator=(const ExpressionArithmetic&);
@@ -17,7 +17,6 @@ class ExpressionArithmetic : public Expression {
 		ExpressionArithmetic(ParserUtils *parserUtils);
 		virtual ~ExpressionArithmetic();
 		virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
-		virtual void parseBody(std::string &line, void *params);
 		virtual Expression * evaluate();
 		virtual int operate(int dest, int src) = 0;
 };

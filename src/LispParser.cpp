@@ -38,7 +38,6 @@ LispParser::~LispParser() {
 
 void LispParser::run() { //TODO. FOR NOW BUFFER WILL BE A SINGLE LINE
 	Expression *expression = parseLine(buffer);
-	expression->evaluate();
 }
 
 Expression * LispParser::parseLine(std::string &line) { //TODO ONCE WORKING REFACTOR IT TO SIMPLER FORM (REPEATING CODE)
@@ -60,6 +59,8 @@ Expression * LispParser::parseLine(std::string &line) { //TODO ONCE WORKING REFA
 	expression->evaluate();
 
 	std::cout << "FINAL VALUE:: " << *(expression->getValues().front()) << std::endl;
+
+	delete expression;
 
 	return 0;
 }

@@ -16,6 +16,7 @@ class Expression;
 #include "RuntimeExpressionInterface.h"
 #include "ParserUtils.h"
 #include "Expression.h"
+#include "expressions/ExpressionCommon.h"
 #include "expressions/ExpressionArithmetic.h"
 #include "expressions/ExpressionSum.h"
 #include "expressions/ExpressionConstant.h"
@@ -104,6 +105,7 @@ Expression * ParserUtils::parseExpression(std::string &line) {
 }
 
 Expression * ParserUtils::expressionFromConstant(std::string &line) {
+	//TODO THIS SHOULD ITERATE THROUGH THE SETQ CONSTANTS TOO
 	Expression *expression = new ExpressionConstant(this);
 	expression->parseBody(line, 0);
 
