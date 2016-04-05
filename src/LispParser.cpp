@@ -58,8 +58,6 @@ Expression * LispParser::parseLine(std::string &line) { //TODO ONCE WORKING REFA
 
 	expression->evaluate();
 
-	std::cout << "FINAL VALUE:: " << *(expression->getValues().front()) << std::endl;
-
 	delete expression;
 
 	return 0;

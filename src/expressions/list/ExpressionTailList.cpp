@@ -36,7 +36,7 @@ Expression * ExpressionTailList::evaluate() {
 			if (start)
 				start = false;
 			else {
-				getValues().push_back(*elementIterator); //TODO MAYBE CREATE ANOTHER ONE IN THE HEAP ? BECAUSE OF THE DELETE AT THE END
+				getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
 				hardcodedCounter++;
 			}
 		}

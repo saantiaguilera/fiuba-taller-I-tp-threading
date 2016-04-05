@@ -28,10 +28,10 @@ ExpressionLogical::~ExpressionLogical() {}
 
 Expression * ExpressionLogical::evaluate() {
 	bool start = true;
-	bool different = false;
+	bool fail = false;
 	int result = 0;
 
-	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); !different && expressionIterator != environment.end(); ++expressionIterator) {
+	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); !fail && expressionIterator != environment.end(); ++expressionIterator) {
 		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
 
 		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
@@ -39,16 +39,16 @@ Expression * ExpressionLogical::evaluate() {
 				result = atoi((**elementIterator).c_str());
 				start = false;
 			} else {
-				if (operate(result, atoi((**elementIterator).c_str())))
-					different = true;
+				if (!operate(result, atoi((**elementIterator).c_str())))
+					fail = true;
 			}
 		}
 	}
 
-	if (different)
+	if (!fail)
 		getValues().push_back(new Element("1"));
 
-	std::cout << "Function of tag " + getTag() << " has value: " << (different ? "1" : "()") << std::endl;
+	std::cout << "Function of tag " + getTag() << " has value: " << (fail ? "()" : "1") << std::endl;
 
 	return this;
 }

@@ -36,7 +36,7 @@ Expression * ExpressionFrontList::evaluate() {
 		std::list<Element*>::const_iterator elementIterator = values.begin();
 
 		if (elementIterator != values.end()) {
-			getValues().push_back(*elementIterator); //TODO MAYBE CREATE ANOTHER ONE IN THE HEAP ? BECAUSE OF THE DELETE AT THE END
+			getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
 			element = (**elementIterator);
 		}
 	}
