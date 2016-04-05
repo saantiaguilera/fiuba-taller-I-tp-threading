@@ -27,6 +27,7 @@ ExpressionCommon::ExpressionCommon(ParserUtils *parserUtils) : Expression(parser
 
 ExpressionCommon::~ExpressionCommon() {}
 
+//TODO THIS SHIT IS AWFUL AS HELL. REFACTOR IT PLEASE PLEASE PLEASE
 void ExpressionCommon::parseBody(std::string &line, void *params) {
 	std::cout << "BODY:: " << line << std::endl;
 	std::string temp = line;
