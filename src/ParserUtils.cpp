@@ -59,7 +59,7 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 	if (string == "cdr")
 		return new ExpressionTailList(this);
 	if (string == "append")
-		return 0;
+		return new ExpressionList(this);
 	if (string == "if")
 		return 0;
 	if (string == "defun")
