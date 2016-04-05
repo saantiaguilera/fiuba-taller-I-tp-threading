@@ -21,7 +21,7 @@ class Expression;
 #include "../Expression.h"
 #include "ExpressionCommon.h"
 
-enum MODE { INNER_EXPRESSION, VALUE, UNDEFINED, DEFINED };
+enum MODE { INNER_EXPRESSION, VALUE, LITERAL, UNDEFINED, DEFINED };
 
 ExpressionCommon::ExpressionCommon(ParserUtils *parserUtils) : Expression(parserUtils) { }
 
@@ -51,9 +51,14 @@ void ExpressionCommon::parseBody(std::string &line, void *params) {
 						mode = INNER_EXPRESSION;
 					}
 
-					if (isdigit(temp[i]) || isalpha(temp[i])) {
+					if (isdigit(temp[i])) {
 						start = i;
 						mode = VALUE;
+					}
+
+					if (temp[i] == '"') {
+						start = i;
+						mode = LITERAL;
 					}
 
 					break;
@@ -83,7 +88,7 @@ void ExpressionCommon::parseBody(std::string &line, void *params) {
 					break;
 
 				case VALUE:
-					if (!isdigit(temp[i]) && !isalpha(temp[i])) {
+					if (!isdigit(temp[i])) {
 						end = i;
 
 						//Get recursive and continue for this value
@@ -97,6 +102,21 @@ void ExpressionCommon::parseBody(std::string &line, void *params) {
 						mode = DEFINED;
 					}
 					break;
+
+				case LITERAL:
+					if (temp[i] == '"') {
+						end = i;
+
+						//Get recursive and continue for this value
+						std::string value = temp.substr(start, end - start + 1);
+						std::cout << "CONSTANT:: " << value << std::endl;
+						environment.push_back(parserUtils->expressionFromConstant(value));
+
+						//Remove the expression and start again
+						temp.replace(start, value.length(), "");
+
+						mode = DEFINED;
+					}
 
 				case DEFINED: //To avoid -W
 					break;
