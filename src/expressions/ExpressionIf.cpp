@@ -118,7 +118,7 @@ void ExpressionIf::parseBody(std::string line) {
 
 				std::cout << "VARIABLE:: " << literal << std::endl;
 
-				//setExpression(parserUtils->expressionFromConstant(literal));
+				//TODO setExpression(parserUtils->expressionFromConstant(literal));
 
 				//Remove the expression and start again
 				line.replace(i, literal.length() + 1, "");

@@ -106,7 +106,7 @@ void ExpressionCommon::parseBody(std::string line) {
 
 				std::cout << "VARIABLE:: " << literal << std::endl;
 
-				//environment.push_back(parserUtils->expressionFromConstant(literal));
+				//TODO environment.push_back(parserUtils->expressionFromConstant(literal));
 
 				//Remove the expression and start again
 				line.replace(i, literal.length() + 1, "");
