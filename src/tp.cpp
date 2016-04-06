@@ -41,10 +41,10 @@ int main() {
 	//std::string a = "(if (car 4 5 6 7) (* 5 (+ 1 3)) 5000)"; //Returns 20
 
 	//print
-	//std::string a = "(print \"HOLA VIEJA\" (* 5 2) (+ 4 (- 3 1)))"; //Returns "HOLA VIEJA 10 6"
+	std::string a = "(print \"HOLA VIEJA\" (* 5 2) (+ 4 (- 3 1)))"; //Returns "HOLA VIEJA 10 6"
 	//std::string a = "(print 45 (if 1 46 47))"; //Returns "45 46"
 	//std::string a = "(print \"HOLA\" (if 1 46 47))"; //Returns "HOLA 46"
-	std::string a = "(print \"HOLA\" (if 1 \"HOLA\" \"CHAU\"))"; //Returns "HOLA HOLA"
+	//std::string a = "(print \"HOLA\" (if 1 \"HOLA\" \"CHAU\"))"; //Returns "HOLA HOLA"
 
 	std::cout << "Lets parse: " << a << std::endl;
 

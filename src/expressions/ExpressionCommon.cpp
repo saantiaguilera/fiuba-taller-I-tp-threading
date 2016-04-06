@@ -29,8 +29,9 @@ void ExpressionCommon::parseInnerExpression(std::string &temp, int startPoint) {
 	int count = 0;
 	int start = -1;
 	int end = -1;
+	bool found = false;
 
-	for (std::string::size_type i = startPoint; i < temp.size(); ++i) {
+	for (std::string::size_type i = startPoint; i < temp.size() && !found; ++i) {
 		if (temp[i] == '('){
 			if (count == 0)
 				start = i;
@@ -48,6 +49,8 @@ void ExpressionCommon::parseInnerExpression(std::string &temp, int startPoint) {
 
 				//Remove the expression and start again
 				temp.replace(start, stuff.length() + 1, "");
+
+				found = true;
 			}
 		}
 	}
