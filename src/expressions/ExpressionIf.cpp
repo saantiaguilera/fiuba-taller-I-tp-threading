@@ -1,9 +1,10 @@
 /*
- * ExpressionsCommon.cpp
+ * ExpressionIf.cpp
  *
- *  Created on: Apr 4, 2016
+ *  Created on: Apr 6, 2016
  *      Author: santiago
  */
+
 
 #include <string>
 #include <cstdio>
@@ -19,13 +20,23 @@ class Expression;
 #include "../RuntimeExpressionInterface.h"
 #include "../ParserUtils.h"
 #include "../Expression.h"
-#include "ExpressionCommon.h"
+#include "ExpressionIf.h"
 
-ExpressionCommon::ExpressionCommon(ParserUtils *parserUtils) : Expression(parserUtils) { }
+ExpressionIf::ExpressionIf(ParserUtils *parserUtils) : Expression(parserUtils) , condition(NULL) ,
+		trueExpression(NULL) , falseExpression(NULL) { }
 
-ExpressionCommon::~ExpressionCommon() {}
+ExpressionIf::~ExpressionIf() {}
 
-void ExpressionCommon::parseInnerExpression(std::string &temp, int startPoint) {
+void ExpressionIf::setExpression(Expression *expression) {
+	if (condition == NULL)
+		condition = expression;
+	else if (trueExpression == NULL)
+		trueExpression = expression;
+	else if (falseExpression == NULL)
+		falseExpression = expression;
+}
+
+void ExpressionIf::parseInnerExpression(std::string &temp, int startPoint) {
 	int count = 0;
 	int start = -1;
 	int end = -1;
@@ -44,7 +55,8 @@ void ExpressionCommon::parseInnerExpression(std::string &temp, int startPoint) {
 				//Get recursive and continue for this new expression
 				std::string stuff = temp.substr(start, end - start + 1);
 				std::cout << "INNER EXPRESSION:: " << stuff << std::endl;
-				environment.push_back(parserUtils->parseExpression(stuff));
+
+				setExpression(parserUtils->parseExpression(stuff));
 
 				//Remove the expression and start again
 				temp.replace(start, stuff.length() + 1, "");
@@ -53,12 +65,12 @@ void ExpressionCommon::parseInnerExpression(std::string &temp, int startPoint) {
 	}
 }
 
-void ExpressionCommon::parseBody(std::string line) {
+void ExpressionIf::parseBody(std::string line) {
 	std::cout << "BODY:: " << line << std::endl;
 
-	unsigned int i = 0;
+	int i = 0;
 	//+. Iterate while there are data in the line
-	while (line.size() > 0 && i < line.size()) {
+	while (line.size() > 0) {
 		switch (line[i]) {
 		case '(': //Its an innter function
 			parseInnerExpression(line, i);
@@ -72,7 +84,7 @@ void ExpressionCommon::parseBody(std::string line) {
 
 			std::cout << "LITERAL:: " << literal << std::endl;
 
-			environment.push_back(parserUtils->expressionFromConstant(literal));
+			setExpression(parserUtils->expressionFromConstant(literal));
 
 			//Remove the expression and start again
 			line.replace(i, literal.length() + 1, "");
@@ -92,7 +104,7 @@ void ExpressionCommon::parseBody(std::string line) {
 
 				std::cout << "NUMBER:: " << literal << std::endl;
 
-				environment.push_back(parserUtils->expressionFromConstant(literal));
+				setExpression(parserUtils->expressionFromConstant(literal));
 
 				//Remove the expression and start again
 				line.replace(i, literal.length() + 1, "");
@@ -106,7 +118,7 @@ void ExpressionCommon::parseBody(std::string line) {
 
 				std::cout << "VARIABLE:: " << literal << std::endl;
 
-				//environment.push_back(parserUtils->expressionFromConstant(literal));
+				//setExpression(parserUtils->expressionFromConstant(literal));
 
 				//Remove the expression and start again
 				line.replace(i, literal.length() + 1, "");
@@ -115,8 +127,39 @@ void ExpressionCommon::parseBody(std::string line) {
 				i = 0;
 			}
 		}
-
-		std::cout << "i VALUE:: " << i << std::endl;
 	}
 
+}
+
+Expression * ExpressionIf::evaluate() {
+	Expression* result;
+	if ((condition->evaluate())->getValues().size() > 0) {
+		//True;
+		std::cout << "Function of tag " + getTag() << " was: TRUE" << std::endl;
+
+		result = trueExpression->evaluate();
+	} else {
+		//False
+		std::cout << "Function of tag " + getTag() << " was: FALSE" << std::endl;
+
+		result = falseExpression->evaluate();
+	}
+	/**
+	 * TODO
+	 * All this if/else change it for
+	 * result = (condition->evaluate())->getValues().size() > 0 ? trueExpression : falseExpression;
+	 * result->evaluate();
+	 */
+
+	//Before returning, set the values of the expression evaluated as result
+	std::list<Element*> values = result->getValues();
+	for (std::list<Element*>::const_iterator expressionIterator = values.begin(); expressionIterator != values.end(); ++expressionIterator) {
+		getValues().push_back(new Element(**expressionIterator));
+	}
+
+	return this;
+}
+
+std::string ExpressionIf::getTag() {
+	return "If";
 }

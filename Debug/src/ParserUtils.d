@@ -13,7 +13,8 @@ src/ParserUtils.o: ../src/ParserUtils.cpp \
  ../src/expressions/logical/ExpressionHigher.h \
  ../src/expressions/list/ExpressionFrontList.h \
  ../src/expressions/list/ExpressionList.h \
- ../src/expressions/list/ExpressionTailList.h
+ ../src/expressions/list/ExpressionTailList.h \
+ ../src/expressions/ExpressionIf.h
 
 ../src/RuntimeExpressionInterface.h:
 
@@ -48,3 +49,5 @@ src/ParserUtils.o: ../src/ParserUtils.cpp \
 ../src/expressions/list/ExpressionList.h:
 
 ../src/expressions/list/ExpressionTailList.h:
+
+../src/expressions/ExpressionIf.h:

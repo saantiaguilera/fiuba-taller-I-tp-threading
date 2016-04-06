@@ -8,6 +8,10 @@
 #include <string>
 #include <list>
 #include <cstdio>
+#include <cctype>
+#include <sstream>
+#include <cstring>
+#include <algorithm>
 #include <stdlib.h>
 #include <iostream>
 
@@ -34,6 +38,19 @@ class Expression;
 #include "expressions/list/ExpressionFrontList.h"
 #include "expressions/list/ExpressionList.h"
 #include "expressions/list/ExpressionTailList.h"
+#include "expressions/ExpressionIf.h"
+
+/**
+ * Inner class for using as predicative
+ * Overrides the operator()
+ */
+class IsFunction {
+	public:
+	IsFunction() {};
+	bool operator()(char c){
+		return c == '(' || c == ')';
+	}
+};
 
 ParserUtils::ParserUtils(RuntimeExpressionInterface *listener) : listener(listener) { }
 
@@ -61,7 +78,7 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 	if (string == "append")
 		return new ExpressionList(this);
 	if (string == "if")
-		return 0;
+		return new ExpressionIf(this);
 	if (string == "defun")
 		return 0;
 	if (string == "print")
@@ -92,13 +109,22 @@ std::string ParserUtils::bodyToString(std::string &line) {
 	return line.substr(line.find(function) + function.length() + 1, line.find_last_of(")") - line.find(function) - function.length() - 1);
 }
 
-std::string ParserUtils::functionToString(std::string &line) {
-	return line.substr(line.find("(") + 1, line.find(" ") - line.find("(") - 1);
+std::string ParserUtils::functionToString(std::string line) {
+	std::istringstream iss(line);
+
+	std::string result;
+	iss >> result;
+
+	result.erase(std::remove_if(result.begin(), result.end(), IsFunction()), result.end());
+
+	return result;
 }
 
 Expression * ParserUtils::parseExpression(std::string &line) {
 	//Get the expression according to the symbol (+)
 	std::string function = functionToString(line);
+
+	std::cout << "FUNCTION:: " << function << std::endl;
 
 	//Here we should get a ExpressionSum instance
 	Expression *expression = expressionFromFunction(function);
