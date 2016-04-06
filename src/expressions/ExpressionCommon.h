@@ -13,11 +13,13 @@ class ExpressionCommon : public Expression {
 		ExpressionCommon(const ExpressionCommon&);
 		ExpressionCommon& operator=(const ExpressionCommon&);
 
+		void parseInnerExpression(std::string &line, int startPosition);
+
 	public:
 		ExpressionCommon(ParserUtils *parserUtils);
 		virtual ~ExpressionCommon();
 		virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
-		virtual void parseBody(std::string &line, void *params);
+		virtual void parseBody(std::string line);
 		virtual Expression * evaluate() = 0;
 };
 

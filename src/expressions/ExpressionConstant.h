@@ -18,7 +18,7 @@ class ExpressionConstant : public Expression {
 		ExpressionConstant(ParserUtils *parserUtils);
 		virtual ~ExpressionConstant();
 		virtual Expression * evaluate();
-		virtual void parseBody(std::string &line, void *params);
+		virtual void parseBody(std::string line);
 		virtual std::string getTag();
 
 };

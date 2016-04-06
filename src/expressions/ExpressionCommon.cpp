@@ -27,128 +27,94 @@ ExpressionCommon::ExpressionCommon(ParserUtils *parserUtils) : Expression(parser
 
 ExpressionCommon::~ExpressionCommon() {}
 
-//TODO THIS SHIT IS AWFUL AS HELL. REFACTOR IT PLEASE PLEASE PLEASE
-void ExpressionCommon::parseBody(std::string &line, void *params) {
-	std::cout << "BODY:: " << line << std::endl;
-	std::string temp = line;
+void ExpressionCommon::parseInnerExpression(std::string &temp, int startPoint) {
+	int count = 0;
+	int start = -1;
+	int end = -1;
 
-	//+. Iterate while there are data in the line
-	while (temp.size() > 0) {
-		int count = 0;
-		int start = -1;
-		int end = -1;
+	for (std::string::size_type i = startPoint; i < temp.size(); ++i) {
+		if (temp[i] == '('){
+			if (count == 0)
+				start = i;
+			count++;
+		}
+		if (temp[i] == ')') {
+			count--;
+			if (count == 0) {
+				end = i;
 
-		MODE mode = UNDEFINED;
+				//Get recursive and continue for this new expression
+				std::string stuff = temp.substr(start, end - start + 1);
+				std::cout << "INNER EXPRESSION:: " << stuff << std::endl;
+				environment.push_back(parserUtils->parseExpression(stuff));
 
-		for (std::string::size_type i = 0; i < temp.size() && mode != DEFINED; ++i) {
-			switch (mode) {
-				case UNDEFINED:
-					if (temp[i] == '('){
-						if (count == 0)
-							start = i;
-						count++;
-
-						mode = INNER_EXPRESSION;
-					}
-
-					if (isdigit(temp[i])) {
-						start = i;
-						mode = VALUE;
-					}
-
-					if (temp[i] == '"') {
-						start = i;
-						mode = LITERAL;
-					}
-
-					break;
-
-				case INNER_EXPRESSION:
-					if (temp[i] == '('){
-						if (count == 0)
-							start = i;
-						count++;
-					}
-					if (temp[i] == ')') {
-						count--;
-						if (count == 0) {
-							end = i;
-
-							//Get recursive and continue for this new expression
-							std::string stuff = temp.substr(start, end - start + 1);
-							std::cout << "INNER EXPRESSION:: " << stuff << std::endl;
-							environment.push_back(parserUtils->parseExpression(stuff));
-
-							//Remove the expression and start again
-							temp.replace(start, stuff.length(), "");
-
-							mode = DEFINED;
-						}
-					}
-					break;
-
-				case VALUE:
-					if (!isdigit(temp[i])) {
-						end = i;
-
-						//Get recursive and continue for this value
-						std::string value = temp.substr(start, end - start + 1);
-						std::cout << "CONSTANT:: " << value << std::endl;
-						environment.push_back(parserUtils->expressionFromConstant(value));
-
-						//Remove the expression and start again
-						temp.replace(start, value.length(), "");
-
-						mode = DEFINED;
-					}
-					break;
-
-				case LITERAL:
-					if (temp[i] == '"') {
-						end = i;
-
-						//Get recursive and continue for this value
-						std::string value = temp.substr(start, end - start + 1);
-						std::cout << "CONSTANT:: " << value << std::endl;
-						environment.push_back(parserUtils->expressionFromConstant(value));
-
-						//Remove the expression and start again
-						temp.replace(start, value.length(), "");
-
-						mode = DEFINED;
-					}
-
-				case DEFINED: //To avoid -W
-					break;
+				//Remove the expression and start again
+				temp.replace(start, stuff.length() + 1, "");
 			}
 		}
+	}
+}
 
-		if (mode != DEFINED) {
-			if (start != -1) {
-				//There was a last char at the end. Parse it as value
-				std::string value = temp.substr(start, temp.size());
+void ExpressionCommon::parseBody(std::string line) {
+	std::cout << "BODY:: " << line << std::endl;
 
-				switch (mode) {
-					case UNDEFINED: //1 char or lots of spaces
-					case VALUE:
-						environment.push_back(parserUtils->expressionFromConstant(value));
-						std::cout << "CONSTANT:: " << value << std::endl;
-						break;
+	int i = 0;
+	//+. Iterate while there are data in the line
+	while (line.size() > 0) {
+		switch (line[i]) {
+		case '(': //Its an innter function
+			parseInnerExpression(line, i);
 
-					case INNER_EXPRESSION:
-						environment.push_back(parserUtils->parseExpression(value));
-						std::cout << "INNER EXPRESSION:: " << value << std::endl;
-						break;
+			//Start again
+			i = 0;
 
-					case DEFINED:
-						break;
-				}
+			break;
+		case '"': { //Its a literal !
+			std::string literal = line.substr(i, line.find('"', i + 1) - i);
 
-				mode = UNDEFINED;
-				temp = "";
-			} else {
-				if (temp.length() > 0)
-					temp = "";
+			std::cout << "LITERAL:: " << literal << std::endl;
+
+			environment.push_back(parserUtils->expressionFromConstant(literal));
+
+			//Remove the expression and start again
+			line.replace(i, literal.length() + 1, "");
+
+			//Start again
+			i = 0;
+
+			}
+			break;
+		case ' ': //Do nothing, increment i
+			++i;
+			break;
+
+		default: //Either a number or a variable
+			if (isdigit(line[i])) {
+				std::string literal = line.substr(i, line.find(' ', i + 1) - i);
+
+				std::cout << "NUMBER:: " << literal << std::endl;
+
+				environment.push_back(parserUtils->expressionFromConstant(literal));
+
+				//Remove the expression and start again
+				line.replace(i, literal.length() + 1, "");
+
+				//Start again
+				i = 0;
+			}
+
+			if (isalpha(line[i])) {
+				std::string literal = line.substr(i, line.find(' ', i + 1) - i);
+
+				std::cout << "VARIABLE:: " << literal << std::endl;
+
+				//environment.push_back(parserUtils->expressionFromConstant(literal));
+
+				//Remove the expression and start again
+				line.replace(i, literal.length() + 1, "");
+
+				//Start again
+				i = 0;
 			}
 		}
 	}

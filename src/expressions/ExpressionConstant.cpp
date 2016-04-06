@@ -33,6 +33,6 @@ std::string ExpressionConstant::getTag() {
 	return "Const";
 }
 
-void ExpressionConstant::parseBody(std::string &line, void *params) {
+void ExpressionConstant::parseBody(std::string line) {
 	this->value = line;
 }

@@ -108,7 +108,7 @@ Expression * ParserUtils::parseExpression(std::string &line) {
 
 	//Ask the expression to parse it (since it can depend
 	if (expression != 0)
-		expression->parseBody(stuff, 0); //0 Should be a virtual method of expression. That overrides only the ones interested
+		expression->parseBody(stuff); //0 Should be a virtual method of expression. That overrides only the ones interested
 
 	return expression;
 }
@@ -116,7 +116,7 @@ Expression * ParserUtils::parseExpression(std::string &line) {
 Expression * ParserUtils::expressionFromConstant(std::string &line) {
 	//TODO THIS SHOULD ITERATE THROUGH THE SETQ CONSTANTS TOO
 	Expression *expression = new ExpressionConstant(this);
-	expression->parseBody(line, 0);
+	expression->parseBody(line);
 
 	return expression;
 }

@@ -35,7 +35,7 @@ class Expression {
 		virtual ~Expression();
 		virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
 		std::list<Element*> &getValues();
-		virtual void parseBody(std::string &line, void *params) = 0;
+		virtual void parseBody(std::string line) = 0;
 		virtual Expression * evaluate() = 0;
 		void setEnvironment(std::list<Expression*> environment);
 		/**
