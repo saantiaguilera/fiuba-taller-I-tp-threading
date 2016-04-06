@@ -37,7 +37,8 @@ int main() {
 	//std::string a = "(append (car (list 1 (* 2 4) 3 4)) (cdr 4 5 (- 8 4)))"; //Return size 3
 
 	//if
-	std::string a = "(if (list) 2 3)"; //Returns 3
+	//std::string a = "(if (list) 2 3)"; //Returns 3
+	std::string a = "(if (car 4 5 6 7) (* 5 (+ 1 3)))"; //Returns 20
 
 	std::cout << "Lets parse: " << a << std::endl;
 
