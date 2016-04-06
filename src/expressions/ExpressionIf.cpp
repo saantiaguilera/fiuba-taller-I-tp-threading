@@ -80,14 +80,14 @@ void ExpressionIf::parseBody(std::string line) {
 
 			break;
 		case '"': { //Its a literal !
-			std::string literal = line.substr(i, line.find('"', i + 1) - i);
+			std::string literal = line.substr(i + 1, line.find('"', i + 1) - i - 1);
 
 			std::cout << "LITERAL:: " << literal << std::endl;
 
-			setExpression(parserUtils->expressionFromConstant(literal));
+			environment.push_back(parserUtils->expressionFromConstant(literal));
 
 			//Remove the expression and start again
-			line.replace(i, literal.length() + 1, "");
+			line.replace(i, literal.length(), "");
 
 			//Start again
 			i = 0;

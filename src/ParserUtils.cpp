@@ -39,6 +39,7 @@ class Expression;
 #include "expressions/list/ExpressionList.h"
 #include "expressions/list/ExpressionTailList.h"
 #include "expressions/ExpressionIf.h"
+#include "expressions/ExpressionPrint.h"
 
 /**
  * Inner class for using as predicative
@@ -82,7 +83,7 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 	if (string == "defun")
 		return 0;
 	if (string == "print")
-		return 0;
+		return new ExpressionPrint(this);
 	if (string == "setq")
 		return 0;
 	if (string == "sync")
