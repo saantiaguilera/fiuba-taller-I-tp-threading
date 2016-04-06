@@ -32,13 +32,9 @@ Expression * ExpressionPrint::evaluate() {
 		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
 
 		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
-			//std::cout << (**elementIterator) << " ";
 			oss << **elementIterator << " ";
 		}
 	}
-
-
-	std::cout << "FUNCTION OF " << getTag() << " WILL PRINT:: " << std::endl;
 
 	std::cout << oss.str();
 

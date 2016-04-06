@@ -84,10 +84,10 @@ void ExpressionIf::parseBody(std::string line) {
 
 			std::cout << "LITERAL:: " << literal << std::endl;
 
-			environment.push_back(parserUtils->expressionFromConstant(literal));
+			setExpression(parserUtils->expressionFromConstant(literal));
 
-			//Remove the expression and start again
-			line.replace(i, literal.length(), "");
+			//Remove the expression and start again (+3 because of init, " and space)
+			line.replace(i, literal.length() + 3, "");
 
 			//Start again
 			i = 0;
@@ -137,12 +137,12 @@ Expression * ExpressionIf::evaluate() {
 		//True;
 		std::cout << "Function of tag " + getTag() << " was: TRUE" << std::endl;
 
-		result = trueExpression->evaluate();
+		result = (trueExpression->evaluate());
 	} else {
 		//False
 		std::cout << "Function of tag " + getTag() << " was: FALSE" << std::endl;
 
-		result = falseExpression->evaluate();
+		result = (falseExpression->evaluate());
 	}
 	/**
 	 * TODO
@@ -151,13 +151,7 @@ Expression * ExpressionIf::evaluate() {
 	 * result->evaluate();
 	 */
 
-	//Before returning, set the values of the expression evaluated as result
-	std::list<Element*> values = result->getValues();
-	for (std::list<Element*>::const_iterator expressionIterator = values.begin(); expressionIterator != values.end(); ++expressionIterator) {
-		getValues().push_back(new Element(**expressionIterator));
-	}
-
-	return this;
+	return result;
 }
 
 std::string ExpressionIf::getTag() {

@@ -74,8 +74,8 @@ void ExpressionCommon::parseBody(std::string line) {
 
 			environment.push_back(parserUtils->expressionFromConstant(literal));
 
-			//Remove the expression and start again
-			line.replace(i, literal.length(), "");
+			//Remove the expression and start again (+3 because of init, " and space)
+			line.replace(i, literal.length() + 3, "");
 
 			//Start again
 			i = 0;
@@ -115,8 +115,6 @@ void ExpressionCommon::parseBody(std::string line) {
 				i = 0;
 			}
 		}
-
-		std::cout << "i VALUE:: " << i << std::endl;
 	}
 
 }
