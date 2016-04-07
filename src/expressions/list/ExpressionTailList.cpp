@@ -15,13 +15,11 @@
 #include <map>
 
 class Expression;
-class ExpressionFunction;
 
 #include "../../RuntimeExpressionInterface.h"
 #include "../../ParserUtils.h"
 #include "../../Expression.h"
 #include "../ExpressionCommon.h"
-#include "../runtime/ExpressionFunction.h"
 #include "ExpressionTailList.h"
 
 ExpressionTailList::ExpressionTailList(ParserUtils *parserUtils) : ExpressionCommon(parserUtils) { }

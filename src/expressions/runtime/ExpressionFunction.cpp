@@ -16,7 +16,6 @@
 #include <map>
 
 class Expression;
-class ExpressionFunction;
 
 #include "../../RuntimeExpressionInterface.h"
 #include "../../ParserUtils.h"

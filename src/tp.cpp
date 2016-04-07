@@ -13,12 +13,10 @@
 #include <map>
 
 class Expression;
-class ExpressionFunction;
 
 #include "RuntimeExpressionInterface.h"
 #include "ParserUtils.h"
 #include "Expression.h"
-#include "expressions/runtime/ExpressionFunction.h"
 #include "LispParser.h"
 
 int main() {

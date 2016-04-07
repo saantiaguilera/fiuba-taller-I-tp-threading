@@ -17,7 +17,6 @@
 #include <map>
 
 class Expression;
-class ExpressionFunction;
 
 #include "ParserUtils.h"
 
@@ -62,7 +61,7 @@ ParserUtils::~ParserUtils() {
 	for (std::map<std::string,Expression*>::iterator it = runtimeVariables.begin(); it != runtimeVariables.end(); ++it)
 		delete it->second;
 
-	for (std::map<std::string,ExpressionFunction*>::iterator it = runtimeFunctions.begin(); it != runtimeFunctions.end(); ++it)
+	for (std::map<std::string,Expression*>::iterator it = runtimeFunctions.begin(); it != runtimeFunctions.end(); ++it)
 		delete it->second;
 }
 
@@ -107,8 +106,8 @@ Expression * ParserUtils::expressionFromFunction(std::string &line) {
 	return expressionFromKnownStrings(line);
 }
 
-ExpressionFunction * ParserUtils::expressionFromRuntime(std::string &tag) {
-	for (std::map<std::string,ExpressionFunction*>::iterator it = runtimeFunctions.begin(); it != runtimeFunctions.end(); ++it)
+Expression * ParserUtils::expressionFromRuntime(std::string &tag) {
+	for (std::map<std::string,Expression*>::iterator it = runtimeFunctions.begin(); it != runtimeFunctions.end(); ++it)
 		if (it->first == tag)
 			return it->second;
 
@@ -168,7 +167,7 @@ Expression * ParserUtils::expressionFromVariable(std::string tag) {
 	return NULL;
 }
 
-Expression * ParserUtils::appendRuntimeFunction(std::string tag, ExpressionFunction *expression) {
+Expression * ParserUtils::appendRuntimeFunction(std::string tag, Expression *expression) {
 	if (runtimeFunctions.find(tag) != runtimeFunctions.end())
 		delete runtimeFunctions[tag];
 

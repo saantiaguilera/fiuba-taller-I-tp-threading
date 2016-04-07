@@ -16,12 +16,10 @@
 #include <map>
 
 class Expression;
-class ExpressionFunction;
 
 #include "../RuntimeExpressionInterface.h"
 #include "../ParserUtils.h"
 #include "../Expression.h"
-#include "runtime/ExpressionFunction.h"
 #include "ExpressionIf.h"
 
 ExpressionIf::ExpressionIf(ParserUtils *parserUtils) : Expression(parserUtils) , condition(NULL) ,
