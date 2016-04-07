@@ -56,15 +56,20 @@ int main() {
 	std::string b = "(- variableName 120)"; //Returns -110 */
 
 	//defunc
-	std::string a = "(defun pow2 (var) (* var var))";
-	std::string b = "(pow2 4)"; //Return 16;
+	/*std::string a = "(defun pow2 (var) (* var var))";
+	std::string b = "(pow2 4)"; //Return 16; */
+	std::string a = "(defun op1 (lista) (+ (cdr lista)))";
+	std::string b = "(setq valores (list 1 2 3 4 5 6 7 8 9))";
+	std::string c = "(print (op1 valores))"; //Return 45; */
 
 	std::cout << "Lets parse: " << a << std::endl;
 	std::cout << "Lets parse: " << b << std::endl;
+	std::cout << "Lets parse: " << c << std::endl;
 
 	LispParser parser;
 	parser.run(a);
 	parser.run(b);
+	parser.run(c);
 
 	return 0;
 }
