@@ -28,5 +28,6 @@ src/expressions \
 src/expressions/arithmetic \
 src/expressions/list \
 src/expressions/logical \
+src/expressions/misc \
 src/expressions/runtime \
 

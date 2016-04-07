@@ -28,7 +28,7 @@ class Expression;
 #include "expressions/arithmetic/ExpressionArithmetic.h"
 
 #include "expressions/arithmetic/ExpressionSum.h"
-#include "expressions/ExpressionConstant.h"
+#include "expressions/misc/ExpressionConstant.h"
 #include "expressions/arithmetic/ExpressionMultiply.h"
 #include "expressions/arithmetic/ExpressionDivide.h"
 #include "expressions/arithmetic/ExpressionSubstraction.h"
@@ -38,8 +38,8 @@ class Expression;
 #include "expressions/list/ExpressionFrontList.h"
 #include "expressions/list/ExpressionList.h"
 #include "expressions/list/ExpressionTailList.h"
-#include "expressions/ExpressionIf.h"
-#include "expressions/ExpressionPrint.h"
+#include "expressions/logical/ExpressionIf.h"
+#include "expressions/misc/ExpressionPrint.h"
 #include "expressions/runtime/ExpressionFunction.h"
 #include "expressions/runtime/ExpressionVariable.h"
 

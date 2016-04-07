@@ -15,8 +15,8 @@
 
 class Expression;
 
-#include "../ParserUtils.h"
-#include "../Expression.h"
+#include "../../ParserUtils.h"
+#include "../../Expression.h"
 #include "ExpressionConstant.h"
 
 ExpressionConstant::ExpressionConstant(ParserUtils *parserUtils) : Expression(parserUtils) , value("") { }

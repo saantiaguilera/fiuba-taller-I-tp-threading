@@ -16,9 +16,9 @@
 
 class Expression;
 
-#include "../ParserUtils.h"
-#include "../Expression.h"
-#include "ExpressionCommon.h"
+#include "../../ParserUtils.h"
+#include "../../Expression.h"
+#include "../ExpressionCommon.h"
 #include "ExpressionPrint.h"
 
 ExpressionPrint::ExpressionPrint(ParserUtils *parserUtils) : ExpressionCommon(parserUtils) { }

@@ -17,9 +17,9 @@
 
 class Expression;
 
-#include "../ParserUtils.h"
-#include "../Expression.h"
-#include "ExpressionCommon.h"
+#include "../../ParserUtils.h"
+#include "../../Expression.h"
+#include "../ExpressionCommon.h"
 #include "ExpressionIf.h"
 
 ExpressionIf::ExpressionIf(ParserUtils *parserUtils) : ExpressionCommon(parserUtils) , condition(NULL) ,
