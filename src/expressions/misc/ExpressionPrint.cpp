@@ -26,17 +26,14 @@ ExpressionPrint::ExpressionPrint(ParserUtils *parserUtils) : ExpressionCommon(pa
 ExpressionPrint::~ExpressionPrint() {}
 
 Expression * ExpressionPrint::evaluate() {
-	std::ostringstream oss; //This is just for testing, remove it and just use cout inside the iterator
 
 	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
 		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
 
 		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
-			oss << **elementIterator << " "; //TODO CARE OF THIS SPACE. CHECK IF SERCOM ADDS IT OR NOT IN A FUNC
+			std::cout << **elementIterator << " "; //TODO CARE OF THIS SPACE. CHECK IF SERCOM ADDS IT OR NOT IN A FUNC
 		}
 	}
-
-	std::cout << oss.str();
 
 	std::cout << std::endl;
 

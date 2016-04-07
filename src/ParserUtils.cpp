@@ -147,7 +147,13 @@ Expression * ParserUtils::expressionFromRuntime(std::string &tag) {
 
 std::string ParserUtils::bodyToString(std::string &line) {
 	std::string function = functionToString(line);
-	return line.substr(line.find(function) + function.length() + 1, line.find_last_of(")") - line.find(function) - function.length() - 1);
+	int start = line.find(function) + function.length() + 1;
+	int end = line.find_last_of(")");
+
+	if (end > 0)
+		return line.substr(start, end - line.find(function) - function.length() - 1);
+
+	throw -100; //==> its a constant or a literal
 }
 
 std::string ParserUtils::functionToString(std::string line) {
@@ -169,7 +175,13 @@ Expression * ParserUtils::parseExpression(std::string &line) {
 	Expression *expression = expressionFromRuntime(function);
 
 	//get the body
-	std::string stuff = bodyToString(line);
+	std::string stuff;
+	try {
+		stuff = bodyToString(line);
+	} catch (int exception) {
+		if (exception == -100)
+			stuff = function;
+	}
 
 	if (expression != NULL) { //Runtime expression
 		expression = ((ExpressionFunction*) expression)->mutate(stuff);

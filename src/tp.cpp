@@ -25,5 +25,8 @@ int main() {
 		parser.run(line);
 	}
 
+//	std::string a = "(list)";
+//	parser.run(a);
+
 	return 0;
 }
