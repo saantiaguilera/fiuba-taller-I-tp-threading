@@ -21,7 +21,7 @@ class Expression;
 
 ExpressionConstant::ExpressionConstant(ParserUtils *parserUtils) : Expression(parserUtils) , value("") { }
 
-ExpressionConstant::~ExpressionConstant() {}
+ExpressionConstant::~ExpressionConstant() { }
 
 Expression * ExpressionConstant::evaluate() {
 	getValues().push_back(new Element(this->value));

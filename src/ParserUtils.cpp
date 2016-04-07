@@ -57,17 +57,43 @@ class IsFunction {
 
 ParserUtils::ParserUtils() { }
 
+/**
+ * @note: I know this shouldnt be like this (its a bad smell to implement the if != NULL
+ * then delete.
+ * But since the Runtime functions need to last till end of program and they will be
+ * inside other expressions
+ * They will be double removed and this will crash.
+ * Solution could be to use a copy constructor. But that would use a lot more heap
+ * and I prefer 6 bad smell lines than 2x heap
+ */
 ParserUtils::~ParserUtils() {
-	for (std::map<std::string,Expression*>::iterator it = runtimeVariables.begin(); it != runtimeVariables.end(); ++it)
-		delete it->second;
+	for (std::map<std::string,Expression*>::iterator it = runtimeVariables.begin(); it != runtimeVariables.end(); ++it) {
+		if(it->second != NULL) {
+			delete it->second;
+			it->second = NULL;
+		}
+	}
 
-	for (std::map<std::string,Expression*>::iterator it = runtimeFunctions.begin(); it != runtimeFunctions.end(); ++it)
-		delete it->second;
+	for (std::map<std::string,Expression*>::iterator it = runtimeFunctions.begin(); it != runtimeFunctions.end(); ++it) {
+		if(it->second != NULL) {
+			delete it->second;
+			it->second = NULL;
+		}
+	}
+
+	for (std::list<Expression*>::iterator it = history.begin(); it != history.end(); ++it) {
+		if (*it != NULL) {
+			delete *it;
+			*it = NULL;
+		}
+	}
 }
 
 void ParserUtils::run(std::string &line) {
 	Expression *expression = parseExpression(line);
 	expression->evaluate();
+
+	history.push_back(expression);
 }
 
 Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {

@@ -25,7 +25,22 @@ class Expression;
 ExpressionIf::ExpressionIf(ParserUtils *parserUtils) : ExpressionCommon(parserUtils) , condition(NULL) ,
 		trueExpression(NULL) , falseExpression(NULL) { }
 
-ExpressionIf::~ExpressionIf() {}
+ExpressionIf::~ExpressionIf() {
+	if (condition != NULL) {
+		delete condition;
+		condition = NULL;
+	}
+
+	if (trueExpression != NULL) {
+		delete trueExpression;
+		trueExpression = NULL;
+	}
+
+	if (falseExpression != NULL) {
+		delete falseExpression;
+		falseExpression = NULL;
+	}
+}
 
 void ExpressionIf::injectExpression(Expression *expression) {
 	if (condition == NULL)

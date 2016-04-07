@@ -12,6 +12,7 @@ class ParserUtils {
 	private:
 		std::map<std::string, Expression*> runtimeVariables;
 		std::map<std::string, Expression*> runtimeFunctions;
+		std::list<Expression*> history;
 
 		std::string bodyToString(std::string &line);
 		std::string functionToString(std::string line);
