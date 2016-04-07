@@ -10,7 +10,7 @@
 
 //I know it should be a logical expression. But derp, this is more logical than the logical ones.
 
-class ExpressionIf : public Expression {
+class ExpressionIf : public ExpressionCommon {
 	private:
 		ExpressionIf(const ExpressionIf&);
 		ExpressionIf& operator=(const ExpressionIf&);
@@ -18,15 +18,12 @@ class ExpressionIf : public Expression {
 		Expression *trueExpression;
 		Expression *falseExpression;
 
-		void setExpression(Expression *expression);
-		void parseInnerExpression(std::string &line, int startPosition);
-
 	public:
 		ExpressionIf(ParserUtils *parserUtils);
 		virtual ~ExpressionIf();
 		virtual std::string getTag(); //known method ? NULL : runtime name tag
-		virtual void parseBody(std::string line);
 		virtual Expression * evaluate();
+		virtual void injectExpression(Expression *expression);
 };
 
 #endif /* EXPRESSIONS_EXPRESSIONIF_H_ */

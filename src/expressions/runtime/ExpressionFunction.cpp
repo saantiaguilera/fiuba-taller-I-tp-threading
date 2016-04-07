@@ -37,10 +37,6 @@ void ExpressionFunction::parseBody(std::string line) {
 	getline(iss, body); // " 5"
 	body = body.substr(1); // "5"
 
-	std::cout << getTag() << " FUNCTION NAME:: " << functionName << std::endl;
-	std::cout << getTag() << " VARIABLE NAME:: " << variableName << std::endl;
-	std::cout << getTag() << " BODY:: " << body << std::endl;
-
 	parserUtils->appendRuntimeFunction(functionName, this);
 }
 

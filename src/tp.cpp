@@ -59,19 +59,19 @@ int main() {
 	/*std::string a = "(defun op1 (lista) (+ (cdr lista)))";
 	std::string b = "(setq valores (list 1 2 3 4 5 6 7 8 9))";
 	std::string c = "(print (op1 valores))"; //Return 44; */
-	std::string a = "(defun caar (ENV) (car (car ENV)))";
+	/*std::string a = "(defun caar (ENV) (car (car ENV)))";
 	std::string b = "(defun condicional (ENV) (if ENV (caar (list ENV 2 3 4 5)) 1234))";
-	std::string c = "(print (condicional (list 1 2 3 4)))";
+	std::string c = "(print (condicional (list 1 2 3 4)))"; //Returns 1 */
 
 	std::cout << "Lets parse: " << a << std::endl;
-	std::cout << "Lets parse: " << b << std::endl;
-	std::cout << "Lets parse: " << c << std::endl;
+	//std::cout << "Lets parse: " << b << std::endl;
+	//std::cout << "Lets parse: " << c << std::endl;
 
 	ParserUtils parser;
 	parser.run(a);
-	parser.run(b);
-	parser.run(c);
-	parser.run(c);
+	//parser.run(b);
+	//parser.run(c);
+//	parser.run(c);
 
 	return 0;
 }

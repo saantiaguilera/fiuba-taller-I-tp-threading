@@ -19,7 +19,11 @@ class ExpressionCommon : public Expression {
 		ExpressionCommon(ParserUtils *parserUtils);
 		virtual ~ExpressionCommon();
 		virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
+
 		virtual void parseBody(std::string line);
+
+		virtual void injectExpression(Expression *expression);
+
 		virtual Expression * evaluate() = 0;
 };
 
