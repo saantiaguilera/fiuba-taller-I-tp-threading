@@ -4,6 +4,7 @@ src/expressions/arithmetic/ExpressionSubstraction.o: \
  ../src/expressions/arithmetic/../../ParserUtils.h \
  ../src/expressions/arithmetic/../../Expression.h \
  ../src/expressions/arithmetic/../ExpressionCommon.h \
+ ../src/expressions/arithmetic/../runtime/ExpressionFunction.h \
  ../src/expressions/arithmetic/ExpressionArithmetic.h \
  ../src/expressions/arithmetic/ExpressionSubstraction.h
 
@@ -14,6 +15,8 @@ src/expressions/arithmetic/ExpressionSubstraction.o: \
 ../src/expressions/arithmetic/../../Expression.h:
 
 ../src/expressions/arithmetic/../ExpressionCommon.h:
+
+../src/expressions/arithmetic/../runtime/ExpressionFunction.h:
 
 ../src/expressions/arithmetic/ExpressionArithmetic.h:
 

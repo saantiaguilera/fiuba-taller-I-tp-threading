@@ -17,8 +17,8 @@
 #include <map>
 
 class Expression;
+class ExpressionFunction;
 
-#include "RuntimeExpressionInterface.h"
 #include "ParserUtils.h"
 
 #include "Expression.h"
@@ -41,6 +41,7 @@ class Expression;
 #include "expressions/list/ExpressionTailList.h"
 #include "expressions/ExpressionIf.h"
 #include "expressions/ExpressionPrint.h"
+#include "expressions/runtime/ExpressionFunction.h"
 #include "expressions/runtime/ExpressionVariable.h"
 
 /**
@@ -55,10 +56,13 @@ class IsFunction {
 	}
 };
 
-ParserUtils::ParserUtils(RuntimeExpressionInterface *listener) : listener(listener) { }
+ParserUtils::ParserUtils() { }
 
 ParserUtils::~ParserUtils() {
 	for (std::map<std::string,Expression*>::iterator it = runtimeVariables.begin(); it != runtimeVariables.end(); ++it)
+		delete it->second;
+
+	for (std::map<std::string,ExpressionFunction*>::iterator it = runtimeFunctions.begin(); it != runtimeFunctions.end(); ++it)
 		delete it->second;
 }
 
@@ -88,7 +92,7 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 	if (string == "if")
 		return new ExpressionIf(this);
 	if (string == "defun")
-		return 0;
+		return new ExpressionFunction(this);
 	if (string == "print")
 		return new ExpressionPrint(this);
 	if (string == "setq")
@@ -100,15 +104,15 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 }
 
 Expression * ParserUtils::expressionFromFunction(std::string &line) {
-	std::list<Expression*> runtimeExpressions = listener->getRuntimeExpressions();
-
-	for (std::list<Expression*>::const_iterator iterator = runtimeExpressions.begin(); iterator != runtimeExpressions.end(); ++iterator) {
-		std::string tag = (*iterator)->getTag();
-		if(line == tag)
-			return (*iterator);
-	}
-
 	return expressionFromKnownStrings(line);
+}
+
+ExpressionFunction * ParserUtils::expressionFromRuntime(std::string &tag) {
+	for (std::map<std::string,ExpressionFunction*>::iterator it = runtimeFunctions.begin(); it != runtimeFunctions.end(); ++it)
+		if (it->first == tag)
+			return it->second;
+
+	return NULL;
 }
 
 std::string ParserUtils::bodyToString(std::string &line) {
@@ -134,14 +138,17 @@ Expression * ParserUtils::parseExpression(std::string &line) {
 	std::cout << "FUNCTION:: " << function << std::endl;
 
 	//Here we should get a ExpressionSum instance
-	Expression *expression = expressionFromFunction(function);
+	Expression *expression = expressionFromRuntime(function);
 
 	//get the body
 	std::string stuff = bodyToString(line);
 
-	//Ask the expression to parse it (since it can depend
-	if (expression != 0)
-		expression->parseBody(stuff); //0 Should be a virtual method of expression. That overrides only the ones interested
+	if (expression != NULL) { //Runtime expression
+		expression = ((ExpressionFunction*) expression)->mutate(stuff);
+	} else {
+		expression = expressionFromFunction(function);
+		expression->parseBody(stuff);
+	}
 
 	return expression;
 }
@@ -161,9 +168,16 @@ Expression * ParserUtils::expressionFromVariable(std::string tag) {
 	return NULL;
 }
 
-Expression * ParserUtils::variableFromRuntime(std::string tag, std::string line) {
-	Expression *expression = parseExpression(line);
+Expression * ParserUtils::appendRuntimeFunction(std::string tag, ExpressionFunction *expression) {
+	if (runtimeFunctions.find(tag) != runtimeFunctions.end())
+		delete runtimeFunctions[tag];
 
+	runtimeFunctions[tag] = expression;
+
+	return expression;
+}
+
+Expression * ParserUtils::appendRuntimeVariable(std::string tag, Expression *expression) {
 	if (runtimeVariables.find(tag) != runtimeVariables.end())
 		delete runtimeVariables[tag];
 

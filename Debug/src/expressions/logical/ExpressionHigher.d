@@ -5,6 +5,7 @@ src/expressions/logical/ExpressionHigher.o: \
  ../src/expressions/logical/../../Expression.h \
  ../src/expressions/logical/../ExpressionCommon.h \
  ../src/expressions/logical/ExpressionLogical.h \
+ ../src/expressions/logical/../runtime/ExpressionFunction.h \
  ../src/expressions/logical/ExpressionHigher.h
 
 ../src/expressions/logical/../../RuntimeExpressionInterface.h:
@@ -16,5 +17,7 @@ src/expressions/logical/ExpressionHigher.o: \
 ../src/expressions/logical/../ExpressionCommon.h:
 
 ../src/expressions/logical/ExpressionLogical.h:
+
+../src/expressions/logical/../runtime/ExpressionFunction.h:
 
 ../src/expressions/logical/ExpressionHigher.h:

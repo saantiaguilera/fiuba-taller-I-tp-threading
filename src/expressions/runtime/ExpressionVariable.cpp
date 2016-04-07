@@ -16,11 +16,13 @@
 #include <map>
 
 class Expression;
+class ExpressionFunction;
 
 #include "../../RuntimeExpressionInterface.h"
 #include "../../ParserUtils.h"
 #include "../../Expression.h"
 #include "../ExpressionCommon.h"
+#include "ExpressionFunction.h"
 #include "ExpressionVariable.h"
 
 ExpressionVariable::ExpressionVariable(ParserUtils *parserUtils) : ExpressionCommon(parserUtils) { }
@@ -39,7 +41,7 @@ void ExpressionVariable::parseBody(std::string line) {
 	std::cout << getTag() << " NAME:: " << variableName << std::endl;
 	std::cout << getTag() << " BODY:: " << body << std::endl;
 
-	parserUtils->variableFromRuntime(variableName, body);
+	parserUtils->appendRuntimeVariable(variableName, parserUtils->parseExpression(body));
 }
 
 Expression * ExpressionVariable::evaluate() {

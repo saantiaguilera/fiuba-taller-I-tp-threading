@@ -16,16 +16,18 @@
 #include <map>
 
 class Expression;
+class ExpressionFunction;
 
 #include "RuntimeExpressionInterface.h"
 #include "ParserUtils.h"
 #include "Expression.h"
+#include "expressions/runtime/ExpressionFunction.h"
 #include "LispParser.h"
 
 #define CHECKSUM_THRESHOLD 65536
 
 LispParser::LispParser() {
-	parserUtils = new ParserUtils(this);
+	parserUtils = new ParserUtils();
 }
 
 std::list<Expression*> LispParser::getRuntimeExpressions() {

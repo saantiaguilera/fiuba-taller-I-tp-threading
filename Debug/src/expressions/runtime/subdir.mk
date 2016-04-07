@@ -4,12 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../src/expressions/runtime/ExpressionFunction.cpp \
 ../src/expressions/runtime/ExpressionVariable.cpp 
 
 OBJS += \
+./src/expressions/runtime/ExpressionFunction.o \
 ./src/expressions/runtime/ExpressionVariable.o 
 
 CPP_DEPS += \
+./src/expressions/runtime/ExpressionFunction.d \
 ./src/expressions/runtime/ExpressionVariable.d 
 
 

@@ -1,5 +1,4 @@
-src/ParserUtils.o: ../src/ParserUtils.cpp \
- ../src/RuntimeExpressionInterface.h ../src/ParserUtils.h \
+src/ParserUtils.o: ../src/ParserUtils.cpp ../src/ParserUtils.h \
  ../src/Expression.h ../src/expressions/ExpressionCommon.h \
  ../src/expressions/logical/ExpressionLogical.h \
  ../src/expressions/arithmetic/ExpressionArithmetic.h \
@@ -15,9 +14,8 @@ src/ParserUtils.o: ../src/ParserUtils.cpp \
  ../src/expressions/list/ExpressionList.h \
  ../src/expressions/list/ExpressionTailList.h \
  ../src/expressions/ExpressionIf.h ../src/expressions/ExpressionPrint.h \
+ ../src/expressions/runtime/ExpressionFunction.h \
  ../src/expressions/runtime/ExpressionVariable.h
-
-../src/RuntimeExpressionInterface.h:
 
 ../src/ParserUtils.h:
 
@@ -54,5 +52,7 @@ src/ParserUtils.o: ../src/ParserUtils.cpp \
 ../src/expressions/ExpressionIf.h:
 
 ../src/expressions/ExpressionPrint.h:
+
+../src/expressions/runtime/ExpressionFunction.h:
 
 ../src/expressions/runtime/ExpressionVariable.h:

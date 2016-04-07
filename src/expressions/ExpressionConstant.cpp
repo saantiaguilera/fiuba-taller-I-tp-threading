@@ -14,10 +14,12 @@
 #include <map>
 
 class Expression;
+class ExpressionFunction;
 
 #include "../RuntimeExpressionInterface.h"
 #include "../ParserUtils.h"
 #include "../Expression.h"
+#include "runtime/ExpressionFunction.h"
 #include "ExpressionConstant.h"
 
 ExpressionConstant::ExpressionConstant(ParserUtils *parserUtils) : Expression(parserUtils) , value("") { }
