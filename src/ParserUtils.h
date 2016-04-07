@@ -19,6 +19,7 @@ class ParserUtils {
 	public:
 		ParserUtils();
 		~ParserUtils();
+
 		void run(std::string &line);
 
 		Expression * parseExpression(std::string &line);

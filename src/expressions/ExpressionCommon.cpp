@@ -44,7 +44,7 @@ void ExpressionCommon::parseInnerExpression(std::string &temp, int startPoint) {
 
 				//Get recursive and continue for this new expression
 				std::string stuff = temp.substr(start, end - start + 1);
-				std::cout << "INNER EXPRESSION:: " << stuff << std::endl;
+
 				injectExpression(parserUtils->parseExpression(stuff));
 
 				//Remove the expression and start again
@@ -61,8 +61,6 @@ void ExpressionCommon::injectExpression(Expression *expression) {
 }
 
 void ExpressionCommon::parseBody(std::string line) {
-	std::cout << "BODY:: " << line << std::endl;
-
 	unsigned int i = 0;
 	//+. Iterate while there are data in the line
 	while (line.size() > 0 && i < line.size()) {
@@ -76,8 +74,6 @@ void ExpressionCommon::parseBody(std::string line) {
 			break;
 		case '"': { //Its a literal !
 			std::string literal = line.substr(i + 1, line.find('"', i + 1) - i - 1);
-
-			std::cout << "LITERAL:: " << literal << std::endl;
 
 			injectExpression(parserUtils->expressionFromConstant(literal));
 
@@ -97,8 +93,6 @@ void ExpressionCommon::parseBody(std::string line) {
 			if (isdigit(line[i])) {
 				std::string literal = line.substr(i, line.find(' ', i + 1) - i);
 
-				std::cout << "NUMBER:: " << literal << std::endl;
-
 				injectExpression(parserUtils->expressionFromConstant(literal));
 
 				//Remove the expression and start again
@@ -110,8 +104,6 @@ void ExpressionCommon::parseBody(std::string line) {
 
 			if (isalpha(line[i])) {
 				std::string literal = line.substr(i, line.find(' ', i + 1) - i);
-
-				std::cout << "VARIABLE:: " << literal << std::endl;
 
 				injectExpression(parserUtils->expressionFromVariable(literal));
 

@@ -139,18 +139,13 @@ Expression * ParserUtils::parseExpression(std::string &line) {
 	//Get the expression according to the symbol (+)
 	std::string function = functionToString(line);
 
-	std::cout << "FUNCTION:: " << function << std::endl;
-
 	//Here we should get NULL
 	Expression *expression = expressionFromRuntime(function);
 
 	//get the body
 	std::string stuff = bodyToString(line);
 
-	std::cout << "BODY:: " << stuff << std::endl;
-
 	if (expression != NULL) { //Runtime expression
-		std::cout << "FOUND RUNTIME EXPRESSION; " << std::endl;
 		expression = ((ExpressionFunction*) expression)->mutate(stuff);
 	} else { //Local expression
 		expression = expressionFromFunction(function);

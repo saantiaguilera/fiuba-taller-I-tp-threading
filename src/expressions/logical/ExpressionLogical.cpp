@@ -48,7 +48,5 @@ Expression * ExpressionLogical::evaluate() {
 	if (!fail)
 		getValues().push_back(new Element("1"));
 
-	std::cout << "Function of tag " + getTag() << " has value: " << (fail ? "()" : "1") << std::endl;
-
 	return this;
 }

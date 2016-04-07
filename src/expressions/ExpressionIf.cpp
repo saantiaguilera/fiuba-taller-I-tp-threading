@@ -37,24 +37,9 @@ void ExpressionIf::injectExpression(Expression *expression) {
 }
 
 Expression * ExpressionIf::evaluate() {
-	Expression* result;
-	if ((condition->evaluate())->getValues().size() > 0) {
-		//True;
-		std::cout << "Function of tag " + getTag() << " was: TRUE" << std::endl;
+	Expression* result = ((condition->evaluate())->getValues().size() > 0) ? trueExpression : falseExpression;
 
-		result = (trueExpression->evaluate());
-	} else {
-		//False
-		std::cout << "Function of tag " + getTag() << " was: FALSE" << std::endl;
-
-		result = (falseExpression->evaluate());
-	}
-	/**
-	 * TODO
-	 * All this if/else change it for
-	 * result = (condition->evaluate())->getValues().size() > 0 ? trueExpression : falseExpression;
-	 * result->evaluate();
-	 */
+	result->evaluate();
 
 	return result;
 }

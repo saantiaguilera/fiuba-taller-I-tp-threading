@@ -17,8 +17,6 @@ class Expression;
 #include "Expression.h"
 
 int main() {
-	std::cout << "!!!Hello World!!!" << std::endl; // prints !!!Hello World!!!
-
 	//arithmetic
 	//std::string a = "(+ 2 3 (* 5 2) (- 2 (/ 6 3)))"; //Returns 15
 
@@ -39,7 +37,7 @@ int main() {
 	//std::string a = "(if (car 4 5 6 7) (* 5 (+ 1 3)) 5000)"; //Returns 20
 
 	//print
-	//std::string a = "(print \"HOLA VIEJA\" (* 5 2) (+ 4 (- 3 1)))"; //Returns "HOLA VIEJA 10 6"
+	std::string a = "(print \"HOLA VIEJA\" (* 5 2) (+ 4 (- 3 1)))"; //Returns "HOLA VIEJA 10 6"
 	//std::string a = "(print 45 (if 1 46 47))"; //Returns "45 46"
 	//std::string a = "(print \"HOLA\" (if 1 46 47))"; //Returns "HOLA 46"
 	//std::string a = "(print \"HOLA\" (if 1 \"HOLA\" \"CHAU\"))"; //Returns "HOLA HOLA"
@@ -62,10 +60,6 @@ int main() {
 	/*std::string a = "(defun caar (ENV) (car (car ENV)))";
 	std::string b = "(defun condicional (ENV) (if ENV (caar (list ENV 2 3 4 5)) 1234))";
 	std::string c = "(print (condicional (list 1 2 3 4)))"; //Returns 1 */
-
-	std::cout << "Lets parse: " << a << std::endl;
-	//std::cout << "Lets parse: " << b << std::endl;
-	//std::cout << "Lets parse: " << c << std::endl;
 
 	ParserUtils parser;
 	parser.run(a);

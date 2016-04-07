@@ -26,18 +26,12 @@ ExpressionList::ExpressionList(ParserUtils *parserUtils) : ExpressionCommon(pars
 ExpressionList::~ExpressionList() {}
 
 Expression * ExpressionList::evaluate() {
-	int hardcodedCounter = 0;
-
 	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
 		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
 
-		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
+		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator)
 			getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
-			hardcodedCounter++;
-		}
 	}
-
-	std::cout << "Function of tag " + getTag() << " has size: " << hardcodedCounter << std::endl;
 
 	return this;
 }

@@ -46,7 +46,5 @@ Expression * ExpressionArithmetic::evaluate() {
     os << result;
 	getValues().push_back(new Element(os.str()));
 
-	std::cout << "Function of tag " + getTag() << " has value: " << result << std::endl;
-
 	return this;
 }
