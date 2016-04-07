@@ -136,15 +136,18 @@ Expression * ParserUtils::parseExpression(std::string &line) {
 
 	std::cout << "FUNCTION:: " << function << std::endl;
 
-	//Here we should get a ExpressionSum instance
+	//Here we should get NULL
 	Expression *expression = expressionFromRuntime(function);
 
 	//get the body
 	std::string stuff = bodyToString(line);
 
+	std::cout << "BODY:: " << stuff << std::endl;
+
 	if (expression != NULL) { //Runtime expression
+		std::cout << "FOUND RUNTIME EXPRESSION; " << std::endl;
 		expression = ((ExpressionFunction*) expression)->mutate(stuff);
-	} else {
+	} else { //Local expression
 		expression = expressionFromFunction(function);
 		expression->parseBody(stuff);
 	}

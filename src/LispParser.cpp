@@ -58,7 +58,7 @@ Expression * LispParser::parseLine(std::string &line) { //TODO ONCE WORKING REFA
 
 	expression->evaluate();
 
-	delete expression;
+//	delete expression;
 
 	return 0;
 }

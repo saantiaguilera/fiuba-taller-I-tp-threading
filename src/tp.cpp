@@ -52,8 +52,12 @@ int main() {
 	std::string b = "(/ var1 (+ (list 1 2 3 4)))"; //Returns 2 */
 	/* std::string a = "(setq abcdef (/ 4 (car (list 2 3 4))))"; // abcdef = 2
 	std::string b = "(print \"abcdef = \" abcdef)"; //Returns "abcdef = 2" */
-	std::string a = "(setq variableName (if (list) 1 (+ (- 8 4 2) (/ 16 2))))"; //variableName = 10
+	/*std::string a = "(setq variableName (if (list) 1 (+ (- 8 4 2) (/ 16 2))))"; //variableName = 10
 	std::string b = "(- variableName 120)"; //Returns -110 */
+
+	//defunc
+	std::string a = "(defun pow2 (var) (* var var))";
+	std::string b = "(pow2 4)"; //Return 16;
 
 	std::cout << "Lets parse: " << a << std::endl;
 	std::cout << "Lets parse: " << b << std::endl;

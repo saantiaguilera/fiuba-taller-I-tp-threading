@@ -42,24 +42,16 @@ void ExpressionFunction::parseBody(std::string line) {
 	std::cout << getTag() << " VARIABLE NAME:: " << variableName << std::endl;
 	std::cout << getTag() << " BODY:: " << body << std::endl;
 
-	parserUtils->appendRuntimeFunction(variableName, this);
+	parserUtils->appendRuntimeFunction(functionName, this);
 }
 
 Expression * ExpressionFunction::mutate(std::string value) {
-	//Change all variableName for value.
-	/**
-	 * Since this could happen
-	 * (print "hollo" (hollo 2)) with hollo as a function
-	 * We will change (variableName for (value
-	 */
-	std::string variable = "(" + variableName;
-	std::string finalValue = "(" + value;
+	//Since we want to reuse this expression. Use a copy :)
 	std::string newBody = body;
 
-	while(newBody.find(variable) != std::string::npos)
-		newBody.replace(newBody.find(variable),variable.size(), finalValue);
-
-	std::cout << "MUTATION:: " << newBody << std::endl;
+	//Literals will be changed too :( Maybe for when I have moar time. Sorry for now
+	while(newBody.find(variableName) != std::string::npos)
+		newBody.replace(newBody.find(variableName),variableName.size(), value);
 
 	return parserUtils->parseExpression(newBody);
 }
