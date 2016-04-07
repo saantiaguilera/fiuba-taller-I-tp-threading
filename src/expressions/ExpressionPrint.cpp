@@ -33,7 +33,7 @@ Expression * ExpressionPrint::evaluate() {
 		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
 
 		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
-			oss << **elementIterator << " ";
+			oss << **elementIterator << " "; //TODO CARE OF THIS SPACE. CHECK IF SERCOM ADDS IT OR NOT IN A FUNC
 		}
 	}
 
