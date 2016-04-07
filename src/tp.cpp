@@ -55,12 +55,16 @@ int main() {
 	/*std::string a = "(setq variableName (if (list) 1 (+ (- 8 4 2) (/ 16 2))))"; //variableName = 10
 	std::string b = "(- variableName 120)"; //Returns -110 */
 
-	//defunc
+	//defunc - Recursive is impossible with this design (and I thought about it and I think
+	//Its still damn hard with most of designs. So no recursivness for defunc :(
 	/*std::string a = "(defun pow2 (var) (* var var))";
 	std::string b = "(pow2 4)"; //Return 16; */
-	std::string a = "(defun op1 (lista) (+ (cdr lista)))";
+	/*std::string a = "(defun op1 (lista) (+ (cdr lista)))";
 	std::string b = "(setq valores (list 1 2 3 4 5 6 7 8 9))";
-	std::string c = "(print (op1 valores))"; //Return 45; */
+	std::string c = "(print (op1 valores))"; //Return 44; */
+	std::string a = "(defun caar (ENV) (car (car ENV)))";
+	std::string b = "(defun condicional (ENV) (if ENV (caar (list ENV 2 3 4 5)) 1234))";
+	std::string c = "(print (condicional (list 1 2 3 4)))";
 
 	std::cout << "Lets parse: " << a << std::endl;
 	std::cout << "Lets parse: " << b << std::endl;
