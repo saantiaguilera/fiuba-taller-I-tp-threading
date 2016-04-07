@@ -14,6 +14,7 @@
 #include <algorithm>
 #include <stdlib.h>
 #include <iostream>
+#include <map>
 
 class Expression;
 
@@ -40,6 +41,7 @@ class Expression;
 #include "expressions/list/ExpressionTailList.h"
 #include "expressions/ExpressionIf.h"
 #include "expressions/ExpressionPrint.h"
+#include "expressions/runtime/ExpressionVariable.h"
 
 /**
  * Inner class for using as predicative
@@ -54,6 +56,11 @@ class IsFunction {
 };
 
 ParserUtils::ParserUtils(RuntimeExpressionInterface *listener) : listener(listener) { }
+
+ParserUtils::~ParserUtils() {
+	for (std::map<std::string,Expression*>::iterator it = runtimeVariables.begin(); it != runtimeVariables.end(); ++it)
+		delete it->second;
+}
 
 Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 	if (string == "+")
@@ -85,7 +92,7 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 	if (string == "print")
 		return new ExpressionPrint(this);
 	if (string == "setq")
-		return 0;
+		return new ExpressionVariable(this);
 	if (string == "sync")
 		return 0;
 
@@ -93,7 +100,6 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 }
 
 Expression * ParserUtils::expressionFromFunction(std::string &line) {
-
 	std::list<Expression*> runtimeExpressions = listener->getRuntimeExpressions();
 
 	for (std::list<Expression*>::const_iterator iterator = runtimeExpressions.begin(); iterator != runtimeExpressions.end(); ++iterator) {
@@ -140,10 +146,28 @@ Expression * ParserUtils::parseExpression(std::string &line) {
 	return expression;
 }
 
-Expression * ParserUtils::expressionFromConstant(std::string &line) {
-	//TODO THIS SHOULD ITERATE THROUGH THE SETQ CONSTANTS TOO
+Expression * ParserUtils::expressionFromConstant(std::string line) {
 	Expression *expression = new ExpressionConstant(this);
 	expression->parseBody(line);
+
+	return expression;
+}
+
+Expression * ParserUtils::expressionFromVariable(std::string tag) {
+	for (std::map<std::string,Expression*>::iterator it = runtimeVariables.begin(); it != runtimeVariables.end(); ++it)
+		if (it->first == tag)
+			return it->second;
+
+	return NULL;
+}
+
+Expression * ParserUtils::variableFromRuntime(std::string tag, std::string line) {
+	Expression *expression = parseExpression(line);
+
+	if (runtimeVariables.find(tag) != runtimeVariables.end())
+		delete runtimeVariables[tag];
+
+	runtimeVariables[tag] = expression;
 
 	return expression;
 }

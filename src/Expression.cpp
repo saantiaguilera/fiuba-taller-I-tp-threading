@@ -10,6 +10,7 @@
 #include <cstdio>
 #include <stdlib.h>
 #include <iostream>
+#include <map>
 
 class Expression;
 

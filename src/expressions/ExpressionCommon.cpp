@@ -13,6 +13,7 @@
 #include <sstream>
 #include <cctype>
 #include <list>
+#include <map>
 
 class Expression;
 
@@ -109,7 +110,7 @@ void ExpressionCommon::parseBody(std::string line) {
 
 				std::cout << "VARIABLE:: " << literal << std::endl;
 
-				//TODO environment.push_back(parserUtils->expressionFromConstant(literal));
+				environment.push_back(parserUtils->expressionFromVariable(literal));
 
 				//Remove the expression and start again
 				line.replace(i, literal.length() + 1, "");

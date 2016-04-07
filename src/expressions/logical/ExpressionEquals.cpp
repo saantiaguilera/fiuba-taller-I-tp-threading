@@ -12,6 +12,7 @@
 #include <sstream>
 #include <iostream>
 #include <list>
+#include <map>
 
 class Expression;
 

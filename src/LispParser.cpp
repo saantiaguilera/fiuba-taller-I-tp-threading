@@ -13,6 +13,7 @@
 #include <sstream>
 #include <list>
 #include "KnownFunctions.h"
+#include <map>
 
 class Expression;
 
@@ -23,7 +24,7 @@ class Expression;
 
 #define CHECKSUM_THRESHOLD 65536
 
-LispParser::LispParser(std::string &code) : buffer(code) {
+LispParser::LispParser() {
 	parserUtils = new ParserUtils(this);
 }
 
@@ -32,12 +33,11 @@ std::list<Expression*> LispParser::getRuntimeExpressions() {
 }
 
 LispParser::~LispParser() {
-	this->buffer.clear();
 	delete parserUtils;
 }
 
-void LispParser::run() { //TODO. FOR NOW BUFFER WILL BE A SINGLE LINE
-	Expression *expression = parseLine(buffer);
+void LispParser::run(std::string value) { //TODO. FOR NOW BUFFER WILL BE A SINGLE LINE
+	parseLine(value);
 }
 
 Expression * LispParser::parseLine(std::string &line) { //TODO ONCE WORKING REFACTOR IT TO SIMPLER FORM (REPEATING CODE)

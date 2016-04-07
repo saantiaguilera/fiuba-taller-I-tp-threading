@@ -5,7 +5,6 @@
  *      Author: santiago
  */
 
-
 #include <string>
 #include <cstdio>
 #include <stdlib.h>
@@ -14,6 +13,7 @@
 #include <sstream>
 #include <cctype>
 #include <list>
+#include <map>
 
 class Expression;
 
@@ -118,7 +118,7 @@ void ExpressionIf::parseBody(std::string line) {
 
 				std::cout << "VARIABLE:: " << literal << std::endl;
 
-				//TODO setExpression(parserUtils->expressionFromConstant(literal));
+				setExpression(parserUtils->expressionFromVariable(literal));
 
 				//Remove the expression and start again
 				line.replace(i, literal.length() + 1, "");

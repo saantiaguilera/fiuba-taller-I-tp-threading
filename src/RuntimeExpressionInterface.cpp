@@ -8,6 +8,7 @@
 #include <string>
 #include <list>
 #include "KnownFunctions.h"
+#include <map>
 
 class Expression;
 

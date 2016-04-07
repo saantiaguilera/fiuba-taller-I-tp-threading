@@ -10,6 +10,7 @@
 #include <string>
 #include <list>
 #include "KnownFunctions.h"
+#include <map>
 
 class Expression;
 
@@ -41,15 +42,25 @@ int main() {
 	//std::string a = "(if (car 4 5 6 7) (* 5 (+ 1 3)) 5000)"; //Returns 20
 
 	//print
-	std::string a = "(print \"HOLA VIEJA\" (* 5 2) (+ 4 (- 3 1)))"; //Returns "HOLA VIEJA 10 6"
+	//std::string a = "(print \"HOLA VIEJA\" (* 5 2) (+ 4 (- 3 1)))"; //Returns "HOLA VIEJA 10 6"
 	//std::string a = "(print 45 (if 1 46 47))"; //Returns "45 46"
 	//std::string a = "(print \"HOLA\" (if 1 46 47))"; //Returns "HOLA 46"
 	//std::string a = "(print \"HOLA\" (if 1 \"HOLA\" \"CHAU\"))"; //Returns "HOLA HOLA"
 
-	std::cout << "Lets parse: " << a << std::endl;
+	//setq
+	/* std::string a = "(setq var1 (+ (* 8 (/ 4 2)) 4))"; //Var1 = 20
+	std::string b = "(/ var1 (+ (list 1 2 3 4)))"; //Returns 2 */
+	std::string a = "(setq abcdef (/ 4 (car (list 2 3 4))))"; // abcdef = 2
+	std::string b = "(print \"abcdef = \" abcdef)"; //Returns "abcdef = 2"
+	/* std::string a = "(setq var1 (+ (* 8 (/ 4 2)) 4))"; //Var1 = 20
+	std::string b = "(/ var1 (+ (list 1 2 3 4)))"; //Returns 2 */
 
-	LispParser parser(a);
-	parser.run();
+	std::cout << "Lets parse: " << a << std::endl;
+	std::cout << "Lets parse: " << b << std::endl;
+
+	LispParser parser;
+	parser.run(a);
+	parser.run(b);
 
 	return 0;
 }
