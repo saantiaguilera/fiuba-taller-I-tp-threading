@@ -13,20 +13,24 @@ class ParserUtils {
 		std::map<std::string, Expression*> runtimeVariables;
 		std::map<std::string, Expression*> runtimeFunctions;
 
-		Expression * expressionFromKnownStrings(std::string &string);
-		Expression * expressionFromFunction(std::string &line);
-		Expression * expressionFromRuntime(std::string &line);
 		std::string bodyToString(std::string &line);
 		std::string functionToString(std::string line);
 
-	public: //Should have like getFunction / getStuff / blabla
+	public:
 		ParserUtils();
 		~ParserUtils();
+		void run(std::string &line);
+
 		Expression * parseExpression(std::string &line);
+
 		Expression * expressionFromConstant(std::string line);
+		Expression * expressionFromVariable(std::string tag);
+		Expression * expressionFromKnownStrings(std::string &string);
+		Expression * expressionFromFunction(std::string &line);
+		Expression * expressionFromRuntime(std::string &line);
+
 		Expression * appendRuntimeVariable(std::string tag, Expression *expression);
 		Expression * appendRuntimeFunction(std::string tag, Expression *expression);
-		Expression * expressionFromVariable(std::string tag);
 };
 
 

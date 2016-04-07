@@ -65,6 +65,11 @@ ParserUtils::~ParserUtils() {
 		delete it->second;
 }
 
+void ParserUtils::run(std::string &line) {
+	Expression *expression = parseExpression(line);
+	expression->evaluate();
+}
+
 Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 	if (string == "+")
 		return new ExpressionSum(this);

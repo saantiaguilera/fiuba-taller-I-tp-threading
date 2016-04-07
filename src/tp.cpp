@@ -9,15 +9,12 @@
 #include <iostream>
 #include <string>
 #include <list>
-#include "KnownFunctions.h"
 #include <map>
 
 class Expression;
 
-#include "RuntimeExpressionInterface.h"
 #include "ParserUtils.h"
 #include "Expression.h"
-#include "LispParser.h"
 
 int main() {
 	std::cout << "!!!Hello World!!!" << std::endl; // prints !!!Hello World!!!
@@ -70,9 +67,10 @@ int main() {
 	std::cout << "Lets parse: " << b << std::endl;
 	std::cout << "Lets parse: " << c << std::endl;
 
-	LispParser parser;
+	ParserUtils parser;
 	parser.run(a);
 	parser.run(b);
+	parser.run(c);
 	parser.run(c);
 
 	return 0;
