@@ -1,0 +1,6 @@
+(print (car (list 1 2 3)))
+(print (car (list (list 1 2 3 4) 2 3)))
+(print (cdr (car (list (list 1 2 3)))))
+(print (append (list) (list 1 2 3)))
+(print (append (list) (list)))
+(print (append (list 1 2) (cdr (cdr (list 1 2 3 4 5 6)))))

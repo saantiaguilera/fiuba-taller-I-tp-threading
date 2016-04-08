@@ -31,12 +31,12 @@ Expression * ExpressionTailList::evaluate() {
 	bool start = true;
 
 	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
-		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
+		if (start)
+			start = false;
+		else {
+			std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
 
-		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
-			if (start)
-				start = false;
-			else
+			for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator)
 				getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
 		}
 	}

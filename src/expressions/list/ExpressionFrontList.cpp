@@ -33,9 +33,8 @@ Expression * ExpressionFrontList::evaluate() {
 
 	if(expressionIterator != environment.end()) {
 		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
-		std::list<Element*>::const_iterator elementIterator = values.begin();
 
-		if (elementIterator != values.end())
+		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator)
 			getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
 	}
 

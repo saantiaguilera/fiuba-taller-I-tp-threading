@@ -54,6 +54,9 @@ void ExpressionCommon::parseInnerExpression(std::string &temp, int startPoint) {
 			}
 		}
 	}
+
+	if (!found || end==-1 || start==-1)
+		throw 2;
 }
 
 void ExpressionCommon::injectExpression(Expression *expression) {

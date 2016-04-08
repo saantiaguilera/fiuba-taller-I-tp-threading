@@ -20,21 +20,20 @@ int main() {
 	ParserUtils parser;
 	std::string line;
 
-    try {
-	while (std::getline(std::cin, line))
-		parser.run(line);
-	} catch (int exception) {
-		std::cout << "EXCEPTION THROWN, RETURNING :: " << exception << std::endl;
-		return exception;
+	while (std::getline(std::cin, line)) {
+	    try {
+	    	parser.run(line);
+		} catch (int exception) {
+			std::cout << "ERROR: " << line << std::endl;
+		}
 	}
-/*
+
+	/*
+	std::string a = "(print (list 1 2 3)";
 	try {
-		std::string a = "1 2 3";
-		std::string b = "ERROR: (print (list 1 2 3)";
 		parser.run(a);
-		parser.run(b);
 	} catch (int exception) {
-		return exception;
+		std::cout << "ERROR: " << a << std::endl;
 	}
 */
 	return 0;
