@@ -23,8 +23,8 @@ int main() {
 	while (std::getline(std::cin, line))
 		parser.run(line);
 /*
-	std::string a = "(setq a (list 1 2 3))";
-	std::string b = "(print a)";
+	std::string a = "(defun cddr (ENV) (cdr (cdr ENV)))";
+	std::string b = "(print (cddr (list 1 2 3 4 5))) ";
 	parser.run(a);
 	parser.run(b);
 */
