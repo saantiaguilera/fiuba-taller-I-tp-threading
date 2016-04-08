@@ -35,7 +35,11 @@ void ExpressionVariable::parseBody(std::string line) {
 	getline(iss, body); // " 5"
 	body = body.substr(1); // "5"
 
-	parserUtils->appendRuntimeVariable(variableName, parserUtils->parseExpression(body));
+	ExpressionCommon::parseBody(body);
+}
+
+void ExpressionVariable::injectExpression(Expression *expression) {
+	parserUtils->appendRuntimeVariable(variableName, expression);
 }
 
 Expression * ExpressionVariable::evaluate() {

@@ -20,6 +20,7 @@ class ExpressionVariable : public ExpressionCommon {
 		virtual void parseBody(std::string line);
 		virtual std::string getTag(); //known method ? NULL : runtime name tag
 		virtual Expression * evaluate();
+		virtual void injectExpression(Expression *expression);
 };
 
 #endif /* EXPRESSIONS_RUNTIME_EXPRESSIONVARIABLE_H_ */
