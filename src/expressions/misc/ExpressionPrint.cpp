@@ -28,13 +28,8 @@ ExpressionPrint::~ExpressionPrint() {}
 Expression * ExpressionPrint::evaluate() {
 	clearValues();
 
-	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
-		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
-
-		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
-			std::cout << **elementIterator << " "; //TODO CARE OF THIS SPACE. CHECK IF SERCOM ADDS IT OR NOT IN A FUNC
-		}
-	}
+	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end() ; ++expressionIterator)
+		std::cout << ((*expressionIterator)->evaluate())->toString();
 
 	std::cout << std::endl;
 
@@ -44,6 +39,3 @@ Expression * ExpressionPrint::evaluate() {
 std::string ExpressionPrint::getTag() {
 	return "Print";
 }
-
-
-

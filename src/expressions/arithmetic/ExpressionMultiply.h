@@ -18,7 +18,6 @@ class ExpressionMultiply : public ExpressionArithmetic {
 		virtual ~ExpressionMultiply();
 		virtual int operate(int dest, int src);
 		virtual std::string getTag();
-
 };
 
 #endif /* EXPRESSIONS_EXPRESSIONMULTIPLY_H_ */

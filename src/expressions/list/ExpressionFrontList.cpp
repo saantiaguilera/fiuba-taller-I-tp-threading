@@ -45,3 +45,21 @@ Expression * ExpressionFrontList::evaluate() {
 std::string ExpressionFrontList::getTag() {
 	return "Car";
 }
+
+std::string ExpressionFrontList::toString() {
+	std::string response;
+
+	response = "(";
+
+	std::list<Element*>::const_iterator end = values.end();
+	for (std::list<Element*>::const_iterator elementIterator = values.begin() ; elementIterator != end;) {
+		response += (**elementIterator);
+
+		if (++elementIterator != end)
+			response += " ";
+	}
+
+	response = ")";
+
+	return response;
+}

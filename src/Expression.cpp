@@ -63,3 +63,12 @@ std::list<Element*> &Expression::getValues() {
 void Expression::setEnvironment(std::list<Expression*> expressions) {
 	this->environment = expressions; //Todo check if this wont give a mem leak
 }
+
+std::string Expression::toString() {
+	std::string returnString = "";
+	for (std::list<Expression*>::iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
+		returnString += (*expressionIterator)->evaluate()->toString();
+	}
+
+	return returnString;
+}

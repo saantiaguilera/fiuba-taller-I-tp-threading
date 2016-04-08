@@ -18,7 +18,6 @@ class ExpressionSubstraction : public ExpressionArithmetic {
 		virtual ~ExpressionSubstraction();
 		virtual int operate(int dest, int src);
 		virtual std::string getTag();
-
 };
 
 #endif /* EXPRESSIONS_EXPRESSIONSUBSTRACTION_H_ */

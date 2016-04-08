@@ -41,3 +41,21 @@ Expression * ExpressionList::evaluate() {
 std::string ExpressionList::getTag() {
 	return "List";
 }
+
+std::string ExpressionList::toString() {
+	std::string response;
+
+	response = "(";
+
+	std::list<Element*>::const_iterator end = values.end();
+	for (std::list<Element*>::const_iterator elementIterator = values.begin() ; elementIterator != end;) {
+		response += (**elementIterator);
+
+		if (++elementIterator != end)
+			response += " ";
+	}
+
+	response += ")";
+
+	return response;
+}

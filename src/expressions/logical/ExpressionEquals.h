@@ -18,7 +18,6 @@ class ExpressionEquals : public ExpressionLogical {
 		virtual ~ExpressionEquals();
 		virtual bool operate(int leftValue, int rightValue);
 		virtual std::string getTag();
-
 };
 
 #endif /* EXPRESSIONS_EXPRESSIONEQUALS_H_ */

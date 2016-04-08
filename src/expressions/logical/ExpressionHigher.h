@@ -18,7 +18,6 @@ class ExpressionHigher : public ExpressionLogical {
 		virtual ~ExpressionHigher();
 		virtual bool operate(int leftValue, int rightValue);
 		virtual std::string getTag();
-
 };
 
 #endif /* EXPRESSIONS_LOGICAL_EXPRESSIONHIGHER_H_ */

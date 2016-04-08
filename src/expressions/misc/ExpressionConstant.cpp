@@ -37,3 +37,7 @@ std::string ExpressionConstant::getTag() {
 void ExpressionConstant::parseBody(std::string line) {
 	this->value = line;
 }
+
+std::string ExpressionConstant::toString() {
+	return value;
+}

@@ -18,7 +18,6 @@ class ExpressionDivide : public ExpressionArithmetic {
 		virtual ~ExpressionDivide();
 		virtual int operate(int dest, int src);
 		virtual std::string getTag();
-
 };
 
 #endif /* EXPRESSIONS_EXPRESSIONDIVIDE_H_ */

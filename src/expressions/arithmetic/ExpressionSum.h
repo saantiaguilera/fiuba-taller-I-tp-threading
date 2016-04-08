@@ -18,7 +18,6 @@ class ExpressionSum : public ExpressionArithmetic {
 		virtual ~ExpressionSum();
 		virtual int operate(int dest, int src);
 		virtual std::string getTag();
-
 };
 
 #endif /* EXPRESSIONSUM_H_ */

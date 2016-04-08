@@ -18,6 +18,7 @@ class ExpressionList : public ExpressionCommon {
 		virtual ~ExpressionList();
 		virtual std::string getTag(); //known method ? NULL : runtime name tag
 		virtual Expression * evaluate();
+		virtual std::string toString();
 };
 
 #endif /* EXPRESSIONS_LIST_EXPRESSIONLIST_H_ */

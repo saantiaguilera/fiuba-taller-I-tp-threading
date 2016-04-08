@@ -47,3 +47,21 @@ Expression * ExpressionTailList::evaluate() {
 std::string ExpressionTailList::getTag() {
 	return "Cdr";
 }
+
+std::string ExpressionTailList::toString() {
+	std::string response;
+
+	response = "(";
+
+	std::list<Element*>::const_iterator end = values.end();
+	for (std::list<Element*>::const_iterator elementIterator = values.begin() ; elementIterator != end;) {
+		response += (**elementIterator);
+
+		if (++elementIterator != end)
+			response += " ";
+	}
+
+	response = ")";
+
+	return response;
+}

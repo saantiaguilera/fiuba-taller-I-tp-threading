@@ -19,14 +19,14 @@ class Expression;
 int main() {
 	ParserUtils parser;
 	std::string line;
-
+/*
 	while (std::getline(std::cin, line)) {
 		std::cout << "LINE:: " << line << std::endl;
 		parser.run(line);
 	}
-
-//	std::string a = "(list)";
-//	parser.run(a);
+*/
+	std::string a = "(print (list))";
+	parser.run(a);
 
 	return 0;
 }

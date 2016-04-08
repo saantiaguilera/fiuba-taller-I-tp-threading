@@ -20,7 +20,7 @@ class ExpressionConstant : public Expression {
 		virtual Expression * evaluate();
 		virtual void parseBody(std::string line);
 		virtual std::string getTag();
-
+		virtual std::string toString();
 };
 
 #endif /* EXPRESSIONCONSTANT_H_ */
