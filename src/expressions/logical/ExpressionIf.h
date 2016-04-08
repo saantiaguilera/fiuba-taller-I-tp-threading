@@ -24,6 +24,7 @@ class ExpressionIf : public ExpressionCommon {
 		virtual std::string getTag(); //known method ? NULL : runtime name tag
 		virtual Expression * evaluate();
 		virtual void injectExpression(Expression *expression);
+		virtual std::string toString();
 };
 
 #endif /* EXPRESSIONS_EXPRESSIONIF_H_ */

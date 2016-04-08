@@ -50,3 +50,10 @@ Expression * ExpressionArithmetic::evaluate() {
 
 	return this;
 }
+
+std::string ExpressionArithmetic::toString() {
+	std::list<Element*>::const_iterator elementIterator = values.begin();
+
+	//Arithmetics should always return 1 value. Else we are living in a parallel world
+	return (**elementIterator);
+}

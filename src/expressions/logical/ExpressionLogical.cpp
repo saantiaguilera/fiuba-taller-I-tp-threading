@@ -52,3 +52,10 @@ Expression * ExpressionLogical::evaluate() {
 
 	return this;
 }
+
+std::string ExpressionLogical::toString() {
+	if (values.size() == 1)
+		return "1";
+
+	return "()";
+}

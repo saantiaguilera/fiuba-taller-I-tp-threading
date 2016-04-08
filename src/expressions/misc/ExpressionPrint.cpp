@@ -28,8 +28,14 @@ ExpressionPrint::~ExpressionPrint() {}
 Expression * ExpressionPrint::evaluate() {
 	clearValues();
 
-	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end() ; ++expressionIterator)
+	std::list<Expression*>::const_iterator end = environment.end();
+	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != end;) {
 		std::cout << ((*expressionIterator)->evaluate())->toString();
+
+		//Space the values unless its the last
+		if (++expressionIterator != end)
+			std::cout << " ";
+	}
 
 	std::cout << std::endl;
 

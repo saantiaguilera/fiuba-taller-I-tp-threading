@@ -64,3 +64,9 @@ Expression * ExpressionIf::evaluate() {
 std::string ExpressionIf::getTag() {
 	return "If";
 }
+
+std::string ExpressionIf::toString() {
+	Expression* result = ((condition->evaluate())->getValues().size() > 0) ? trueExpression : falseExpression;
+
+	return result->toString();
+}

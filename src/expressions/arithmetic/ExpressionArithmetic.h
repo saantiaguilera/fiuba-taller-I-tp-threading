@@ -19,6 +19,7 @@ class ExpressionArithmetic : public ExpressionCommon {
 		virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
 		virtual Expression * evaluate();
 		virtual int operate(int dest, int src) = 0;
+		virtual std::string toString();
 };
 
 #endif /* EXPRESSIONARITHMETIC_H_ */

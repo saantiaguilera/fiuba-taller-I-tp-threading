@@ -66,8 +66,9 @@ void Expression::setEnvironment(std::list<Expression*> expressions) {
 
 std::string Expression::toString() {
 	std::string returnString = "";
+
 	for (std::list<Expression*>::iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
-		returnString += (*expressionIterator)->evaluate()->toString();
+		returnString += ((*expressionIterator)->evaluate())->toString();
 	}
 
 	return returnString;

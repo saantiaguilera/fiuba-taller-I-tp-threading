@@ -19,6 +19,7 @@ class ExpressionLogical : public ExpressionCommon {
 		virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
 		virtual Expression * evaluate();
 		virtual bool operate(int leftValue, int rightValue) = 0;
+		virtual std::string toString();
 };
 
 #endif /* EXPRESSIONS_LOGICAL_EXPRESSIONLOGICAL_H_ */

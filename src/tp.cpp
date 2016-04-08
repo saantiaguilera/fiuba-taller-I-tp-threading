@@ -25,7 +25,7 @@ int main() {
 		parser.run(line);
 	}
 */
-	std::string a = "(print (list))";
+	std::string a = "(print \"HOLA\" (+ 4 5))";
 	parser.run(a);
 
 	return 0;
