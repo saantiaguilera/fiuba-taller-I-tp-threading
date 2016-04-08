@@ -45,8 +45,7 @@ std::string ExpressionList::getTag() {
 std::string ExpressionList::toString() {
 	std::string response;
 
-	if (values.size() != 1)
-		response = "(";
+	response = "(";
 
 	std::list<Element*>::const_iterator end = values.end();
 	for (std::list<Element*>::const_iterator elementIterator = values.begin() ; elementIterator != end;) {
@@ -56,8 +55,7 @@ std::string ExpressionList::toString() {
 			response += " ";
 	}
 
-	if (values.size() != 1)
-		response += ")";
+	response += ")";
 
 	return response;
 }
