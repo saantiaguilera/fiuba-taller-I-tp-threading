@@ -27,6 +27,8 @@ ExpressionFrontList::ExpressionFrontList(ParserUtils *parserUtils) : ExpressionC
 ExpressionFrontList::~ExpressionFrontList() {}
 
 Expression * ExpressionFrontList::evaluate() {
+	clearValues();
+
 	std::list<Expression*>::const_iterator expressionIterator = environment.begin();
 
 	if(expressionIterator != environment.end()) {

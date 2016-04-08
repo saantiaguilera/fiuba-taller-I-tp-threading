@@ -30,6 +30,9 @@ class Expression {
 		ParserUtils *parserUtils;
 		std::list<Element*> values;
 
+		void clearEnvironment();
+		void clearValues();
+
 	public:
 		Expression(ParserUtils *parserUtils);
 		virtual ~Expression();

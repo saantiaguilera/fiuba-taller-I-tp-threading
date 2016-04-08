@@ -27,6 +27,8 @@ ExpressionLogical::ExpressionLogical(ParserUtils *parserUtils) : ExpressionCommo
 ExpressionLogical::~ExpressionLogical() {}
 
 Expression * ExpressionLogical::evaluate() {
+	clearValues();
+
 	bool start = true;
 	bool fail = false;
 	int result = 0;

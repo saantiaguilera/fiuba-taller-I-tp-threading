@@ -26,6 +26,8 @@ ExpressionTailList::ExpressionTailList(ParserUtils *parserUtils) : ExpressionCom
 ExpressionTailList::~ExpressionTailList() {}
 
 Expression * ExpressionTailList::evaluate() {
+	clearValues();
+
 	bool start = true;
 
 	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {

@@ -203,7 +203,7 @@ Expression * ParserUtils::expressionFromConstant(std::string line) {
 Expression * ParserUtils::expressionFromVariable(std::string tag) {
 	for (std::map<std::string,Expression*>::iterator it = runtimeVariables.begin(); it != runtimeVariables.end(); ++it)
 		if (it->first == tag)
-			return it->second;
+			return ((ExpressionVariable*) (it->second))->mutate();
 
 	return NULL;
 }

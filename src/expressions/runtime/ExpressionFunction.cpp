@@ -26,6 +26,8 @@ ExpressionFunction::ExpressionFunction(ParserUtils *parserUtils) : Expression(pa
 ExpressionFunction::~ExpressionFunction() {}
 
 void ExpressionFunction::parseBody(std::string line) {
+	clearEnvironment();
+
 	//eg (setq var1 5)
 	std::istringstream iss(line);
 	iss >> functionName; // "op1"
@@ -41,6 +43,8 @@ void ExpressionFunction::parseBody(std::string line) {
 }
 
 Expression * ExpressionFunction::mutate(std::string value) {
+	clearEnvironment();
+
 	//Since we want to reuse this expression. Use a copy :)
 	std::string newBody = body;
 

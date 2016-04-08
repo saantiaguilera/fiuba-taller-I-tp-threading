@@ -29,6 +29,23 @@ Expression::Expression(ParserUtils *parserUtils) : parserUtils(parserUtils) {}
  * and I prefer 6 bad smell lines than 2x heap
  */
 Expression::~Expression() {
+	clearEnvironment();
+
+	clearValues();
+}
+
+void Expression::clearValues() {
+	for (std::list<Element*>::iterator valuesIterator = values.begin(); valuesIterator != values.end(); ++valuesIterator){
+		if (*valuesIterator != NULL) {
+			delete (*valuesIterator);
+			*valuesIterator = NULL;
+		}
+	}
+
+	values.clear();
+}
+
+void Expression::clearEnvironment() {
 	for (std::list<Expression*>::iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
 		if (*expressionIterator != NULL) {
 			delete (*expressionIterator);
@@ -36,12 +53,7 @@ Expression::~Expression() {
 		}
 	}
 
-	for (std::list<Element*>::iterator valuesIterator = values.begin(); valuesIterator != values.end(); ++valuesIterator){
-		if (*valuesIterator != NULL) {
-			delete (*valuesIterator);
-			*valuesIterator = NULL;
-		}
-	}
+	environment.clear();
 }
 
 std::list<Element*> &Expression::getValues() {

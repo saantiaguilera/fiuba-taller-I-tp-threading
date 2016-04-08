@@ -27,19 +27,30 @@ ExpressionVariable::ExpressionVariable(ParserUtils *parserUtils) : ExpressionCom
 ExpressionVariable::~ExpressionVariable() {}
 
 void ExpressionVariable::parseBody(std::string line) {
+	clearEnvironment();
+
 	//eg (setq var1 5)
 	std::istringstream iss(line);
 	iss >> variableName; // "var1"
 
-	std::string body;
 	getline(iss, body); // " 5"
 	body = body.substr(1); // "5"
-
-	ExpressionCommon::parseBody(body);
 }
 
 void ExpressionVariable::injectExpression(Expression *expression) {
 	parserUtils->appendRuntimeVariable(variableName, expression);
+}
+
+Expression * ExpressionVariable::mutate() {
+	clearEnvironment();
+
+	ExpressionCommon::parseBody(body); //Parse the body, this creates an environment
+
+	Expression *expression = (*environment.begin()); //Get the generated expression
+
+	environment.clear(); //Clear the environment
+
+	return expression; //Return the expression generated
 }
 
 Expression * ExpressionVariable::evaluate() {

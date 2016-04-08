@@ -26,6 +26,8 @@ ExpressionArithmetic::ExpressionArithmetic(ParserUtils *parserUtils) : Expressio
 ExpressionArithmetic::~ExpressionArithmetic() {}
 
 Expression * ExpressionArithmetic::evaluate() {
+	clearValues();
+
 	bool start = true;
 	int result = 0;
 

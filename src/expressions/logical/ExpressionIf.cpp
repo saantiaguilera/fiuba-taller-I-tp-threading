@@ -52,6 +52,8 @@ void ExpressionIf::injectExpression(Expression *expression) {
 }
 
 Expression * ExpressionIf::evaluate() {
+	clearValues();
+
 	Expression* result = ((condition->evaluate())->getValues().size() > 0) ? trueExpression : falseExpression;
 
 	result->evaluate();

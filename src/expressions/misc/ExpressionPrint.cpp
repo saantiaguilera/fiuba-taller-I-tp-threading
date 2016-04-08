@@ -26,6 +26,8 @@ ExpressionPrint::ExpressionPrint(ParserUtils *parserUtils) : ExpressionCommon(pa
 ExpressionPrint::~ExpressionPrint() {}
 
 Expression * ExpressionPrint::evaluate() {
+	clearValues();
+
 	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
 		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
 

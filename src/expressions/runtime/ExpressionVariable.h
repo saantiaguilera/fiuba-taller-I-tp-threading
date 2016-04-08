@@ -13,6 +13,7 @@ class ExpressionVariable : public ExpressionCommon {
 		ExpressionVariable(const ExpressionVariable&);
 		ExpressionVariable& operator=(const ExpressionVariable&);
 
+		std::string body;
 		std::string variableName;
 	public:
 		ExpressionVariable(ParserUtils *parserUtils);
@@ -21,6 +22,7 @@ class ExpressionVariable : public ExpressionCommon {
 		virtual std::string getTag(); //known method ? NULL : runtime name tag
 		virtual Expression * evaluate();
 		virtual void injectExpression(Expression *expression);
+		Expression * mutate();
 };
 
 #endif /* EXPRESSIONS_RUNTIME_EXPRESSIONVARIABLE_H_ */

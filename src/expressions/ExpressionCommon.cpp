@@ -61,6 +61,8 @@ void ExpressionCommon::injectExpression(Expression *expression) {
 }
 
 void ExpressionCommon::parseBody(std::string line) {
+	clearEnvironment();
+
 	unsigned int i = 0;
 	//+. Iterate while there are data in the line
 	while (line.size() > 0 && i < line.size()) {
