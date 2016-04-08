@@ -35,10 +35,8 @@ void ExpressionVariable::parseBody(std::string line) {
 
 	getline(iss, body); // " 5"
 	body = body.substr(1); // "5"
-}
 
-void ExpressionVariable::injectExpression(Expression *expression) {
-	parserUtils->appendRuntimeVariable(variableName, expression);
+	parserUtils->appendRuntimeVariable(variableName, this);
 }
 
 Expression * ExpressionVariable::mutate() {

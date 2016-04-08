@@ -23,10 +23,12 @@ int main() {
 	while (std::getline(std::cin, line)) {
 		std::cout << "LINE:: " << line << std::endl;
 		parser.run(line);
-	}
-*/
-	std::string a = "(print \"HOLA\" (+ 4 5))";
+	}*/
+
+	std::string a = "(setq a (list 1 2 3))";
+	std::string b = "(print a)";
 	parser.run(a);
+	parser.run(b);
 
 	return 0;
 }
