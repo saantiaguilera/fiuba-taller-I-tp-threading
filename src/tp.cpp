@@ -20,13 +20,22 @@ int main() {
 	ParserUtils parser;
 	std::string line;
 
+    try {
 	while (std::getline(std::cin, line))
 		parser.run(line);
+	} catch (int exception) {
+		std::cout << "EXCEPTION THROWN, RETURNING :: " << exception << std::endl;
+		return exception;
+	}
 /*
-	std::string a = "(defun cddr (ENV) (cdr (cdr ENV)))";
-	std::string b = "(print (cddr (list 1 2 3 4 5))) ";
-	parser.run(a);
-	parser.run(b);
+	try {
+		std::string a = "1 2 3";
+		std::string b = "ERROR: (print (list 1 2 3)";
+		parser.run(a);
+		parser.run(b);
+	} catch (int exception) {
+		return exception;
+	}
 */
 	return 0;
 }

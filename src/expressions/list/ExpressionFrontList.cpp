@@ -49,7 +49,8 @@ std::string ExpressionFrontList::getTag() {
 std::string ExpressionFrontList::toString() {
 	std::string response;
 
-	response = "(";
+	if (values.size() != 1)
+		response = "(";
 
 	std::list<Element*>::const_iterator end = values.end();
 	for (std::list<Element*>::const_iterator elementIterator = values.begin() ; elementIterator != end;) {
@@ -59,7 +60,8 @@ std::string ExpressionFrontList::toString() {
 			response += " ";
 	}
 
-	response += ")";
+	if (values.size() != 1)
+		response += ")";
 
 	return response;
 }

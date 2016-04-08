@@ -131,7 +131,10 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 	if (string == "sync")
 		return 0;
 
-	return new ExpressionConstant(this); //constant, lets say 4 or "hello"
+	//If its a number or it has ""
+	if ((string.find_first_not_of("0123456789") == std::string::npos) || string.find('"') != std::string::npos)
+		return new ExpressionConstant(this); //constant, lets say 4 or "hello"
+	else throw 2;
 }
 
 Expression * ParserUtils::expressionFromFunction(std::string &line) {
