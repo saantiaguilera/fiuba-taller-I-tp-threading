@@ -93,7 +93,8 @@ void ParserUtils::run(std::string &line) {
 	Expression *expression = parseExpression(line);
 	expression->evaluate();
 
-	history.push_back(expression);
+	if (expression->getTag() != "Defun" && expression->getTag() != "Setq")
+		history.push_back(expression);
 }
 
 Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
