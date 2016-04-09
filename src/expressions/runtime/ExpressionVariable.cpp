@@ -61,5 +61,5 @@ Expression * ExpressionVariable::evaluate() {
 }
 
 std::string ExpressionVariable::getTag() {
-	return "Setq";
+	return EXPRESSION_SETQ;
 }

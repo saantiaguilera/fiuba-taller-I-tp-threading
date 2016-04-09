@@ -21,6 +21,9 @@ class Expression;
 #include "../ExpressionCommon.h"
 #include "ExpressionLogical.h"
 
+#define LOGICAL_SUCCESS_RETURN "1"
+#define LOGICAL_FAILURE_RETURN "()"
+
 ExpressionLogical::ExpressionLogical(ParserUtils *parserUtils) :
 		ExpressionCommon(parserUtils) {
 }
@@ -56,14 +59,14 @@ Expression * ExpressionLogical::evaluate() {
 	}
 
 	if (!fail)
-		getValues().push_back(new Element("1"));
+		getValues().push_back(new Element(LOGICAL_SUCCESS_RETURN));
 
 	return this;
 }
 
 std::string ExpressionLogical::toString() {
 	if (values.size() == 1)
-		return "1";
+		return LOGICAL_SUCCESS_RETURN;
 
-	return "()";
+	return LOGICAL_FAILURE_RETURN;
 }

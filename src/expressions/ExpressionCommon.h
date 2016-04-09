@@ -8,6 +8,11 @@
 #ifndef EXPRESSIONS_EXPRESSIONCOMMON_H_
 #define EXPRESSIONS_EXPRESSIONCOMMON_H_
 
+const char SYMBOL_PARENTHESIS_OPEN = '(';
+const char SYMBOL_PARENTHESIS_CLOSE = ')';
+const char SYMBOL_SPACE = ' ';
+const char SYMBOL_QUOTATIONS = '"';
+
 #include <string>
 
 class ExpressionCommon: public Expression {

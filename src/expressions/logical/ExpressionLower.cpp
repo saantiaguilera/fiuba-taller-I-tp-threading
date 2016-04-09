@@ -34,5 +34,5 @@ bool ExpressionLower::operate(int leftValue, int rightValue) {
 }
 
 std::string ExpressionLower::getTag() {
-	return "=";
+	return EXPRESSION_LOWER;
 }

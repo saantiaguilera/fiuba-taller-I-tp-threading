@@ -64,5 +64,5 @@ Expression * ExpressionFunction::evaluate() {
 }
 
 std::string ExpressionFunction::getTag() {
-	return "Defun";
+	return EXPRESSION_DEFUN;
 }

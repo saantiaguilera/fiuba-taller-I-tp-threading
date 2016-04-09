@@ -37,12 +37,12 @@ void ExpressionCommon::parseInnerExpression(std::string &temp, int startPoint) {
 
 	for (std::string::size_type i = startPoint; i < temp.size() && !found;
 			++i) {
-		if (temp[i] == '(') {
+		if (temp[i] == SYMBOL_PARENTHESIS_OPEN) {
 			if (count == 0)
 				start = i;
 			count++;
 		}
-		if (temp[i] == ')') {
+		if (temp[i] == SYMBOL_PARENTHESIS_CLOSE) {
 			count--;
 			if (count == 0) {
 				end = i;
@@ -75,16 +75,16 @@ void ExpressionCommon::parseBody(std::string line) {
 	//+. Iterate while there are data in the line
 	while (line.size() > 0 && i < line.size()) {
 		switch (line[i]) {
-		case '(': //Its an innter function
+		case SYMBOL_PARENTHESIS_OPEN: //Its an innter function
 			parseInnerExpression(line, i);
 
 			//Start again
 			i = 0;
 
 			break;
-		case '"': { //Its a literal !
+		case SYMBOL_QUOTATIONS: { //Its a literal !
 			std::string literal = line.substr(i + 1,
-					line.find('"', i + 1) - i - 1);
+					line.find(SYMBOL_QUOTATIONS, i + 1) - i - 1);
 
 			injectExpression(parserUtils->expressionFromConstant(literal));
 
@@ -101,7 +101,7 @@ void ExpressionCommon::parseBody(std::string line) {
 
 		default: //Either a number or a variable
 			if (isdigit(line[i])) {
-				std::string literal = line.substr(i, line.find(' ', i + 1) - i);
+				std::string literal = line.substr(i, line.find(SYMBOL_SPACE, i + 1) - i);
 
 				injectExpression(parserUtils->expressionFromConstant(literal));
 
@@ -113,7 +113,7 @@ void ExpressionCommon::parseBody(std::string line) {
 			}
 
 			if (isalpha(line[i])) {
-				std::string literal = line.substr(i, line.find(' ', i + 1) - i);
+				std::string literal = line.substr(i, line.find(SYMBOL_SPACE, i + 1) - i);
 
 				injectExpression(parserUtils->expressionFromVariable(literal));
 

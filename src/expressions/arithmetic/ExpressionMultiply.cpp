@@ -34,5 +34,5 @@ int ExpressionMultiply::operate(int dest, int src) {
 }
 
 std::string ExpressionMultiply::getTag() {
-	return "*";
+	return EXPRESSION_MULTIPLY;
 }

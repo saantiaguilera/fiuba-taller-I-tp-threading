@@ -34,5 +34,5 @@ int ExpressionSum::operate(int dest, int src) {
 }
 
 std::string ExpressionSum::getTag() {
-	return "+";
+	return EXPRESSION_SUM;
 }

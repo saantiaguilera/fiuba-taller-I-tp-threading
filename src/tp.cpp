@@ -20,13 +20,17 @@ class Expression;
 #define ERROR_ARGUMENTS "ERROR: argumentos"
 #define ERROR_GENERIC "ERROR: "
 
+#define STATE_SUCCESS 0
+#define STATE_WRONG_ARGS 1
+#define STATE_BAD_FUNCTION 2
+
 int main(int argc, char *argv[]) {
 	ParserUtils parser;
 	std::string line;
 
 	if (argc > 1) {
 		std::cout << ERROR_ARGUMENTS << std::endl;
-		return 1;
+		return STATE_WRONG_ARGS;
 	}
 
 	while (std::getline(std::cin, line)) {
@@ -35,10 +39,10 @@ int main(int argc, char *argv[]) {
 		} catch (const std::logic_error &exception) {
 			if (exception.what() == EXCEPTION_BAD_FUNCTION) {
 				std::cout << ERROR_GENERIC << line << std::endl;
-				return 2;
+				return STATE_BAD_FUNCTION;
 			}
 		}
 	}
 
-	return 0;
+	return STATE_SUCCESS;
 }

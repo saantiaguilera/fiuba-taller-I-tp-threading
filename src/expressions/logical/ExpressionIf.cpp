@@ -23,8 +23,7 @@ class Expression;
 #include "ExpressionIf.h"
 
 ExpressionIf::ExpressionIf(ParserUtils *parserUtils) :
-		ExpressionCommon(parserUtils), condition(NULL),
-		trueExpression(NULL), falseExpression(
+		ExpressionCommon(parserUtils), condition(NULL), trueExpression(NULL), falseExpression(
 		NULL) {
 }
 
@@ -72,7 +71,7 @@ Expression * ExpressionIf::evaluate() {
 }
 
 std::string ExpressionIf::getTag() {
-	return "If";
+	return EXPRESSION_IF;
 }
 
 std::string ExpressionIf::toString() {

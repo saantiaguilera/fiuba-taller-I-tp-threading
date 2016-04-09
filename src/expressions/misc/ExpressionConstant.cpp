@@ -35,7 +35,7 @@ Expression * ExpressionConstant::evaluate() {
 }
 
 std::string ExpressionConstant::getTag() {
-	return "Const";
+	return EXPRESSION_CONST;
 }
 
 void ExpressionConstant::parseBody(std::string line) {

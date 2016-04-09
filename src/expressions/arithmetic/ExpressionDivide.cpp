@@ -34,5 +34,5 @@ int ExpressionDivide::operate(int dest, int src) {
 }
 
 std::string ExpressionDivide::getTag() {
-	return "/";
+	return EXPRESSION_DIVIDE;
 }

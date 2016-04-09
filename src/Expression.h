@@ -21,6 +21,24 @@
 #include <string>
 #include <list>
 
+const std::string EXPRESSION_SUM = "+";
+const std::string EXPRESSION_SUBSTRACTION = "-";
+const std::string EXPRESSION_MULTIPLY = "*";
+const std::string EXPRESSION_DIVIDE = "/";
+const std::string EXPRESSION_EQUALS = "=";
+const std::string EXPRESSION_HIGHER = ">";
+const std::string EXPRESSION_LOWER = "<";
+const std::string EXPRESSION_LIST = "list";
+const std::string EXPRESSION_CAR = "car";
+const std::string EXPRESSION_CDR = "cdr";
+const std::string EXPRESSION_APPEND = "append";
+const std::string EXPRESSION_IF = "if";
+const std::string EXPRESSION_DEFUN = "defun";
+const std::string EXPRESSION_PRINT = "print";
+const std::string EXPRESSION_SETQ = "setq";
+const std::string EXPRESSION_SYNC = "sync";
+const std::string EXPRESSION_CONST = "const";
+
 typedef std::string Element;
 
 class Expression {

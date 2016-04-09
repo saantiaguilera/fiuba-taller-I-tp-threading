@@ -34,5 +34,5 @@ bool ExpressionEquals::operate(int leftValue, int rightValue) {
 }
 
 std::string ExpressionEquals::getTag() {
-	return "=";
+	return EXPRESSION_EQUALS;
 }

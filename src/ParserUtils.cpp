@@ -56,7 +56,7 @@ public:
 	}
 
 	bool operator()(char c) {
-		return c == '(' || c == ')';
+		return c == SYMBOL_PARENTHESIS_OPEN || c == SYMBOL_PARENTHESIS_CLOSE;
 	}
 };
 
@@ -104,49 +104,52 @@ ParserUtils::~ParserUtils() {
 void ParserUtils::run(std::string &line) {
 	Expression *expression = parseExpression(line);
 
-	if (expression->getTag() != "Defun" && expression->getTag() != "Setq")
+	//Because both are in runtime stuff, they
+	//Cant belong to a history yet
+	if (expression->getTag() != EXPRESSION_DEFUN
+			&& expression->getTag() != EXPRESSION_SETQ)
 		history.push_back(expression);
 
 	expression->evaluate();
 }
 
 Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
-	if (string == "+")
+	if (string == EXPRESSION_SUM)
 		return new ExpressionSum(this);
-	if (string == "-")
+	if (string == EXPRESSION_SUBSTRACTION)
 		return new ExpressionSubstraction(this);
-	if (string == "*")
+	if (string == EXPRESSION_MULTIPLY)
 		return new ExpressionMultiply(this);
-	if (string == "/")
+	if (string == EXPRESSION_DIVIDE)
 		return new ExpressionDivide(this);
-	if (string == "=")
+	if (string == EXPRESSION_EQUALS)
 		return new ExpressionEquals(this);
-	if (string == ">")
+	if (string == EXPRESSION_HIGHER)
 		return new ExpressionHigher(this);
-	if (string == "<")
+	if (string == EXPRESSION_LOWER)
 		return new ExpressionLower(this);
-	if (string == "list")
+	if (string == EXPRESSION_LIST)
 		return new ExpressionList(this);
-	if (string == "car")
+	if (string == EXPRESSION_CAR)
 		return new ExpressionFrontList(this);
-	if (string == "cdr")
+	if (string == EXPRESSION_CDR)
 		return new ExpressionTailList(this);
-	if (string == "append")
+	if (string == EXPRESSION_APPEND)
 		return new ExpressionAppend(this);
-	if (string == "if")
+	if (string == EXPRESSION_IF)
 		return new ExpressionIf(this);
-	if (string == "defun")
+	if (string == EXPRESSION_DEFUN)
 		return new ExpressionFunction(this);
-	if (string == "print")
+	if (string == EXPRESSION_PRINT)
 		return new ExpressionPrint(this);
-	if (string == "setq")
+	if (string == EXPRESSION_SETQ)
 		return new ExpressionVariable(this);
-	if (string == "sync")
+	if (string == EXPRESSION_SYNC)
 		return new ExpressionSync(this);
 
 	//If its a number or it has ""
 	if ((string.find_first_not_of("0123456789") == std::string::npos)
-			|| string.find('"') != std::string::npos)
+			|| string.find(SYMBOL_QUOTATIONS) != std::string::npos)
 		return new ExpressionConstant(this); //constant, lets say 4 or "hello"
 	else
 		throw std::logic_error(EXCEPTION_BAD_FUNCTION);
@@ -168,7 +171,7 @@ Expression * ParserUtils::expressionFromRuntime(std::string &tag) {
 std::string ParserUtils::bodyToString(std::string &line) {
 	std::string function = functionToString(line);
 	int start = line.find(function) + function.length() + 1;
-	int end = line.find_last_of(")");
+	int end = line.find_last_of(SYMBOL_PARENTHESIS_CLOSE);
 
 	if (end > 0)
 		return line.substr(start,

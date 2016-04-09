@@ -49,13 +49,13 @@ Expression * ExpressionList::evaluate() {
 }
 
 std::string ExpressionList::getTag() {
-	return "List";
+	return EXPRESSION_LIST;
 }
 
 std::string ExpressionList::toString() {
 	std::string response;
 
-	response = "(";
+	response = SYMBOL_PARENTHESIS_OPEN;
 
 	std::list<Expression*>::const_iterator end = environment.end();
 	for (std::list<Expression*>::const_iterator expressionIterator =
@@ -63,10 +63,10 @@ std::string ExpressionList::toString() {
 		response += (*expressionIterator)->toString();
 
 		if (++expressionIterator != end)
-			response += " ";
+			response += SYMBOL_SPACE;
 	}
 
-	response += ")";
+	response += SYMBOL_PARENTHESIS_CLOSE;
 
 	return response;
 }

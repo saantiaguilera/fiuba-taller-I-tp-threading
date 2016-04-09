@@ -29,7 +29,7 @@ ExpressionTailList::~ExpressionTailList() {
 }
 
 void ExpressionTailList::parseEvaluation(Expression *expression) {
-	if (expression->getTag() == "Const") {
+	if (expression->getTag() == EXPRESSION_CONST) {
 		flattenedEnvironment.push_back(expression);
 	} else {
 		std::list<Expression*> expressionEnvironment =
@@ -87,7 +87,7 @@ void ExpressionTailList::appendToValues() {
 }
 
 std::string ExpressionTailList::getTag() {
-	return "Cdr";
+	return EXPRESSION_CDR;
 }
 
 std::list<Expression*> * ExpressionTailList::getEnvironment() {
@@ -98,7 +98,7 @@ std::string ExpressionTailList::toString() {
 	std::string response;
 
 	if (values.size() != 1)
-		response = "(";
+		response = SYMBOL_PARENTHESIS_OPEN;
 
 	std::list<Element*>::const_iterator end = values.end();
 	for (std::list<Element*>::const_iterator elementIterator = values.begin();
@@ -106,11 +106,11 @@ std::string ExpressionTailList::toString() {
 		response += (**elementIterator);
 
 		if (++elementIterator != end)
-			response += " ";
+			response += SYMBOL_SPACE;
 	}
 
 	if (values.size() != 1)
-		response += ")";
+		response += SYMBOL_PARENTHESIS_CLOSE;
 
 	return response;
 }

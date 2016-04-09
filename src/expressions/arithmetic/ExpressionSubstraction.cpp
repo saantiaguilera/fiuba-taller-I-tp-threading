@@ -34,5 +34,5 @@ int ExpressionSubstraction::operate(int dest, int src) {
 }
 
 std::string ExpressionSubstraction::getTag() {
-	return "-";
+	return EXPRESSION_SUBSTRACTION;
 }

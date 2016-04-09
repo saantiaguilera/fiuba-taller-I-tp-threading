@@ -37,5 +37,5 @@ Expression * ExpressionSync::evaluate() {
 }
 
 std::string ExpressionSync::getTag() {
-	return "Sync";
+	return EXPRESSION_SYNC;
 }

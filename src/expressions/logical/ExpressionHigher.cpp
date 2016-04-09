@@ -34,5 +34,5 @@ bool ExpressionHigher::operate(int leftValue, int rightValue) {
 }
 
 std::string ExpressionHigher::getTag() {
-	return "=";
+	return EXPRESSION_HIGHER;
 }

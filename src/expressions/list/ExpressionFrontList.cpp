@@ -29,7 +29,7 @@ ExpressionFrontList::~ExpressionFrontList() {
 }
 
 void ExpressionFrontList::parseEvaluation(Expression *expression) {
-	if (expression->getTag() == "Const") {
+	if (expression->getTag() == EXPRESSION_CONST) {
 		flattenedEnvironment.push_back(expression);
 	} else {
 		std::list<Expression*> expressionEnvironment =
@@ -92,7 +92,7 @@ std::list<Expression*> * ExpressionFrontList::getEnvironment() {
 }
 
 std::string ExpressionFrontList::getTag() {
-	return "Car";
+	return EXPRESSION_CAR;
 }
 
 std::string ExpressionFrontList::toString() {
@@ -100,7 +100,7 @@ std::string ExpressionFrontList::toString() {
 	std::string response;
 
 	if (values.size() != 1)
-		response = "(";
+		response = SYMBOL_PARENTHESIS_OPEN;
 
 	std::list<Element*>::const_iterator end = values.end();
 	for (std::list<Element*>::const_iterator elementIterator = values.begin();
@@ -108,11 +108,11 @@ std::string ExpressionFrontList::toString() {
 		response += (**elementIterator);
 
 		if (++elementIterator != end)
-			response += " ";
+			response += SYMBOL_SPACE;
 	}
 
 	if (values.size() != 1)
-		response += ")";
+		response += SYMBOL_PARENTHESIS_CLOSE;
 
 	return response;
 }

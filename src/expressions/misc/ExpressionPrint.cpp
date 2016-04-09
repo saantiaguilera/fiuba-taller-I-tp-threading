@@ -38,7 +38,7 @@ Expression * ExpressionPrint::evaluate() {
 
 		//Space the values unless its the last
 		if (++expressionIterator != end)
-			std::cout << " ";
+			std::cout << SYMBOL_SPACE;
 	}
 
 	std::cout << std::endl;
@@ -47,5 +47,5 @@ Expression * ExpressionPrint::evaluate() {
 }
 
 std::string ExpressionPrint::getTag() {
-	return "Print";
+	return EXPRESSION_PRINT;
 }
