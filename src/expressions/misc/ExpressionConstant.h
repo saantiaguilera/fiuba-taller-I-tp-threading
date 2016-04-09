@@ -8,19 +8,19 @@
 #ifndef EXPRESSIONCONSTANT_H_
 #define EXPRESSIONCONSTANT_H_
 
-class ExpressionConstant : public Expression {
-	private:
-		ExpressionConstant(const ExpressionConstant&);
-		ExpressionConstant& operator=(const ExpressionConstant&);
-		Element value;
+class ExpressionConstant: public Expression {
+private:
+	ExpressionConstant(const ExpressionConstant&);
+	ExpressionConstant& operator=(const ExpressionConstant&);
+	Element value;
 
-	public:
-		ExpressionConstant(ParserUtils *parserUtils);
-		virtual ~ExpressionConstant();
-		virtual Expression * evaluate();
-		virtual void parseBody(std::string line);
-		virtual std::string getTag();
-		virtual std::string toString();
+public:
+	ExpressionConstant(ParserUtils *parserUtils);
+	virtual ~ExpressionConstant();
+	virtual Expression * evaluate();
+	virtual void parseBody(std::string line);
+	virtual std::string getTag();
+	virtual std::string toString();
 };
 
 #endif /* EXPRESSIONCONSTANT_H_ */

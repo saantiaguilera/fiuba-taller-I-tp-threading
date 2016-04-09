@@ -21,9 +21,12 @@ class Expression;
 #include "../../Expression.h"
 #include "ExpressionFunction.h"
 
-ExpressionFunction::ExpressionFunction(ParserUtils *parserUtils) : Expression(parserUtils) { }
+ExpressionFunction::ExpressionFunction(ParserUtils *parserUtils) :
+		Expression(parserUtils) {
+}
 
-ExpressionFunction::~ExpressionFunction() {}
+ExpressionFunction::~ExpressionFunction() {
+}
 
 void ExpressionFunction::parseBody(std::string line) {
 	clearEnvironment();
@@ -49,8 +52,8 @@ Expression * ExpressionFunction::mutate(std::string value) {
 	std::string newBody = body;
 
 	//Literals will be changed too :( Maybe for when I have moar time. Sorry for now
-	while(newBody.find(variableName) != std::string::npos)
-		newBody.replace(newBody.find(variableName),variableName.size(), value);
+	while (newBody.find(variableName) != std::string::npos)
+		newBody.replace(newBody.find(variableName), variableName.size(), value);
 
 	return parserUtils->parseExpression(newBody);
 }

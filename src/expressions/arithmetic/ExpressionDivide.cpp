@@ -22,9 +22,12 @@ class Expression;
 #include "ExpressionArithmetic.h"
 #include "ExpressionDivide.h"
 
-ExpressionDivide::ExpressionDivide(ParserUtils *parserUtils) : ExpressionArithmetic(parserUtils) { }
+ExpressionDivide::ExpressionDivide(ParserUtils *parserUtils) :
+		ExpressionArithmetic(parserUtils) {
+}
 
-ExpressionDivide::~ExpressionDivide() {}
+ExpressionDivide::~ExpressionDivide() {
+}
 
 int ExpressionDivide::operate(int dest, int src) {
 	return dest / src;

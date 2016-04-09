@@ -22,9 +22,12 @@ class Expression;
 #include "ExpressionLogical.h"
 #include "ExpressionHigher.h"
 
-ExpressionHigher::ExpressionHigher(ParserUtils *parserUtils) : ExpressionLogical(parserUtils) { }
+ExpressionHigher::ExpressionHigher(ParserUtils *parserUtils) :
+		ExpressionLogical(parserUtils) {
+}
 
-ExpressionHigher::~ExpressionHigher() {}
+ExpressionHigher::~ExpressionHigher() {
+}
 
 bool ExpressionHigher::operate(int leftValue, int rightValue) {
 	return leftValue > rightValue;

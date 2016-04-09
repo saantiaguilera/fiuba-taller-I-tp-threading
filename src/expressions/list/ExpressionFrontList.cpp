@@ -5,7 +5,6 @@
  *      Author: santiago
  */
 
-
 #include <string>
 #include <cstdio>
 #include <stdlib.h>
@@ -22,44 +21,45 @@ class Expression;
 #include "../ExpressionCommon.h"
 #include "ExpressionFrontList.h"
 
-ExpressionFrontList::ExpressionFrontList(ParserUtils *parserUtils) : ExpressionCommon(parserUtils) { }
+ExpressionFrontList::ExpressionFrontList(ParserUtils *parserUtils) :
+		ExpressionCommon(parserUtils) {
+}
 
-ExpressionFrontList::~ExpressionFrontList() {}
+ExpressionFrontList::~ExpressionFrontList() {
+}
 
 void ExpressionFrontList::parseEvaluation(Expression *expression) {
 	if (expression->getTag() == "Const") {
 		flattenedEnvironment.push_back(expression);
 	} else {
-		std::list<Expression*> expressionEnvironment = *(expression->evaluate()->getEnvironment());
+		std::list<Expression*> expressionEnvironment =
+				*(expression->evaluate()->getEnvironment());
 
-		for (std::list<Expression*>::iterator iterator = expressionEnvironment.begin() ;
-				iterator != expressionEnvironment.end() ; ++iterator) {
+		for (std::list<Expression*>::iterator iterator =
+				expressionEnvironment.begin();
+				iterator != expressionEnvironment.end(); ++iterator) {
 			flattenedEnvironment.push_back(*iterator);
-	//		std::cout << "Getting element from " << getTag() << std::endl;
 		}
 	}
 }
 
 Expression * ExpressionFrontList::evaluate() {
-//	std::cout << getTag() << "::evaluate" << std::endl;
 	clearValues();
 	bool done = false;
 	//CAR
 
 	flattenedEnvironment.clear();
 
-	std::list<Expression*> environmentOfInner = *((*environment.begin())->evaluate()->getEnvironment());
+	std::list<Expression*> environmentOfInner =
+			*((*environment.begin())->evaluate()->getEnvironment());
 
-	for (std::list<Expression*>::iterator innerIterator = environmentOfInner.begin() ;
-			innerIterator != environmentOfInner.end() ; ++innerIterator) {
+	for (std::list<Expression*>::iterator innerIterator =
+			environmentOfInner.begin();
+			innerIterator != environmentOfInner.end(); ++innerIterator) {
 
-		if (*innerIterator != NULL) {
-			if (done) {
-	//			std::cout << "SKIPPING AN EXPRESSION OF TAG " << (*innerIterator)->getTag() << std::endl;
-			} else {
-				done = true;
-				parseEvaluation(*innerIterator);
-			}
+		if (*innerIterator != NULL && !done) {
+			done = true;
+			parseEvaluation(*innerIterator);
 		}
 
 	}
@@ -74,13 +74,17 @@ void ExpressionFrontList::appendToValues() {
 
 	clearValues();
 
-	for (std::list<Expression*>::iterator iterator = flattenedEnvironment.begin() ;
-				iterator != flattenedEnvironment.end() ; ++iterator) {
+	for (std::list<Expression*>::iterator iterator =
+			flattenedEnvironment.begin();
+			iterator != flattenedEnvironment.end(); ++iterator) {
 
-		std::list<Element*> iteratorValues = (*iterator)->evaluate()->getValues();
+		std::list<Element*> iteratorValues =
+				(*iterator)->evaluate()->getValues();
 
 		std::list<Element*>::const_iterator end = iteratorValues.end();
-		for (std::list<Element*>::const_iterator elementIterator = iteratorValues.begin() ; elementIterator != end; ++elementIterator) {
+		for (std::list<Element*>::const_iterator elementIterator =
+				iteratorValues.begin(); elementIterator != end;
+				++elementIterator) {
 			values.push_back(new Element(**elementIterator));
 		}
 
@@ -103,7 +107,8 @@ std::string ExpressionFrontList::toString() {
 		response = "(";
 
 	std::list<Element*>::const_iterator end = values.end();
-	for (std::list<Element*>::const_iterator elementIterator = values.begin() ; elementIterator != end;) {
+	for (std::list<Element*>::const_iterator elementIterator = values.begin();
+			elementIterator != end;) {
 		response += (**elementIterator);
 
 		if (++elementIterator != end)

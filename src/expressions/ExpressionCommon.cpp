@@ -21,9 +21,12 @@ class Expression;
 #include "../Expression.h"
 #include "ExpressionCommon.h"
 
-ExpressionCommon::ExpressionCommon(ParserUtils *parserUtils) : Expression(parserUtils) { }
+ExpressionCommon::ExpressionCommon(ParserUtils *parserUtils) :
+		Expression(parserUtils) {
+}
 
-ExpressionCommon::~ExpressionCommon() {}
+ExpressionCommon::~ExpressionCommon() {
+}
 
 void ExpressionCommon::parseInnerExpression(std::string &temp, int startPoint) {
 	int count = 0;
@@ -31,8 +34,9 @@ void ExpressionCommon::parseInnerExpression(std::string &temp, int startPoint) {
 	int end = -1;
 	bool found = false;
 
-	for (std::string::size_type i = startPoint; i < temp.size() && !found; ++i) {
-		if (temp[i] == '('){
+	for (std::string::size_type i = startPoint; i < temp.size() && !found;
+			++i) {
+		if (temp[i] == '(') {
 			if (count == 0)
 				start = i;
 			count++;
@@ -55,7 +59,7 @@ void ExpressionCommon::parseInnerExpression(std::string &temp, int startPoint) {
 		}
 	}
 
-	if (!found || end==-1 || start==-1)
+	if (!found || end == -1 || start == -1)
 		throw 2;
 }
 
@@ -78,7 +82,8 @@ void ExpressionCommon::parseBody(std::string line) {
 
 			break;
 		case '"': { //Its a literal !
-			std::string literal = line.substr(i + 1, line.find('"', i + 1) - i - 1);
+			std::string literal = line.substr(i + 1,
+					line.find('"', i + 1) - i - 1);
 
 			injectExpression(parserUtils->expressionFromConstant(literal));
 
@@ -88,7 +93,7 @@ void ExpressionCommon::parseBody(std::string line) {
 			//Start again
 			i = 0;
 
-			}
+		}
 			break;
 		case ' ': //Do nothing, increment i
 			++i;

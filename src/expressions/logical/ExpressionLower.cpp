@@ -22,9 +22,12 @@ class Expression;
 #include "ExpressionLogical.h"
 #include "ExpressionLower.h"
 
-ExpressionLower::ExpressionLower(ParserUtils *parserUtils) : ExpressionLogical(parserUtils) { }
+ExpressionLower::ExpressionLower(ParserUtils *parserUtils) :
+		ExpressionLogical(parserUtils) {
+}
 
-ExpressionLower::~ExpressionLower() {}
+ExpressionLower::~ExpressionLower() {
+}
 
 bool ExpressionLower::operate(int leftValue, int rightValue) {
 	return leftValue < rightValue;

@@ -21,20 +21,20 @@ int main() {
 	std::string line;
 
 	while (std::getline(std::cin, line)) {
-	    try {
-	    	parser.run(line);
+		try {
+			parser.run(line);
 		} catch (int exception) {
 			std::cout << "ERROR: " << line << std::endl;
 		}
 	}
 
-/*
-	std::string a = "(print (append (list) (list 1 2 3)))";
-	try {
-		parser.run(a);
-	} catch (int exception) {
-		std::cout << "ERROR: " << a << std::endl;
-	}
-*/
+	/*
+	 std::string a = "(print (append (list) (list 1 2 3)))";
+	 try {
+	 parser.run(a);
+	 } catch (int exception) {
+	 std::cout << "ERROR: " << a << std::endl;
+	 }
+	 */
 	return 0;
 }

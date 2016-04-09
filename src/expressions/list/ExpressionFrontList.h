@@ -8,23 +8,23 @@
 #ifndef EXPRESSIONS_LIST_EXPRESSIONFRONTLIST_H_
 #define EXPRESSIONS_LIST_EXPRESSIONFRONTLIST_H_
 
-class ExpressionFrontList : public ExpressionCommon {
-	private:
-		ExpressionFrontList(const ExpressionFrontList&);
-		ExpressionFrontList& operator=(const ExpressionFrontList&);
+class ExpressionFrontList: public ExpressionCommon {
+private:
+	ExpressionFrontList(const ExpressionFrontList&);
+	ExpressionFrontList& operator=(const ExpressionFrontList&);
 
-		std::list<Expression*> flattenedEnvironment;
+	std::list<Expression*> flattenedEnvironment;
 
-		void appendToValues();
-		void parseEvaluation(Expression *expression);
+	void appendToValues();
+	void parseEvaluation(Expression *expression);
 
-	public:
-		ExpressionFrontList(ParserUtils *parserUtils);
-		virtual ~ExpressionFrontList();
-		virtual std::string getTag(); //known method ? NULL : runtime name tag
-		virtual Expression * evaluate();
-		virtual std::list<Expression*> * getEnvironment();
-		virtual std::string toString();
+public:
+	ExpressionFrontList(ParserUtils *parserUtils);
+	virtual ~ExpressionFrontList();
+	virtual std::string getTag(); //known method ? NULL : runtime name tag
+	virtual Expression * evaluate();
+	virtual std::list<Expression*> * getEnvironment();
+	virtual std::string toString();
 };
 
 #endif /* EXPRESSIONS_LIST_EXPRESSIONFRONTLIST_H_ */

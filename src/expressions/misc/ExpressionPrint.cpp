@@ -21,15 +21,19 @@ class Expression;
 #include "../ExpressionCommon.h"
 #include "ExpressionPrint.h"
 
-ExpressionPrint::ExpressionPrint(ParserUtils *parserUtils) : ExpressionCommon(parserUtils) { }
+ExpressionPrint::ExpressionPrint(ParserUtils *parserUtils) :
+		ExpressionCommon(parserUtils) {
+}
 
-ExpressionPrint::~ExpressionPrint() {}
+ExpressionPrint::~ExpressionPrint() {
+}
 
 Expression * ExpressionPrint::evaluate() {
 	clearValues();
 
 	std::list<Expression*>::const_iterator end = environment.end();
-	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != end;) {
+	for (std::list<Expression*>::const_iterator expressionIterator =
+			environment.begin(); expressionIterator != end;) {
 		std::cout << ((*expressionIterator)->evaluate())->toString();
 
 		//Space the values unless its the last

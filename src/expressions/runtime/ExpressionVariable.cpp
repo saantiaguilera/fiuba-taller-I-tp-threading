@@ -22,9 +22,12 @@ class Expression;
 #include "../ExpressionCommon.h"
 #include "ExpressionVariable.h"
 
-ExpressionVariable::ExpressionVariable(ParserUtils *parserUtils) : ExpressionCommon(parserUtils) { }
+ExpressionVariable::ExpressionVariable(ParserUtils *parserUtils) :
+		ExpressionCommon(parserUtils) {
+}
 
-ExpressionVariable::~ExpressionVariable() {}
+ExpressionVariable::~ExpressionVariable() {
+}
 
 void ExpressionVariable::parseBody(std::string line) {
 	clearEnvironment();

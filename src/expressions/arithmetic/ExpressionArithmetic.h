@@ -8,18 +8,18 @@
 #ifndef EXPRESSIONARITHMETIC_H_
 #define EXPRESSIONARITHMETIC_H_
 
-class ExpressionArithmetic : public ExpressionCommon {
-	private:
-		ExpressionArithmetic(const ExpressionArithmetic&);
-		ExpressionArithmetic& operator=(const ExpressionArithmetic&);
+class ExpressionArithmetic: public ExpressionCommon {
+private:
+	ExpressionArithmetic(const ExpressionArithmetic&);
+	ExpressionArithmetic& operator=(const ExpressionArithmetic&);
 
-	public:
-		ExpressionArithmetic(ParserUtils *parserUtils);
-		virtual ~ExpressionArithmetic();
-		virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
-		virtual Expression * evaluate();
-		virtual int operate(int dest, int src) = 0;
-		virtual std::string toString();
+public:
+	ExpressionArithmetic(ParserUtils *parserUtils);
+	virtual ~ExpressionArithmetic();
+	virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
+	virtual Expression * evaluate();
+	virtual int operate(int dest, int src) = 0;
+	virtual std::string toString();
 };
 
 #endif /* EXPRESSIONARITHMETIC_H_ */

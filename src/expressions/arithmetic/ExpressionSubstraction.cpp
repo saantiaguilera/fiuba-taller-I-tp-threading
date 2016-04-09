@@ -22,9 +22,12 @@ class Expression;
 #include "ExpressionArithmetic.h"
 #include "ExpressionSubstraction.h"
 
-ExpressionSubstraction::ExpressionSubstraction(ParserUtils *parserUtils) : ExpressionArithmetic(parserUtils) { }
+ExpressionSubstraction::ExpressionSubstraction(ParserUtils *parserUtils) :
+		ExpressionArithmetic(parserUtils) {
+}
 
-ExpressionSubstraction::~ExpressionSubstraction() {}
+ExpressionSubstraction::~ExpressionSubstraction() {
+}
 
 int ExpressionSubstraction::operate(int dest, int src) {
 	return dest - src;

@@ -22,9 +22,12 @@ class Expression;
 #include "ExpressionArithmetic.h"
 #include "ExpressionSum.h"
 
-ExpressionSum::ExpressionSum(ParserUtils *parserUtils) : ExpressionArithmetic(parserUtils) { }
+ExpressionSum::ExpressionSum(ParserUtils *parserUtils) :
+		ExpressionArithmetic(parserUtils) {
+}
 
-ExpressionSum::~ExpressionSum() {}
+ExpressionSum::~ExpressionSum() {
+}
 
 int ExpressionSum::operate(int dest, int src) {
 	return dest + src;

@@ -10,21 +10,21 @@
 
 //I know it should be a logical expression. But derp, this is more logical than the logical ones.
 
-class ExpressionIf : public ExpressionCommon {
-	private:
-		ExpressionIf(const ExpressionIf&);
-		ExpressionIf& operator=(const ExpressionIf&);
-		Expression *condition;
-		Expression *trueExpression;
-		Expression *falseExpression;
+class ExpressionIf: public ExpressionCommon {
+private:
+	ExpressionIf(const ExpressionIf&);
+	ExpressionIf& operator=(const ExpressionIf&);
+	Expression *condition;
+	Expression *trueExpression;
+	Expression *falseExpression;
 
-	public:
-		ExpressionIf(ParserUtils *parserUtils);
-		virtual ~ExpressionIf();
-		virtual std::string getTag(); //known method ? NULL : runtime name tag
-		virtual Expression * evaluate();
-		virtual void injectExpression(Expression *expression);
-		virtual std::string toString();
+public:
+	ExpressionIf(ParserUtils *parserUtils);
+	virtual ~ExpressionIf();
+	virtual std::string getTag(); //known method ? NULL : runtime name tag
+	virtual Expression * evaluate();
+	virtual void injectExpression(Expression *expression);
+	virtual std::string toString();
 };
 
 #endif /* EXPRESSIONS_EXPRESSIONIF_H_ */

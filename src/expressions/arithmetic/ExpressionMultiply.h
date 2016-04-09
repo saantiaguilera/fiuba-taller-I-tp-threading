@@ -8,16 +8,16 @@
 #ifndef EXPRESSIONS_EXPRESSIONMULTIPLY_H_
 #define EXPRESSIONS_EXPRESSIONMULTIPLY_H_
 
-class ExpressionMultiply : public ExpressionArithmetic {
-	private:
-		ExpressionMultiply(const ExpressionMultiply&);
-		ExpressionMultiply& operator=(const ExpressionMultiply&);
+class ExpressionMultiply: public ExpressionArithmetic {
+private:
+	ExpressionMultiply(const ExpressionMultiply&);
+	ExpressionMultiply& operator=(const ExpressionMultiply&);
 
-	public:
-		ExpressionMultiply(ParserUtils *parserUtils);
-		virtual ~ExpressionMultiply();
-		virtual int operate(int dest, int src);
-		virtual std::string getTag();
+public:
+	ExpressionMultiply(ParserUtils *parserUtils);
+	virtual ~ExpressionMultiply();
+	virtual int operate(int dest, int src);
+	virtual std::string getTag();
 };
 
 #endif /* EXPRESSIONS_EXPRESSIONMULTIPLY_H_ */

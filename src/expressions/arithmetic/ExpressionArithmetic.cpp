@@ -21,9 +21,12 @@ class Expression;
 #include "../ExpressionCommon.h"
 #include "ExpressionArithmetic.h"
 
-ExpressionArithmetic::ExpressionArithmetic(ParserUtils *parserUtils) : ExpressionCommon(parserUtils) { }
+ExpressionArithmetic::ExpressionArithmetic(ParserUtils *parserUtils) :
+		ExpressionCommon(parserUtils) {
+}
 
-ExpressionArithmetic::~ExpressionArithmetic() {}
+ExpressionArithmetic::~ExpressionArithmetic() {
+}
 
 Expression * ExpressionArithmetic::evaluate() {
 	clearValues();
@@ -31,10 +34,15 @@ Expression * ExpressionArithmetic::evaluate() {
 	bool start = true;
 	int result = 0;
 
-	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
-		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
+	for (std::list<Expression*>::const_iterator expressionIterator =
+			environment.begin(); expressionIterator != environment.end();
+			++expressionIterator) {
+		std::list<Element*> values =
+				((*expressionIterator)->evaluate())->getValues();
 
-		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
+		for (std::list<Element*>::const_iterator elementIterator =
+				values.begin(); elementIterator != values.end();
+				++elementIterator) {
 			if (start) {
 				result = atoi((**elementIterator).c_str());
 				start = false;
@@ -44,8 +52,8 @@ Expression * ExpressionArithmetic::evaluate() {
 		}
 	}
 
-    std::ostringstream os ;
-    os << result;
+	std::ostringstream os;
+	os << result;
 	getValues().push_back(new Element(os.str()));
 
 	return this;
@@ -54,6 +62,7 @@ Expression * ExpressionArithmetic::evaluate() {
 std::string ExpressionArithmetic::toString() {
 	std::list<Element*>::const_iterator elementIterator = values.begin();
 
-	//Arithmetics should always return 1 value. Else we are living in a parallel world
+	//Arithmetics should always return 1 value.
+	//Else we are living in a parallel world
 	return (**elementIterator);
 }

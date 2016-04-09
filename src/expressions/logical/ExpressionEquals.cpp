@@ -22,9 +22,12 @@ class Expression;
 #include "ExpressionLogical.h"
 #include "ExpressionEquals.h"
 
-ExpressionEquals::ExpressionEquals(ParserUtils *parserUtils) : ExpressionLogical(parserUtils) { }
+ExpressionEquals::ExpressionEquals(ParserUtils *parserUtils) :
+		ExpressionLogical(parserUtils) {
+}
 
-ExpressionEquals::~ExpressionEquals() {}
+ExpressionEquals::~ExpressionEquals() {
+}
 
 bool ExpressionEquals::operate(int leftValue, int rightValue) {
 	return leftValue == rightValue;

@@ -5,7 +5,6 @@
  *      Author: santiago
  */
 
-
 #include <string>
 #include <cstdio>
 #include <stdlib.h>
@@ -22,9 +21,12 @@ class Expression;
 #include "../ExpressionCommon.h"
 #include "ExpressionLogical.h"
 
-ExpressionLogical::ExpressionLogical(ParserUtils *parserUtils) : ExpressionCommon(parserUtils) { }
+ExpressionLogical::ExpressionLogical(ParserUtils *parserUtils) :
+		ExpressionCommon(parserUtils) {
+}
 
-ExpressionLogical::~ExpressionLogical() {}
+ExpressionLogical::~ExpressionLogical() {
+}
 
 Expression * ExpressionLogical::evaluate() {
 	clearValues();
@@ -33,10 +35,16 @@ Expression * ExpressionLogical::evaluate() {
 	bool fail = false;
 	int result = 0;
 
-	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); !fail && expressionIterator != environment.end(); ++expressionIterator) {
-		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
+	for (std::list<Expression*>::const_iterator expressionIterator =
+			environment.begin();
+			!fail && expressionIterator != environment.end();
+			++expressionIterator) {
+		std::list<Element*> values =
+				((*expressionIterator)->evaluate())->getValues();
 
-		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
+		for (std::list<Element*>::const_iterator elementIterator =
+				values.begin(); elementIterator != values.end();
+				++elementIterator) {
 			if (start) {
 				result = atoi((**elementIterator).c_str());
 				start = false;

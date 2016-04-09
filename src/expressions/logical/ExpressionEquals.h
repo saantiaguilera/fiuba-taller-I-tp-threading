@@ -8,16 +8,16 @@
 #ifndef EXPRESSIONS_EXPRESSIONEQUALS_H_
 #define EXPRESSIONS_EXPRESSIONEQUALS_H_
 
-class ExpressionEquals : public ExpressionLogical {
-	private:
-		ExpressionEquals(const ExpressionEquals&);
-		ExpressionEquals& operator=(const ExpressionEquals&);
+class ExpressionEquals: public ExpressionLogical {
+private:
+	ExpressionEquals(const ExpressionEquals&);
+	ExpressionEquals& operator=(const ExpressionEquals&);
 
-	public:
-		ExpressionEquals(ParserUtils *parserUtils);
-		virtual ~ExpressionEquals();
-		virtual bool operate(int leftValue, int rightValue);
-		virtual std::string getTag();
+public:
+	ExpressionEquals(ParserUtils *parserUtils);
+	virtual ~ExpressionEquals();
+	virtual bool operate(int leftValue, int rightValue);
+	virtual std::string getTag();
 };
 
 #endif /* EXPRESSIONS_EXPRESSIONEQUALS_H_ */

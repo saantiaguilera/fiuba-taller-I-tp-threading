@@ -21,19 +21,27 @@ class Expression;
 #include "../ExpressionCommon.h"
 #include "ExpressionList.h"
 
-ExpressionList::ExpressionList(ParserUtils *parserUtils) : ExpressionCommon(parserUtils) { }
+ExpressionList::ExpressionList(ParserUtils *parserUtils) :
+		ExpressionCommon(parserUtils) {
+}
 
-ExpressionList::~ExpressionList() {}
+ExpressionList::~ExpressionList() {
+}
 
 Expression * ExpressionList::evaluate() {
 	clearValues();
 
-	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
-		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
+	for (std::list<Expression*>::const_iterator expressionIterator =
+			environment.begin(); expressionIterator != environment.end();
+			++expressionIterator) {
+		std::list<Element*> values =
+				((*expressionIterator)->evaluate())->getValues();
 
-		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
-	//		std::cout << "LIST PUSHING ELEMENT:: " << **elementIterator << std::endl;
-			getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
+		for (std::list<Element*>::const_iterator elementIterator =
+				values.begin(); elementIterator != values.end();
+				++elementIterator) {
+			getValues().push_back(new Element(**elementIterator));
+			//Else it gets double deleted
 		}
 	}
 
@@ -50,7 +58,8 @@ std::string ExpressionList::toString() {
 	response = "(";
 
 	std::list<Element*>::const_iterator end = values.end();
-	for (std::list<Element*>::const_iterator elementIterator = values.begin() ; elementIterator != end;) {
+	for (std::list<Element*>::const_iterator elementIterator = values.begin();
+			elementIterator != end;) {
 		response += (**elementIterator);
 
 		if (++elementIterator != end)

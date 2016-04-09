@@ -22,9 +22,12 @@ class Expression;
 #include "ExpressionArithmetic.h"
 #include "ExpressionMultiply.h"
 
-ExpressionMultiply::ExpressionMultiply(ParserUtils *parserUtils) : ExpressionArithmetic(parserUtils) { }
+ExpressionMultiply::ExpressionMultiply(ParserUtils *parserUtils) :
+		ExpressionArithmetic(parserUtils) {
+}
 
-ExpressionMultiply::~ExpressionMultiply() {}
+ExpressionMultiply::~ExpressionMultiply() {
+}
 
 int ExpressionMultiply::operate(int dest, int src) {
 	return dest * src;

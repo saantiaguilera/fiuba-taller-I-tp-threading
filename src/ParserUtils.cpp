@@ -48,40 +48,49 @@ class Expression;
  * Overrides the operator()
  */
 class IsFunction {
-	public:
-	IsFunction() {};
-	bool operator()(char c){
+public:
+	IsFunction() {
+	}
+	;
+	bool operator()(char c) {
 		return c == '(' || c == ')';
 	}
 };
 
-ParserUtils::ParserUtils() { }
+ParserUtils::ParserUtils() {
+}
 
 /**
- * @note: I know this shouldnt be like this (its a bad smell to implement the if != NULL
+ * @note: I know this shouldnt be like this
+ * (its a bad smell to implement the if != NULL
  * then delete.
- * But since the Runtime functions need to last till end of program and they will be
+ * But since the Runtime functions need to last
+ * till end of program and they will be
  * inside other expressions
  * They will be double removed and this will crash.
- * Solution could be to use a copy constructor. But that would use a lot more heap
+ * Solution could be to use a copy constructor.
+ * But that would use a lot more heap
  * and I prefer 6 bad smell lines than 2x heap
  */
 ParserUtils::~ParserUtils() {
-	for (std::map<std::string,Expression*>::iterator it = runtimeVariables.begin(); it != runtimeVariables.end(); ++it) {
-		if(it->second != NULL) {
+	for (std::map<std::string, Expression*>::iterator it =
+			runtimeVariables.begin(); it != runtimeVariables.end(); ++it) {
+		if (it->second != NULL) {
 			delete it->second;
 			it->second = NULL;
 		}
 	}
 
-	for (std::map<std::string,Expression*>::iterator it = runtimeFunctions.begin(); it != runtimeFunctions.end(); ++it) {
-		if(it->second != NULL) {
+	for (std::map<std::string, Expression*>::iterator it =
+			runtimeFunctions.begin(); it != runtimeFunctions.end(); ++it) {
+		if (it->second != NULL) {
 			delete it->second;
 			it->second = NULL;
 		}
 	}
 
-	for (std::list<Expression*>::iterator it = history.begin(); it != history.end(); ++it) {
+	for (std::list<Expression*>::iterator it = history.begin();
+			it != history.end(); ++it) {
 		if (*it != NULL) {
 			delete *it;
 			*it = NULL;
@@ -132,9 +141,11 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 		return 0;
 
 	//If its a number or it has ""
-	if ((string.find_first_not_of("0123456789") == std::string::npos) || string.find('"') != std::string::npos)
+	if ((string.find_first_not_of("0123456789") == std::string::npos)
+			|| string.find('"') != std::string::npos)
 		return new ExpressionConstant(this); //constant, lets say 4 or "hello"
-	else throw 2;
+	else
+		throw 2;
 }
 
 Expression * ParserUtils::expressionFromFunction(std::string &line) {
@@ -142,7 +153,8 @@ Expression * ParserUtils::expressionFromFunction(std::string &line) {
 }
 
 Expression * ParserUtils::expressionFromRuntime(std::string &tag) {
-	for (std::map<std::string,Expression*>::iterator it = runtimeFunctions.begin(); it != runtimeFunctions.end(); ++it)
+	for (std::map<std::string, Expression*>::iterator it =
+			runtimeFunctions.begin(); it != runtimeFunctions.end(); ++it)
 		if (it->first == tag)
 			return it->second;
 
@@ -155,7 +167,8 @@ std::string ParserUtils::bodyToString(std::string &line) {
 	int end = line.find_last_of(")");
 
 	if (end > 0)
-		return line.substr(start, end - line.find(function) - function.length() - 1);
+		return line.substr(start,
+				end - line.find(function) - function.length() - 1);
 
 	throw -100; //==> its a constant or a literal
 }
@@ -166,7 +179,8 @@ std::string ParserUtils::functionToString(std::string line) {
 	std::string result;
 	iss >> result;
 
-	result.erase(std::remove_if(result.begin(), result.end(), IsFunction()), result.end());
+	result.erase(std::remove_if(result.begin(), result.end(), IsFunction()),
+			result.end());
 
 	return result;
 }
@@ -205,7 +219,8 @@ Expression * ParserUtils::expressionFromConstant(std::string line) {
 }
 
 Expression * ParserUtils::expressionFromVariable(std::string tag) {
-	for (std::map<std::string,Expression*>::iterator it = runtimeVariables.begin(); it != runtimeVariables.end(); ++it)
+	for (std::map<std::string, Expression*>::iterator it =
+			runtimeVariables.begin(); it != runtimeVariables.end(); ++it)
 		if (it->first == tag) {
 			return (((ExpressionVariable*) (it->second))->mutate());
 		}
@@ -213,7 +228,8 @@ Expression * ParserUtils::expressionFromVariable(std::string tag) {
 	return NULL;
 }
 
-Expression * ParserUtils::appendRuntimeFunction(std::string tag, Expression *expression) {
+Expression * ParserUtils::appendRuntimeFunction(std::string tag,
+		Expression *expression) {
 	if (runtimeFunctions.find(tag) != runtimeFunctions.end())
 		delete runtimeFunctions[tag];
 
@@ -222,7 +238,8 @@ Expression * ParserUtils::appendRuntimeFunction(std::string tag, Expression *exp
 	return expression;
 }
 
-Expression * ParserUtils::appendRuntimeVariable(std::string tag, Expression *expression) {
+Expression * ParserUtils::appendRuntimeVariable(std::string tag,
+		Expression *expression) {
 	if (runtimeVariables.find(tag) != runtimeVariables.end())
 		delete runtimeVariables[tag];
 

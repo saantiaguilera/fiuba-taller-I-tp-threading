@@ -22,8 +22,10 @@ class Expression;
 #include "../ExpressionCommon.h"
 #include "ExpressionIf.h"
 
-ExpressionIf::ExpressionIf(ParserUtils *parserUtils) : ExpressionCommon(parserUtils) , condition(NULL) ,
-		trueExpression(NULL) , falseExpression(NULL) { }
+ExpressionIf::ExpressionIf(ParserUtils *parserUtils) :
+		ExpressionCommon(parserUtils), condition(NULL), trueExpression(NULL), falseExpression(
+				NULL) {
+}
 
 ExpressionIf::~ExpressionIf() {
 	environment.clear();
@@ -56,7 +58,9 @@ void ExpressionIf::injectExpression(Expression *expression) {
 Expression * ExpressionIf::evaluate() {
 	clearValues();
 
-	Expression* result = ((condition->evaluate())->getValues().size() > 0) ? trueExpression : falseExpression;
+	Expression* result =
+			((condition->evaluate())->getValues().size() > 0) ?
+					trueExpression : falseExpression;
 
 	result->evaluate();
 
@@ -71,7 +75,9 @@ std::string ExpressionIf::getTag() {
 }
 
 std::string ExpressionIf::toString() {
-	Expression* result = ((condition->evaluate())->getValues().size() > 0) ? trueExpression : falseExpression;
+	Expression* result =
+			((condition->evaluate())->getValues().size() > 0) ?
+					trueExpression : falseExpression;
 
 	return result->toString();
 }
