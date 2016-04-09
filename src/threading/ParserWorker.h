@@ -10,7 +10,7 @@
 
 #include <pthread.h>
 
-class ParserWorker: Thread {
+class ParserWorker: public Thread {
 private:
 	Expression *expression;
 

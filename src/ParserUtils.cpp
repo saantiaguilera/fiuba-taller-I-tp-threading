@@ -66,6 +66,8 @@ public:
 	}
 };
 
+std::list<Thread*> threads;
+
 ParserUtils::ParserUtils() {
 }
 
@@ -131,7 +133,11 @@ void ParserUtils::run(std::string &line) {
 	if (expression->getTag() == EXPRESSION_SYNC) {
 		//TODO join
 	} else {
-		expression->evaluate();
+		ParserWorker *thread = new ParserWorker(expression);
+
+		threads.push_back(thread);
+
+		thread->start();
 	}
 }
 
