@@ -25,6 +25,7 @@ int main() {
 			parser.run(line);
 		} catch (int exception) {
 			std::cout << "ERROR: " << line << std::endl;
+			return 2;
 		}
 	}
 
