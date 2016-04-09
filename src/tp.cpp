@@ -17,12 +17,15 @@ class Expression;
 #include "ParserUtils.h"
 #include "Expression.h"
 
+#define ERROR_ARGUMENTS "ERROR: argumentos"
+#define ERROR_GENERIC "ERROR: "
+
 int main(int argc, char *argv[]) {
 	ParserUtils parser;
 	std::string line;
 
 	if (argc > 1) {
-		std::cout << "ERROR: argumentos" << std::endl;
+		std::cout << ERROR_ARGUMENTS << std::endl;
 		return 1;
 	}
 
@@ -31,7 +34,7 @@ int main(int argc, char *argv[]) {
 			parser.run(line);
 		} catch (const std::logic_error &exception) {
 			if (exception.what() == EXCEPTION_BAD_FUNCTION) {
-				std::cout << "ERROR: " << line << std::endl;
+				std::cout << ERROR_GENERIC << line << std::endl;
 				return 2;
 			}
 		}
