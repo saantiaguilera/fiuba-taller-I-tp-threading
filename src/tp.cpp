@@ -1,9 +1,6 @@
 //============================================================================
 // Name        : tp.cpp
 // Author      : Santi Aguilera
-// Version     :
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
 //============================================================================
 
 #include <iostream>
@@ -30,15 +27,24 @@ int main(int argc, char *argv[]) {
 	ParserUtils parser;
 	std::string line;
 
+	//Check if the user send args. If so prompt error
 	if (argc > 1) {
 		std::cout << ERROR_GENERIC << ERROR_TYPE_ARGUMENTS << std::endl;
 		return STATE_WRONG_ARGS;
 	}
 
+	/**
+	 * Iterate through the file that was input
+	 * and for each line run the parser.
+	 *
+	 * In case an exception is thrown while running
+	 * the parser, act on it.
+	 */
 	while (std::getline(std::cin, line)) {
 		try {
 			parser.run(line);
 		} catch (const std::logic_error &exception) {
+			//If the exception was of a malformed func. Print it
 			if (exception.what() == EXCEPTION_BAD_FUNCTION) {
 				std::cout << ERROR_GENERIC << line << std::endl;
 				return STATE_BAD_FUNCTION;

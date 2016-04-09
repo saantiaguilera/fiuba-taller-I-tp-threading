@@ -11,6 +11,9 @@
 #include <cstdio>
 #include <pthread.h>
 
+/**
+ * Simple class for a mutual exclusion
+ */
 class Mutex {
 private:
 	pthread_mutex_t mutex;

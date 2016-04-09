@@ -27,10 +27,18 @@ class Expression;
 #include "Thread.h"
 #include "ParserWorker.h"
 
+/**
+ * @Public
+ * @Constructor
+ */
 ParserWorker::ParserWorker(Expression *expression) :
 		expression(expression) {
 }
 
+/**
+ * @Protected
+ * @Note: Evaluates the expression
+ */
 void ParserWorker::run() {
 	expression->evaluate();
 }

@@ -10,6 +10,10 @@
 
 #include <pthread.h>
 
+/**
+ * Simple abstract thread class that is able
+ * to be started or joined
+ */
 class Thread {
 private:
 	pthread_t thread;
