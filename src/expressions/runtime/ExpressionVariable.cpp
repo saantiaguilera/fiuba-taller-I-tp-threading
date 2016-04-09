@@ -45,9 +45,11 @@ void ExpressionVariable::parseBody(std::string line) {
 Expression * ExpressionVariable::mutate() {
 	clearEnvironment();
 
-	ExpressionCommon::parseBody(body); //Parse the body, this creates an environment
+	ExpressionCommon::parseBody(body);
+	//Parse the body, this creates an environment
 
-	Expression *expression = (*environment.begin()); //Get the generated expression
+	Expression *expression = (*environment.begin());
+	//Get the generated expression
 
 	environment.clear(); //Clear the environment
 

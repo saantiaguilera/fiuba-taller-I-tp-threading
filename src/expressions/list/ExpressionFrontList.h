@@ -8,6 +8,9 @@
 #ifndef EXPRESSIONS_LIST_EXPRESSIONFRONTLIST_H_
 #define EXPRESSIONS_LIST_EXPRESSIONFRONTLIST_H_
 
+#include <string>
+#include <list>
+
 class ExpressionFrontList: public ExpressionCommon {
 private:
 	ExpressionFrontList(const ExpressionFrontList&);
@@ -19,7 +22,7 @@ private:
 	void parseEvaluation(Expression *expression);
 
 public:
-	ExpressionFrontList(ParserUtils *parserUtils);
+	explicit ExpressionFrontList(ParserUtils *parserUtils);
 	virtual ~ExpressionFrontList();
 	virtual std::string getTag(); //known method ? NULL : runtime name tag
 	virtual Expression * evaluate();

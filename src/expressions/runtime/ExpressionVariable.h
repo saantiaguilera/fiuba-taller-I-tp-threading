@@ -8,6 +8,8 @@
 #ifndef EXPRESSIONS_RUNTIME_EXPRESSIONVARIABLE_H_
 #define EXPRESSIONS_RUNTIME_EXPRESSIONVARIABLE_H_
 
+#include <string>
+
 class ExpressionVariable: public ExpressionCommon {
 private:
 	ExpressionVariable(const ExpressionVariable&);
@@ -16,7 +18,7 @@ private:
 	std::string body;
 	std::string variableName;
 public:
-	ExpressionVariable(ParserUtils *parserUtils);
+	explicit ExpressionVariable(ParserUtils *parserUtils);
 	virtual ~ExpressionVariable();
 	virtual void parseBody(std::string line);
 	virtual std::string getTag(); //known method ? NULL : runtime name tag

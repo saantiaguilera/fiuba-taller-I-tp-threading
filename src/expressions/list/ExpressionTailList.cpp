@@ -75,7 +75,6 @@ void ExpressionTailList::appendToValues() {
 	for (std::list<Expression*>::iterator iterator =
 			flattenedEnvironment.begin();
 			iterator != flattenedEnvironment.end(); ++iterator) {
-
 		std::list<Element*> iteratorValues =
 				(*iterator)->evaluate()->getValues();
 
@@ -85,7 +84,6 @@ void ExpressionTailList::appendToValues() {
 				++elementIterator) {
 			values.push_back(new Element(**elementIterator));
 		}
-
 	}
 }
 

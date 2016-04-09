@@ -23,8 +23,9 @@ class Expression;
 #include "ExpressionIf.h"
 
 ExpressionIf::ExpressionIf(ParserUtils *parserUtils) :
-		ExpressionCommon(parserUtils), condition(NULL), trueExpression(NULL), falseExpression(
-				NULL) {
+		ExpressionCommon(parserUtils), condition(NULL),
+		trueExpression(NULL), falseExpression(
+		NULL) {
 }
 
 ExpressionIf::~ExpressionIf() {

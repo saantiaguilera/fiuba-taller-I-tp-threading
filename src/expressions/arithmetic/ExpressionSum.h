@@ -8,13 +8,15 @@
 #ifndef EXPRESSIONSUM_H_
 #define EXPRESSIONSUM_H_
 
+#include <string>
+
 class ExpressionSum: public ExpressionArithmetic {
 private:
 	ExpressionSum(const ExpressionSum&);
 	ExpressionSum& operator=(const ExpressionSum&);
 
 public:
-	ExpressionSum(ParserUtils *parserUtils);
+	explicit ExpressionSum(ParserUtils *parserUtils);
 	virtual ~ExpressionSum();
 	virtual int operate(int dest, int src);
 	virtual std::string getTag();

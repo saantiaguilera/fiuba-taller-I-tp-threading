@@ -8,6 +8,10 @@
 #ifndef PARSERUTILS_H_
 #define PARSERUTILS_H_
 
+#include <map>
+#include <string>
+#include <list>
+
 class ParserUtils {
 private:
 	std::map<std::string, Expression*> runtimeVariables;

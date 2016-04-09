@@ -8,6 +8,8 @@
 #ifndef EXPRESSIONCONSTANT_H_
 #define EXPRESSIONCONSTANT_H_
 
+#include <string>
+
 class ExpressionConstant: public Expression {
 private:
 	ExpressionConstant(const ExpressionConstant&);
@@ -15,7 +17,7 @@ private:
 	Element value;
 
 public:
-	ExpressionConstant(ParserUtils *parserUtils);
+	explicit ExpressionConstant(ParserUtils *parserUtils);
 	virtual ~ExpressionConstant();
 	virtual Expression * evaluate();
 	virtual void parseBody(std::string line);

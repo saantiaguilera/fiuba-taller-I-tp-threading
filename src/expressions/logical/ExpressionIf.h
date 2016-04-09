@@ -8,7 +8,10 @@
 #ifndef EXPRESSIONS_EXPRESSIONIF_H_
 #define EXPRESSIONS_EXPRESSIONIF_H_
 
-//I know it should be a logical expression. But derp, this is more logical than the logical ones.
+#include <string>
+
+//I know it should be a logical expression.
+//But derp, this is more logical than the logical ones.
 
 class ExpressionIf: public ExpressionCommon {
 private:
@@ -19,7 +22,7 @@ private:
 	Expression *falseExpression;
 
 public:
-	ExpressionIf(ParserUtils *parserUtils);
+	explicit ExpressionIf(ParserUtils *parserUtils);
 	virtual ~ExpressionIf();
 	virtual std::string getTag(); //known method ? NULL : runtime name tag
 	virtual Expression * evaluate();

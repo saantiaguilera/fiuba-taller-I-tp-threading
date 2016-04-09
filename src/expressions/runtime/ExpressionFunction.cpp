@@ -51,7 +51,8 @@ Expression * ExpressionFunction::mutate(std::string value) {
 	//Since we want to reuse this expression. Use a copy :)
 	std::string newBody = body;
 
-	//Literals will be changed too :( Maybe for when I have moar time. Sorry for now
+	//Literals will be changed too :(
+	//Maybe for when I have moar time. Sorry for now
 	while (newBody.find(variableName) != std::string::npos)
 		newBody.replace(newBody.find(variableName), variableName.size(), value);
 

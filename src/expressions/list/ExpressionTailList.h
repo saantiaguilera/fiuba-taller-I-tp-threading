@@ -8,6 +8,9 @@
 #ifndef EXPRESSIONS_LIST_EXPRESSIONTAILLIST_H_
 #define EXPRESSIONS_LIST_EXPRESSIONTAILLIST_H_
 
+#include <string>
+#include <list>
+
 class ExpressionTailList: public ExpressionCommon {
 private:
 	ExpressionTailList(const ExpressionTailList&);
@@ -19,7 +22,7 @@ private:
 	void parseEvaluation(Expression *expression);
 
 public:
-	ExpressionTailList(ParserUtils *parserUtils);
+	explicit ExpressionTailList(ParserUtils *parserUtils);
 	virtual ~ExpressionTailList();
 	virtual std::string getTag(); //known method ? NULL : runtime name tag
 	virtual Expression * evaluate();

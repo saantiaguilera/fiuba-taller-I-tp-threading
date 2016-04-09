@@ -8,13 +8,15 @@
 #ifndef EXPRESSIONS_LIST_EXPRESSIONLIST_H_
 #define EXPRESSIONS_LIST_EXPRESSIONLIST_H_
 
+#include <string>
+
 class ExpressionList: public ExpressionCommon {
 private:
 	ExpressionList(const ExpressionList&);
 	ExpressionList& operator=(const ExpressionList&);
 
 public:
-	ExpressionList(ParserUtils *parserUtils);
+	explicit ExpressionList(ParserUtils *parserUtils);
 	virtual ~ExpressionList();
 	virtual std::string getTag(); //known method ? NULL : runtime name tag
 	virtual Expression * evaluate();

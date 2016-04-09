@@ -8,13 +8,15 @@
 #ifndef EXPRESSIONS_EXPRESSIONPRINT_H_
 #define EXPRESSIONS_EXPRESSIONPRINT_H_
 
+#include <string>
+
 class ExpressionPrint: public ExpressionCommon {
 private:
 	ExpressionPrint(const ExpressionPrint&);
 	ExpressionPrint& operator=(const ExpressionPrint&);
 
 public:
-	ExpressionPrint(ParserUtils *parserUtils);
+	explicit ExpressionPrint(ParserUtils *parserUtils);
 	virtual ~ExpressionPrint();
 	virtual Expression * evaluate();
 	virtual std::string getTag();

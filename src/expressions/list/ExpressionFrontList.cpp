@@ -56,12 +56,10 @@ Expression * ExpressionFrontList::evaluate() {
 	for (std::list<Expression*>::iterator innerIterator =
 			environmentOfInner.begin();
 			innerIterator != environmentOfInner.end(); ++innerIterator) {
-
 		if (*innerIterator != NULL && !done) {
 			done = true;
 			parseEvaluation(*innerIterator);
 		}
-
 	}
 
 	appendToValues();
@@ -77,7 +75,6 @@ void ExpressionFrontList::appendToValues() {
 	for (std::list<Expression*>::iterator iterator =
 			flattenedEnvironment.begin();
 			iterator != flattenedEnvironment.end(); ++iterator) {
-
 		std::list<Element*> iteratorValues =
 				(*iterator)->evaluate()->getValues();
 
@@ -87,7 +84,6 @@ void ExpressionFrontList::appendToValues() {
 				++elementIterator) {
 			values.push_back(new Element(**elementIterator));
 		}
-
 	}
 }
 

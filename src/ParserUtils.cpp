@@ -52,7 +52,7 @@ class IsFunction {
 public:
 	IsFunction() {
 	}
-	;
+
 	bool operator()(char c) {
 		return c == '(' || c == ')';
 	}

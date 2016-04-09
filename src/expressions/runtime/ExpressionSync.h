@@ -8,13 +8,15 @@
 #ifndef EXPRESSIONS_RUNTIME_EXPRESSIONSYNC_H_
 #define EXPRESSIONS_RUNTIME_EXPRESSIONSYNC_H_
 
+#include <string>
+
 class ExpressionSync: public Expression {
 private:
 	ExpressionSync(const ExpressionSync&);
 	ExpressionSync& operator=(const ExpressionSync&);
 
 public:
-	ExpressionSync(ParserUtils *parserUtils);
+	explicit ExpressionSync(ParserUtils *parserUtils);
 	virtual ~ExpressionSync();
 	virtual void parseBody(std::string line);
 	virtual std::string getTag(); //known method ? NULL : runtime name tag
