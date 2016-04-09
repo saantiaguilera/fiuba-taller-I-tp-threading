@@ -17,6 +17,7 @@
 class Expression;
 
 #include "../../threading/Mutex.h"
+#include "../../threading/ReentrantLock.h"
 
 #include "../../ParserUtils.h"
 #include "../../Expression.h"
@@ -32,6 +33,13 @@ ExpressionPrint::~ExpressionPrint() {
 
 Expression * ExpressionPrint::evaluate() {
 	clearValues();
+
+	/**
+	 * This needs to be locked
+	 * Else a race condition can occur over
+	 * the std::cout (shared object)
+	 */
+	ReentrantLock lock(mutex);
 
 	std::list<Expression*>::const_iterator end = environment.end();
 	for (std::list<Expression*>::const_iterator expressionIterator =

@@ -18,7 +18,7 @@ protected:
 	virtual void run();
 
 public:
-	ParserWorker(Expression *expression);
+	explicit ParserWorker(Expression *expression);
 };
 
 #endif /* PARSERWORKERTHREAD_H_ */

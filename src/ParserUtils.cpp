@@ -69,6 +69,29 @@ public:
 std::list<Thread*> threads;
 
 ParserUtils::ParserUtils() {
+	runtimeFunctions = new std::map<std::string, Expression*>();
+	runtimeVariables = new std::map<std::string, Expression*>();
+}
+
+void cleanThreads() {
+	/**
+	 * @MainThread
+	 * @Note: This joins each thread, and then deletes them from the
+	 * thread list. There cant be race conditions since we are
+	 * in the main UI and other threads dont have access to
+	 * the thread list (stack in main thread)
+	 */
+	for (std::list<Thread*>::iterator threadIterator = threads.begin();
+			threadIterator != threads.end(); ++threadIterator) {
+		(*threadIterator)->join();
+
+		if (*threadIterator != NULL) {
+			delete *threadIterator;
+			*threadIterator = NULL;
+		} //While iterating clean the list
+	}
+
+	threads.clear();
 }
 
 /**
@@ -85,7 +108,7 @@ ParserUtils::ParserUtils() {
  */
 ParserUtils::~ParserUtils() {
 	for (std::map<std::string, Expression*>::iterator it =
-			runtimeVariables.begin(); it != runtimeVariables.end(); ++it) {
+			runtimeVariables->begin(); it != runtimeVariables->end(); ++it) {
 		if (it->second != NULL) {
 			delete it->second;
 			it->second = NULL;
@@ -93,13 +116,22 @@ ParserUtils::~ParserUtils() {
 	}
 
 	for (std::map<std::string, Expression*>::iterator it =
-			runtimeFunctions.begin(); it != runtimeFunctions.end(); ++it) {
+			runtimeFunctions->begin(); it != runtimeFunctions->end(); ++it) {
 		if (it->second != NULL) {
 			delete it->second;
 			it->second = NULL;
 		}
 	}
 
+	cleanHistory();
+
+	cleanThreads();
+
+	delete runtimeVariables;
+	delete runtimeFunctions;
+}
+
+void ParserUtils::cleanHistory() {
 	for (std::list<Expression*>::iterator it = history.begin();
 			it != history.end(); ++it) {
 		if (*it != NULL) {
@@ -107,6 +139,8 @@ ParserUtils::~ParserUtils() {
 			*it = NULL;
 		}
 	}
+
+	history.clear();
 }
 
 void ParserUtils::run(std::string &line) {
@@ -131,7 +165,11 @@ void ParserUtils::run(std::string &line) {
 	 * thread, and this is not what we want.
 	 */
 	if (expression->getTag() == EXPRESSION_SYNC) {
-		//TODO join
+		//GC the threads
+		cleanThreads();
+
+		//GC the history
+		cleanHistory();
 	} else {
 		ParserWorker *thread = new ParserWorker(expression);
 
@@ -188,8 +226,13 @@ Expression * ParserUtils::expressionFromFunction(std::string &line) {
 }
 
 Expression * ParserUtils::expressionFromRuntime(std::string &tag) {
+	/**
+	 * This cant produce a race condition
+	 * Since there are not changes in the
+	 * shared data
+	 */
 	for (std::map<std::string, Expression*>::iterator it =
-			runtimeFunctions.begin(); it != runtimeFunctions.end(); ++it)
+			runtimeFunctions->begin(); it != runtimeFunctions->end(); ++it)
 		if (it->first == tag)
 			return it->second;
 
@@ -259,9 +302,15 @@ Expression * ParserUtils::expressionFromConstant(std::string line) {
 }
 
 Expression * ParserUtils::expressionFromVariable(std::string tag) {
+	/**
+	 * This can produce a race condition
+	 * Since someone can try to use the
+	 * same expression* while its mutating
+	 */
 	for (std::map<std::string, Expression*>::iterator it =
-			runtimeVariables.begin(); it != runtimeVariables.end(); ++it)
+			runtimeVariables->begin(); it != runtimeVariables->end(); ++it)
 		if (it->first == tag) {
+			ReentrantLock lock(mutex);
 			return (((ExpressionVariable*) (it->second))->mutate());
 		}
 
@@ -270,20 +319,36 @@ Expression * ParserUtils::expressionFromVariable(std::string tag) {
 
 Expression * ParserUtils::appendRuntimeFunction(std::string tag,
 		Expression *expression) {
-	if (runtimeFunctions.find(tag) != runtimeFunctions.end())
-		delete runtimeFunctions[tag];
+	/**
+	 * This can produce a race condition
+	 * Since someone can be accessing the shared
+	 * data while we are deleting / changing
+	 * the function
+	 */
+	ReentrantLock lock(mutex);
 
-	runtimeFunctions[tag] = expression;
+	if (runtimeFunctions->find(tag) != runtimeFunctions->end())
+		delete (*runtimeFunctions)[tag];
+
+	(*runtimeFunctions)[tag] = expression;
 
 	return expression;
 }
 
 Expression * ParserUtils::appendRuntimeVariable(std::string tag,
 		Expression *expression) {
-	if (runtimeVariables.find(tag) != runtimeVariables.end())
-		delete runtimeVariables[tag];
+	/**
+	 * This can produce a race condition
+	 * Since someone can be accessing the shared
+	 * data while we are deleting / changing
+	 * the function
+	 */
+	ReentrantLock lock(mutex);
 
-	runtimeVariables[tag] = expression;
+	if (runtimeVariables->find(tag) != runtimeVariables->end())
+		delete (*runtimeVariables)[tag];
+
+	(*runtimeVariables)[tag] = expression;
 
 	return expression;
 }

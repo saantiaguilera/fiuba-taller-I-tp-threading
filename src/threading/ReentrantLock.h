@@ -13,7 +13,7 @@ class ReentrantLock {
         Mutex &m;
 
     public:
-        ReentrantLock(Mutex &m);
+        explicit ReentrantLock(Mutex &m);
         ~ReentrantLock();
 
     private:

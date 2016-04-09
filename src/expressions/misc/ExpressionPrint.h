@@ -15,6 +15,8 @@ private:
 	ExpressionPrint(const ExpressionPrint&);
 	ExpressionPrint& operator=(const ExpressionPrint&);
 
+	Mutex mutex;
+
 public:
 	explicit ExpressionPrint(ParserUtils *parserUtils);
 	virtual ~ExpressionPrint();

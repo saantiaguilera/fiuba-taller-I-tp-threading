@@ -20,9 +20,11 @@ class ParserUtils {
 private:
 	Mutex mutex;
 
-	std::map<std::string, Expression*> runtimeVariables;
-	std::map<std::string, Expression*> runtimeFunctions;
+	std::map<std::string, Expression*> * runtimeVariables;
+	std::map<std::string, Expression*> * runtimeFunctions;
 	std::list<Expression*> history;
+
+	void cleanHistory();
 
 	std::string bodyToString(std::string &line);
 	std::string functionToString(std::string line);
