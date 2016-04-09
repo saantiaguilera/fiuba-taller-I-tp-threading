@@ -111,7 +111,22 @@ void ParserUtils::run(std::string &line) {
 			&& expression->getTag() != EXPRESSION_SETQ)
 		history.push_back(expression);
 
-	expression->evaluate();
+	/**
+	 * Ideally the best would be to use a
+	 * interface (abstract class in this case)
+	 * that has a onJoinThreads() and this is
+	 * triggered by the sync expression in his
+	 * evaluate().
+	 * Since evaluate() wont be done on the main
+	 * thread, we cant do this approach
+	 * else the JOIN will be done from a different
+	 * thread, and this is not what we want.
+	 */
+	if (expression->getTag() == EXPRESSION_SYNC) {
+		//TODO join
+	} else {
+		expression->evaluate();
+	}
 }
 
 Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {

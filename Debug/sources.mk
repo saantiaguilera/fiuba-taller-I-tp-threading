@@ -30,4 +30,5 @@ src/expressions/list \
 src/expressions/logical \
 src/expressions/misc \
 src/expressions/runtime \
+src/threading \
 
