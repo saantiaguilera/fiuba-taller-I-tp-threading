@@ -21,6 +21,7 @@
 #include <string>
 #include <list>
 
+//List of the Lisp expressions
 const std::string EXPRESSION_SUM = "+";
 const std::string EXPRESSION_SUBSTRACTION = "-";
 const std::string EXPRESSION_MULTIPLY = "*";
@@ -41,6 +42,9 @@ const std::string EXPRESSION_CONST = "const";
 
 typedef std::string Element;
 
+/**
+ * Base class for an expression
+ */
 class Expression {
 private:
 	Expression(const Expression&);
@@ -60,9 +64,8 @@ public:
 	virtual ~Expression();
 
 	virtual std::string getTag() = 0;
-	std::list<Element*> &getValues();
+	std::list<Element*> * getValues();
 	virtual std::list<Expression*> * getEnvironment();
-	//TODO CHANGE THIS TO BE LIKE GETVALUES ?
 
 	virtual void parseBody(std::string line) = 0;
 	virtual Expression * evaluate() = 0;

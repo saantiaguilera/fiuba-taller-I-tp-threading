@@ -19,21 +19,17 @@ class Expression;
 #include "ParserUtils.h"
 #include "Expression.h"
 
+/**
+ * @Public
+ * @Constructor
+ */
 Expression::Expression(ParserUtils *parserUtils) :
 		parserUtils(parserUtils) {
 }
 
 /**
- * @note: I know this shouldnt be like this
- * (its a bad smell to implement the if != NULL
- * then delete.
- * But since the Runtime functions need to last till end of
- * program and they will be
- * inside other expressions
- * They will be double removed and this will crash.
- * Solution could be to use a copy constructor.
- * But that would use a lot more heap
- * and I prefer 6 bad smell lines than 2x heap
+ * @Public
+ * @Destructor
  */
 Expression::~Expression() {
 	clearEnvironment();
@@ -41,6 +37,10 @@ Expression::~Expression() {
 	clearValues();
 }
 
+/**
+ * @Protected
+ * @Note: Clean the list of values
+ */
 void Expression::clearValues() {
 	for (std::list<Element*>::iterator valuesIterator = values.begin();
 			valuesIterator != values.end(); ++valuesIterator) {
@@ -53,6 +53,10 @@ void Expression::clearValues() {
 	values.clear();
 }
 
+/**
+ * @Protected
+ * @Note: Clean the environment
+ */
 void Expression::clearEnvironment() {
 	for (std::list<Expression*>::iterator expressionIterator =
 			environment.begin(); expressionIterator != environment.end();
@@ -66,18 +70,38 @@ void Expression::clearEnvironment() {
 	environment.clear();
 }
 
-std::list<Element*> &Expression::getValues() {
-	return this->values;
+/**
+ * @Public
+ * @Note: Getter for the values list
+ */
+std::list<Element*> * Expression::getValues() {
+	return &values;
 }
 
+/**
+ * @Protected
+ * @Note: Setter for the environment
+ */
 void Expression::setEnvironment(std::list<Expression*> expressions) {
-	this->environment = expressions; //Todo check if this wont give a mem leak
+	this->environment = expressions;
 }
 
+/**
+ * @Public
+ * @Note: Getter for the environment
+ */
 std::list<Expression*> * Expression::getEnvironment() {
 	return &environment;
 }
 
+/**
+ * @Public
+ * @Note: By default an expression just tells
+ * all his environment to be parsed as string
+ * and it returns it.
+ *
+ * @Overridable
+ */
 std::string Expression::toString() {
 	std::string returnString = "";
 

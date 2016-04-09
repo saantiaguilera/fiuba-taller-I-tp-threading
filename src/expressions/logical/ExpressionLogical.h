@@ -10,6 +10,10 @@
 
 #include <string>
 
+/**
+ * Abstract class that groups all logical expressions
+ * Except If. Because thats a conditional and idk.
+ */
 class ExpressionLogical: public ExpressionCommon {
 private:
 	ExpressionLogical(const ExpressionLogical&);

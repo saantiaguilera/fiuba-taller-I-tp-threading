@@ -24,10 +24,18 @@ class Expression;
 #include "ExpressionArithmetic.h"
 #include "ExpressionSubstraction.h"
 
+/**
+ * @Public
+ * @Constructor
+ */
 ExpressionSubstraction::ExpressionSubstraction(ParserUtils *parserUtils) :
 		ExpressionArithmetic(parserUtils) {
 }
 
+/**
+ * @Public
+ * @Destructor
+ */
 ExpressionSubstraction::~ExpressionSubstraction() {
 }
 

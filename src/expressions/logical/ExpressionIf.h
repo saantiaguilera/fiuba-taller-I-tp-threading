@@ -10,9 +10,11 @@
 
 #include <string>
 
-//I know it should be a logical expression.
-//But derp, this is more logical than the logical ones.
-
+/**
+ * Expression that resembles the IF
+ *
+ * This is not a logical expression, its a conditional.
+ */
 class ExpressionIf: public ExpressionCommon {
 private:
 	ExpressionIf(const ExpressionIf&);

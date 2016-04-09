@@ -11,6 +11,9 @@
 #include <string>
 #include <list>
 
+/**
+ * Expression that resembles the CDR
+ */
 class ExpressionTailList: public ExpressionCommon {
 private:
 	ExpressionTailList(const ExpressionTailList&);

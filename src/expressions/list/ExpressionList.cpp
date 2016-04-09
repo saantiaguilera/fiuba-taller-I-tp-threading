@@ -23,13 +23,27 @@ class Expression;
 #include "../ExpressionCommon.h"
 #include "ExpressionList.h"
 
+/**
+ * @Public
+ * @Constructor
+ */
 ExpressionList::ExpressionList(ParserUtils *parserUtils) :
 		ExpressionCommon(parserUtils) {
 }
 
+/**
+ * @Public
+ * @Destructor
+ */
 ExpressionList::~ExpressionList() {
 }
 
+/**
+ * @Note Appends all the values of our environment
+ * to our values.
+ * @Note This method creates values resembling
+ * a flat environment
+ */
 Expression * ExpressionList::evaluate() {
 	clearValues();
 
@@ -37,12 +51,12 @@ Expression * ExpressionList::evaluate() {
 			environment.begin(); expressionIterator != environment.end();
 			++expressionIterator) {
 		std::list<Element*> values =
-				((*expressionIterator)->evaluate())->getValues();
+				(*((*expressionIterator)->evaluate())->getValues());
 
 		for (std::list<Element*>::const_iterator elementIterator =
 				values.begin(); elementIterator != values.end();
 				++elementIterator) {
-			getValues().push_back(new Element(**elementIterator));
+			getValues()->push_back(new Element(**elementIterator));
 			//Else it gets double deleted
 		}
 	}
@@ -54,6 +68,10 @@ std::string ExpressionList::getTag() {
 	return EXPRESSION_LIST;
 }
 
+/*
+ * @Note Iterate through our environment and
+ * let them print itself.
+ */
 std::string ExpressionList::toString() {
 	std::string response;
 

@@ -24,10 +24,18 @@ class Expression;
 #include "ExpressionLogical.h"
 #include "ExpressionHigher.h"
 
+/**
+ * @Public
+ * @Constructor
+ */
 ExpressionHigher::ExpressionHigher(ParserUtils *parserUtils) :
 		ExpressionLogical(parserUtils) {
 }
 
+/**
+ * @Public
+ * @Destructor
+ */
 ExpressionHigher::~ExpressionHigher() {
 }
 

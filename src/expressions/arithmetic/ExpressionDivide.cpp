@@ -24,10 +24,18 @@ class Expression;
 #include "ExpressionArithmetic.h"
 #include "ExpressionDivide.h"
 
+/**
+ * @Public
+ * @Constructor
+ */
 ExpressionDivide::ExpressionDivide(ParserUtils *parserUtils) :
 		ExpressionArithmetic(parserUtils) {
 }
 
+/**
+ * @Public
+ * @Destructor
+ */
 ExpressionDivide::~ExpressionDivide() {
 }
 

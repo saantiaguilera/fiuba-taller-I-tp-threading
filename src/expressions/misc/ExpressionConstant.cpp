@@ -39,7 +39,7 @@ ExpressionConstant::~ExpressionConstant() {
 Expression * ExpressionConstant::evaluate() {
 	clearValues();
 
-	getValues().push_back(new Element(this->value));
+	getValues()->push_back(new Element(this->value));
 
 	return this;
 }

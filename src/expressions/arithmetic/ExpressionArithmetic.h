@@ -10,6 +10,9 @@
 
 #include <string>
 
+/**
+ * Abstract expression for arithmetic operations
+ */
 class ExpressionArithmetic: public ExpressionCommon {
 private:
 	ExpressionArithmetic(const ExpressionArithmetic&);

@@ -23,16 +23,35 @@ class Expression;
 #include "../ExpressionCommon.h"
 #include "ExpressionLogical.h"
 
+//Posible return values for a logic expression
 #define LOGICAL_SUCCESS_RETURN "1"
 #define LOGICAL_FAILURE_RETURN "()"
 
+/**
+ * @Public
+ * @Constructor
+ */
 ExpressionLogical::ExpressionLogical(ParserUtils *parserUtils) :
 		ExpressionCommon(parserUtils) {
 }
 
+/**
+ * @Public
+ * @Destructor
+ */
 ExpressionLogical::~ExpressionLogical() {
 }
 
+/**
+ * @Note:
+ * Iterates through all the values and compares them
+ * among the others, invoking the operate(lv,rv) method.
+ * With just one failure the result is a fail.
+ *
+ * Eg. (= 4 (+ 2 2) 8)
+ * operate(4, 2+2) --> true.
+ * operate(2+2, 8) --> false.
+ */
 Expression * ExpressionLogical::evaluate() {
 	clearValues();
 
@@ -45,7 +64,7 @@ Expression * ExpressionLogical::evaluate() {
 			!fail && expressionIterator != environment.end();
 			++expressionIterator) {
 		std::list<Element*> values =
-				((*expressionIterator)->evaluate())->getValues();
+				(*((*expressionIterator)->evaluate())->getValues());
 
 		for (std::list<Element*>::const_iterator elementIterator =
 				values.begin(); elementIterator != values.end();
@@ -61,7 +80,7 @@ Expression * ExpressionLogical::evaluate() {
 	}
 
 	if (!fail)
-		getValues().push_back(new Element(LOGICAL_SUCCESS_RETURN));
+		getValues()->push_back(new Element(LOGICAL_SUCCESS_RETURN));
 
 	return this;
 }

@@ -52,9 +52,6 @@ ExpressionVariable::~ExpressionVariable() {
  * (But mutate does!!)
  */
 void ExpressionVariable::parseBody(std::string line) {
-	//TODO Clear in case it was previously parsed
-	clearEnvironment();
-
 	//Eg. "Var1 5" (thats the body of (setq var1 5))
 
 	//We can take advantage of its body

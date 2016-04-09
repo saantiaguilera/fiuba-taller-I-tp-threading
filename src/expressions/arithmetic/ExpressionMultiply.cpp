@@ -24,6 +24,10 @@ class Expression;
 #include "ExpressionArithmetic.h"
 #include "ExpressionMultiply.h"
 
+/**
+ * @Public
+ * @Constructor
+ */
 ExpressionMultiply::ExpressionMultiply(ParserUtils *parserUtils) :
 		ExpressionArithmetic(parserUtils) {
 }

@@ -24,12 +24,20 @@ class Expression;
 #include "../ExpressionCommon.h"
 #include "ExpressionIf.h"
 
+/**
+ * @Public
+ * @Constructor
+ */
 ExpressionIf::ExpressionIf(ParserUtils *parserUtils) :
 		ExpressionCommon(parserUtils), condition(NULL),
 		trueExpression(NULL), falseExpression(
 		NULL) {
 }
 
+/**
+ * @Public
+ * @Destructor
+ */
 ExpressionIf::~ExpressionIf() {
 	environment.clear();
 
@@ -49,6 +57,11 @@ ExpressionIf::~ExpressionIf() {
 	}
 }
 
+/**
+ * @Protected
+ * @Note Since we have a known order
+ * Lets take advantage of it.
+ */
 void ExpressionIf::injectExpression(Expression *expression) {
 	if (condition == NULL)
 		condition = expression;
@@ -58,11 +71,18 @@ void ExpressionIf::injectExpression(Expression *expression) {
 		falseExpression = expression;
 }
 
+/**
+ * @Public
+ * @Note: Evalutes the condition,
+ * and depending on its result
+ * it evaluates the trueCondition
+ * or the false one.
+ */
 Expression * ExpressionIf::evaluate() {
 	clearValues();
 
 	Expression* result =
-			((condition->evaluate())->getValues().size() > 0) ?
+			((condition->evaluate())->getValues()->size() > 0) ?
 					trueExpression : falseExpression;
 
 	result->evaluate();
@@ -79,7 +99,7 @@ std::string ExpressionIf::getTag() {
 
 std::string ExpressionIf::toString() {
 	Expression* result =
-			((condition->evaluate())->getValues().size() > 0) ?
+			((condition->evaluate())->getValues()->size() > 0) ?
 					trueExpression : falseExpression;
 
 	return result->toString();

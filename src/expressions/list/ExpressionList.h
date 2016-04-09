@@ -10,6 +10,9 @@
 
 #include <string>
 
+/**
+ * Expression that resembles the LIST
+ */
 class ExpressionList: public ExpressionCommon {
 private:
 	ExpressionList(const ExpressionList&);

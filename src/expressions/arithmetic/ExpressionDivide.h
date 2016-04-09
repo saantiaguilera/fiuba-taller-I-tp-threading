@@ -10,6 +10,9 @@
 
 #include <string>
 
+/**
+ * Expression that resembles DIVISION
+ */
 class ExpressionDivide: public ExpressionArithmetic {
 private:
 	ExpressionDivide(const ExpressionDivide&);

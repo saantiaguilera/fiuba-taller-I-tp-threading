@@ -10,6 +10,9 @@
 
 #include <string>
 
+/**
+ * Expression that resembles the =
+ */
 class ExpressionEquals: public ExpressionLogical {
 private:
 	ExpressionEquals(const ExpressionEquals&);

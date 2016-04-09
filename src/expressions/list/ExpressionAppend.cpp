@@ -23,13 +23,27 @@ class Expression;
 #include "../ExpressionCommon.h"
 #include "ExpressionAppend.h"
 
+/**
+ * @Public
+ * @Constructor
+ */
 ExpressionAppend::ExpressionAppend(ParserUtils *parserUtils) :
 		ExpressionCommon(parserUtils) {
 }
 
+/**
+ * @Public
+ * @Destructor
+ */
 ExpressionAppend::~ExpressionAppend() {
 }
 
+/**
+ * @Note Appends all the values of our environment
+ * to our values.
+ * @Note This method creates values resembling
+ * a flat environment
+ */
 Expression * ExpressionAppend::evaluate() {
 	clearValues();
 
@@ -37,12 +51,12 @@ Expression * ExpressionAppend::evaluate() {
 			environment.begin(); expressionIterator != environment.end();
 			++expressionIterator) {
 		std::list<Element*> values =
-				((*expressionIterator)->evaluate())->getValues();
+				(*((*expressionIterator)->evaluate())->getValues());
 
 		for (std::list<Element*>::const_iterator elementIterator =
 				values.begin(); elementIterator != values.end();
 				++elementIterator) {
-			getValues().push_back(new Element(**elementIterator));
+			getValues()->push_back(new Element(**elementIterator));
 			//Else it gets double deleted
 		}
 	}
@@ -54,6 +68,11 @@ std::string ExpressionAppend::getTag() {
 	return EXPRESSION_APPEND;
 }
 
+/*
+ * @Note Print all our environment
+ * (That should be flattened because of how
+ * evaluate works).
+ */
 std::string ExpressionAppend::toString() {
 	std::string response;
 

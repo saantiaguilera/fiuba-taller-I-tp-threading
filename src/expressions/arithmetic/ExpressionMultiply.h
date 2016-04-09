@@ -10,6 +10,9 @@
 
 #include <string>
 
+/**
+ * Expression that resembles MULTIPLICATION
+ */
 class ExpressionMultiply: public ExpressionArithmetic {
 private:
 	ExpressionMultiply(const ExpressionMultiply&);

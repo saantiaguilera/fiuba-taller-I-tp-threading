@@ -11,6 +11,9 @@
 #include <string>
 #include <list>
 
+/**
+ * Expression that resembles the CAR
+ */
 class ExpressionFrontList: public ExpressionCommon {
 private:
 	ExpressionFrontList(const ExpressionFrontList&);

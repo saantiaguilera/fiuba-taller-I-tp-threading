@@ -134,9 +134,9 @@ ParserUtils::~ParserUtils() {
 		}
 	}
 
-	cleanHistory();
-
 	cleanThreads();
+
+	cleanHistory();
 
 	delete runtimeVariables;
 	delete runtimeFunctions;
@@ -385,7 +385,7 @@ Expression * ParserUtils::parseExpression(std::string &line) {
 
 	try {
 		if (expression != NULL) { //Runtime expression
-			//Return a mutation ! TODO
+			//Return a mutation !
 			expression = ((ExpressionFunction*) expression)->mutate(stuff);
 		} else { //Local expression
 			expression = expressionFromFunction(function);

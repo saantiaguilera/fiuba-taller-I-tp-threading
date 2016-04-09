@@ -10,6 +10,9 @@
 
 #include <string>
 
+/**
+ * Expression that resembles the <
+ */
 class ExpressionLower: public ExpressionLogical {
 private:
 	ExpressionLower(const ExpressionLower&);

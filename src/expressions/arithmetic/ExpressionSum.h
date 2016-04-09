@@ -10,6 +10,9 @@
 
 #include <string>
 
+/**
+ * Expression that resembles SUM
+ */
 class ExpressionSum: public ExpressionArithmetic {
 private:
 	ExpressionSum(const ExpressionSum&);

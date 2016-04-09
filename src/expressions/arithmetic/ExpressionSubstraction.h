@@ -10,6 +10,9 @@
 
 #include <string>
 
+/**
+ * Expression that resembles SUBSTRACTION
+ */
 class ExpressionSubstraction: public ExpressionArithmetic {
 private:
 	ExpressionSubstraction(const ExpressionSubstraction&);

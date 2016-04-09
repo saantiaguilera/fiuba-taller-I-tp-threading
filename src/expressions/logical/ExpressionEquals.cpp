@@ -24,10 +24,18 @@ class Expression;
 #include "ExpressionLogical.h"
 #include "ExpressionEquals.h"
 
+/**
+ * @Public
+ * @Constructor
+ */
 ExpressionEquals::ExpressionEquals(ParserUtils *parserUtils) :
 		ExpressionLogical(parserUtils) {
 }
 
+/**
+ * @Public
+ * @Destructor
+ */
 ExpressionEquals::~ExpressionEquals() {
 }
 

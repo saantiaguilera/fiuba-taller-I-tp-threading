@@ -10,6 +10,9 @@
 
 #include <string>
 
+/**
+ * Expression that resembles the APPEND
+ */
 class ExpressionAppend: public ExpressionCommon {
 private:
 	ExpressionAppend(const ExpressionAppend&);
