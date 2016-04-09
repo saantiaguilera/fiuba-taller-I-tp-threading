@@ -18,6 +18,8 @@
 
 class Expression;
 
+#include "Mutex.h"
+
 #include "../ParserUtils.h"
 #include "../Expression.h"
 

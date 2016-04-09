@@ -15,6 +15,8 @@
 
 class Expression;
 
+#include "../../threading/Mutex.h"
+
 #include "../../ParserUtils.h"
 #include "../../Expression.h"
 #include "ExpressionConstant.h"

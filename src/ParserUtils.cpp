@@ -19,6 +19,8 @@
 
 class Expression;
 
+#include "threading/Mutex.h"
+
 #include "ParserUtils.h"
 
 #include "Expression.h"
@@ -45,6 +47,10 @@ class Expression;
 #include "expressions/runtime/ExpressionVariable.h"
 #include "expressions/runtime/ExpressionSync.h"
 #include "expressions/list/ExpressionAppend.h"
+
+#include "threading/ReentrantLock.h"
+#include "threading/Thread.h"
+#include "threading/ParserWorker.h"
 
 /**
  * Inner class for using as predicative

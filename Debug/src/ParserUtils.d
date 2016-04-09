@@ -1,5 +1,6 @@
-src/ParserUtils.o: ../src/ParserUtils.cpp ../src/ParserUtils.h \
- ../src/Expression.h ../src/expressions/ExpressionCommon.h \
+src/ParserUtils.o: ../src/ParserUtils.cpp ../src/threading/Mutex.h \
+ ../src/ParserUtils.h ../src/Expression.h \
+ ../src/expressions/ExpressionCommon.h \
  ../src/expressions/logical/ExpressionLogical.h \
  ../src/expressions/arithmetic/ExpressionArithmetic.h \
  ../src/expressions/arithmetic/ExpressionSum.h \
@@ -18,7 +19,11 @@ src/ParserUtils.o: ../src/ParserUtils.cpp ../src/ParserUtils.h \
  ../src/expressions/runtime/ExpressionFunction.h \
  ../src/expressions/runtime/ExpressionVariable.h \
  ../src/expressions/runtime/ExpressionSync.h \
- ../src/expressions/list/ExpressionAppend.h
+ ../src/expressions/list/ExpressionAppend.h \
+ ../src/threading/ReentrantLock.h ../src/threading/Thread.h \
+ ../src/threading/ParserWorker.h
+
+../src/threading/Mutex.h:
 
 ../src/ParserUtils.h:
 
@@ -63,3 +68,9 @@ src/ParserUtils.o: ../src/ParserUtils.cpp ../src/ParserUtils.h \
 ../src/expressions/runtime/ExpressionSync.h:
 
 ../src/expressions/list/ExpressionAppend.h:
+
+../src/threading/ReentrantLock.h:
+
+../src/threading/Thread.h:
+
+../src/threading/ParserWorker.h:

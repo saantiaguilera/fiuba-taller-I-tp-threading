@@ -18,6 +18,8 @@ const std::string EXCEPTION_NO_BODY = "NoBody";
 
 class ParserUtils {
 private:
+	Mutex mutex;
+
 	std::map<std::string, Expression*> runtimeVariables;
 	std::map<std::string, Expression*> runtimeFunctions;
 	std::list<Expression*> history;
