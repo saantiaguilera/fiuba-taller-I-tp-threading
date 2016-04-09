@@ -30,16 +30,16 @@ Expression * ExpressionTailList::evaluate() {
 	//CDR
 	bool start = true;
 
-	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
-		std::list<Expression*>::const_iterator innerExpressionIterator = ((*expressionIterator)->getEnvironment()).begin();
+	for (std::list<Expression*>::iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
+		std::list<Expression*>::iterator innerExpressionIterator = ((*expressionIterator)->getEnvironment()).begin();
 
 		if (*innerExpressionIterator != NULL) {
 			std::list<Element*> values = (*innerExpressionIterator)->evaluate()->getValues();
 
 			for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
-				if (start)
+				if (start) {
 					start = false;
-				else {
+				} else {
 					getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
 			//		std::cout << "Getting element from " << getTag() << ":: " << **elementIterator << std::endl;
 				}

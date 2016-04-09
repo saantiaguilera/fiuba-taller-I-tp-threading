@@ -28,19 +28,31 @@ ExpressionFrontList::~ExpressionFrontList() {}
 
 Expression * ExpressionFrontList::evaluate() {
 	clearValues();
+	bool done = false;
 	//CAR
-	std::list<Expression*>::const_iterator expressionIterator = environment.begin();
+	std::list<Expression*>::iterator expressionIterator = environment.begin();
 
 	if(expressionIterator != environment.end()) {
-		std::list<Expression*>::const_iterator innerExpressionIterator = ((*expressionIterator)->evaluate()->getEnvironment()).begin();
+		std::list<Expression*> innerEnvironment = ((*expressionIterator)->evaluate()->getEnvironment());
 
-		if (*innerExpressionIterator != NULL) {
-			std::list<Element*> values = (*innerExpressionIterator)->evaluate()->getValues();
+		for (std::list<Expression*>::iterator innerIterator = innerEnvironment.begin() ;
+				innerIterator != innerEnvironment.end() ; ++innerIterator) {
 
-			for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
-				getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
-			//	std::cout << "Getting element from " << getTag() << ":: " << **elementIterator << std::endl;
+			if (*innerIterator != NULL) {
+				if (done) {
+					innerIterator = innerEnvironment.erase(innerIterator);
+				} else {
+					done = true;
+
+					std::list<Element*> values = (*innerIterator)->evaluate()->getValues();
+
+					for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
+						getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
+					//	std::cout << "Getting element from " << getTag() << ":: " << **elementIterator << std::endl;
+					}
+				}
 			}
+
 		}
 	}
 
