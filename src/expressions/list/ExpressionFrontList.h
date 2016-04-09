@@ -13,11 +13,16 @@ class ExpressionFrontList : public ExpressionCommon {
 		ExpressionFrontList(const ExpressionFrontList&);
 		ExpressionFrontList& operator=(const ExpressionFrontList&);
 
+		std::list<Expression*> flattenedEnvironment;
+
+		void appendToValues();
+
 	public:
 		ExpressionFrontList(ParserUtils *parserUtils);
 		virtual ~ExpressionFrontList();
 		virtual std::string getTag(); //known method ? NULL : runtime name tag
 		virtual Expression * evaluate();
+		virtual std::list<Expression*> * getEnvironment();
 		virtual std::string toString();
 };
 

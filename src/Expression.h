@@ -41,7 +41,7 @@ class Expression {
 		virtual void parseBody(std::string line) = 0;
 		virtual Expression * evaluate() = 0;
 		void setEnvironment(std::list<Expression*> environment);
-		std::list<Expression*> getEnvironment();
+		virtual std::list<Expression*> * getEnvironment();
 		virtual std::string toString();
 		/**
 		 * if we have

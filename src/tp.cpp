@@ -19,7 +19,7 @@ class Expression;
 int main() {
 	ParserUtils parser;
 	std::string line;
-
+/*
 	while (std::getline(std::cin, line)) {
 	    try {
 	    	parser.run(line);
@@ -27,14 +27,14 @@ int main() {
 			std::cout << "ERROR: " << line << std::endl;
 		}
 	}
+*/
 
-/*
-	std::string a = "(print (cdr (car (list (list 1 2 3)))))";
+	std::string a = "(print (append (list 1 2) (cdr (cdr (list 1 2 3 4 5 6)))))";
 	try {
 		parser.run(a);
 	} catch (int exception) {
 		std::cout << "ERROR: " << a << std::endl;
 	}
-*/
+
 	return 0;
 }

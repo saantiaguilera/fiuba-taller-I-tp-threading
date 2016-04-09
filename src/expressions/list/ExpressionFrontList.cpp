@@ -27,36 +27,58 @@ ExpressionFrontList::ExpressionFrontList(ParserUtils *parserUtils) : ExpressionC
 ExpressionFrontList::~ExpressionFrontList() {}
 
 Expression * ExpressionFrontList::evaluate() {
+	std::cout << getTag() << "::evaluate" << std::endl;
 	clearValues();
 	bool done = false;
 	//CAR
-	std::list<Expression*>::iterator expressionIterator = environment.begin();
 
-	if(expressionIterator != environment.end()) {
-		std::list<Expression*> innerEnvironment = ((*expressionIterator)->evaluate()->getEnvironment());
+	flattenedEnvironment.clear();
 
-		for (std::list<Expression*>::iterator innerIterator = innerEnvironment.begin() ;
-				innerIterator != innerEnvironment.end() ; ++innerIterator) {
+	std::list<Expression*> environmentOfInner = *((*environment.begin())->evaluate()->getEnvironment());
 
-			if (*innerIterator != NULL) {
-				if (done) {
-					innerIterator = innerEnvironment.erase(innerIterator);
-				} else {
-					done = true;
+	for (std::list<Expression*>::iterator innerIterator = environmentOfInner.begin() ;
+			innerIterator != environmentOfInner.end() ;) {
 
-					std::list<Element*> values = (*innerIterator)->evaluate()->getValues();
+		if (*innerIterator != NULL) {
+			if (done) {
+				std::cout << "SKIPPING AN EXPRESSION OF TAG " << (*innerIterator)->getTag() << std::endl;
+			} else {
+				std::cout << "Getting element from " << getTag() << ":: " << std::endl;
+				done = true;
 
-					for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
-						getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
-					//	std::cout << "Getting element from " << getTag() << ":: " << **elementIterator << std::endl;
-					}
-				}
+				flattenedEnvironment.push_back(*innerIterator);
+
+				++innerIterator;
 			}
+		} else ++innerIterator;
 
-		}
 	}
 
+	appendToValues();
+
 	return this;
+}
+
+void ExpressionFrontList::appendToValues() {
+	std::cout << getTag() << "::appendToValues" << std::endl;
+
+	clearValues();
+
+	for (std::list<Expression*>::iterator iterator = flattenedEnvironment.begin() ;
+				iterator != flattenedEnvironment.end() ; ++iterator) {
+
+		std::list<Element*> iteratorValues = (*iterator)->evaluate()->getValues();
+
+		std::list<Element*>::const_iterator end = iteratorValues.end();
+		for (std::list<Element*>::const_iterator elementIterator = iteratorValues.begin() ; elementIterator != end; ++elementIterator) {
+			values.push_back(new Element(**elementIterator));
+		}
+
+	}
+}
+
+std::list<Expression*> * ExpressionFrontList::getEnvironment() {
+	return &flattenedEnvironment;
 }
 
 std::string ExpressionFrontList::getTag() {
@@ -64,6 +86,7 @@ std::string ExpressionFrontList::getTag() {
 }
 
 std::string ExpressionFrontList::toString() {
+	std::cout << getTag() << "::toString" << std::endl;
 	std::string response;
 
 	if (values.size() != 1)

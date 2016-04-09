@@ -31,8 +31,10 @@ Expression * ExpressionList::evaluate() {
 	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
 		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
 
-		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator)
+		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
+			std::cout << "LIST PUSHING ELEMENT:: " << **elementIterator << std::endl;
 			getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
+		}
 	}
 
 	return this;

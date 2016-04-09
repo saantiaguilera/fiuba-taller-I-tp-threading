@@ -26,35 +26,60 @@ ExpressionTailList::ExpressionTailList(ParserUtils *parserUtils) : ExpressionCom
 ExpressionTailList::~ExpressionTailList() {}
 
 Expression * ExpressionTailList::evaluate() {
+	std::cout << getTag() << "::evaluate" << std::endl;
+
 	clearValues();
 	//CDR
 	bool start = true;
 
-	for (std::list<Expression*>::iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
-		std::list<Expression*>::iterator innerExpressionIterator = ((*expressionIterator)->getEnvironment()).begin();
+	flattenedEnvironment.clear();
 
-		if (*innerExpressionIterator != NULL) {
-			std::list<Element*> values = (*innerExpressionIterator)->evaluate()->getValues();
+	std::list<Expression*> environmentOfInner = *((*environment.begin())->evaluate()->getEnvironment());
 
-			for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
-				if (start) {
-					start = false;
-				} else {
-					getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
-			//		std::cout << "Getting element from " << getTag() << ":: " << **elementIterator << std::endl;
-				}
-			}
+	for (std::list<Expression*>::iterator innerIterator = environmentOfInner.begin(); innerIterator != environmentOfInner.end(); ++innerIterator) {
+		if (start) {
+			std::cout << "DELETING AN EXPRESSION OF TAG " << (*innerIterator)->getTag() << std::endl;
+			start = false;
+		} else {
+			flattenedEnvironment.push_back(*innerIterator);
+			std::cout << "Getting element from " << getTag() << std::endl;
 		}
+
 	}
 
+	appendToValues();
+
 	return this;
+}
+
+void ExpressionTailList::appendToValues() {
+	std::cout << getTag() << "::appendToValues" << std::endl;
+
+	clearValues();
+
+	for (std::list<Expression*>::iterator iterator = flattenedEnvironment.begin() ;
+				iterator != flattenedEnvironment.end() ; ++iterator) {
+
+		std::list<Element*> iteratorValues = (*iterator)->evaluate()->getValues();
+
+		std::list<Element*>::const_iterator end = iteratorValues.end();
+		for (std::list<Element*>::const_iterator elementIterator = iteratorValues.begin() ; elementIterator != end; ++elementIterator) {
+			values.push_back(new Element(**elementIterator));
+		}
+
+	}
 }
 
 std::string ExpressionTailList::getTag() {
 	return "Cdr";
 }
 
+std::list<Expression*> * ExpressionTailList::getEnvironment() {
+	return &flattenedEnvironment;
+}
+
 std::string ExpressionTailList::toString() {
+	std::cout << getTag() << "::toString" << std::endl;
 	std::string response;
 
 	if (values.size() != 1)
