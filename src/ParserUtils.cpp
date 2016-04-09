@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <map>
+#include <stdexcept>
 
 class Expression;
 
@@ -148,7 +149,7 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 			|| string.find('"') != std::string::npos)
 		return new ExpressionConstant(this); //constant, lets say 4 or "hello"
 	else
-		throw 2;
+		throw std::logic_error(EXCEPTION_BAD_FUNCTION);
 }
 
 Expression * ParserUtils::expressionFromFunction(std::string &line) {
@@ -173,7 +174,7 @@ std::string ParserUtils::bodyToString(std::string &line) {
 		return line.substr(start,
 				end - line.find(function) - function.length() - 1);
 
-	throw -100; //==> its a constant or a literal
+	throw std::logic_error(EXCEPTION_NO_BODY); //==> its a constant or a literal
 }
 
 std::string ParserUtils::functionToString(std::string line) {
@@ -199,8 +200,8 @@ Expression * ParserUtils::parseExpression(std::string &line) {
 	std::string stuff;
 	try {
 		stuff = bodyToString(line);
-	} catch (int exception) {
-		if (exception == -100)
+	} catch (const std::logic_error &exception) {
+		if (exception.what() == EXCEPTION_NO_BODY)
 			stuff = function;
 	}
 
@@ -211,7 +212,7 @@ Expression * ParserUtils::parseExpression(std::string &line) {
 			expression = expressionFromFunction(function);
 			expression->parseBody(stuff);
 		}
-	} catch (int exception) {
+	} catch (const std::logic_error &exception) {
 		delete expression;
 		throw exception;
 	}

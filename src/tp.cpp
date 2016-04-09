@@ -10,6 +10,7 @@
 #include <string>
 #include <list>
 #include <map>
+#include <stdexcept>
 
 class Expression;
 
@@ -28,9 +29,11 @@ int main(int argc, char *argv[]) {
 	while (std::getline(std::cin, line)) {
 		try {
 			parser.run(line);
-		} catch (int exception) {
-			std::cout << "ERROR: " << line << std::endl;
-			return 2;
+		} catch (const std::logic_error &exception) {
+			if (exception.what() == EXCEPTION_BAD_FUNCTION) {
+				std::cout << "ERROR: " << line << std::endl;
+				return 2;
+			}
 		}
 	}
 

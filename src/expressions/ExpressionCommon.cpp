@@ -14,6 +14,7 @@
 #include <cctype>
 #include <list>
 #include <map>
+#include <stdexcept>
 
 class Expression;
 
@@ -60,7 +61,7 @@ void ExpressionCommon::parseInnerExpression(std::string &temp, int startPoint) {
 	}
 
 	if (!found || end == -1 || start == -1)
-		throw 2;
+		throw std::logic_error(EXCEPTION_BAD_FUNCTION);
 }
 
 void ExpressionCommon::injectExpression(Expression *expression) {

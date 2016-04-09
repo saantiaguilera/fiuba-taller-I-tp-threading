@@ -8,6 +8,10 @@
 #ifndef PARSERUTILS_H_
 #define PARSERUTILS_H_
 
+//This should be objects. But I lack of time :D
+#define EXCEPTION_BAD_FUNCTION "BadFunction"
+#define EXCEPTION_NO_BODY "NoBody"
+
 #include <map>
 #include <string>
 #include <list>
