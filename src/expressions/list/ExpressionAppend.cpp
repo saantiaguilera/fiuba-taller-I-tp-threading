@@ -5,7 +5,6 @@
  *      Author: santiago
  */
 
-
 #include <string>
 #include <cstdio>
 #include <stdlib.h>
@@ -61,7 +60,6 @@ std::string ExpressionAppend::toString() {
 	std::list<Element*>::const_iterator end = values.end();
 	for (std::list<Element*>::const_iterator elementIterator = values.begin();
 			elementIterator != end;) {
-
 		response += (**elementIterator);
 
 		if (++elementIterator != end)

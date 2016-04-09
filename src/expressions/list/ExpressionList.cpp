@@ -58,9 +58,8 @@ std::string ExpressionList::toString() {
 	response = "(";
 
 	std::list<Expression*>::const_iterator end = environment.end();
-	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin();
-			expressionIterator != end;) {
-
+	for (std::list<Expression*>::const_iterator expressionIterator =
+			environment.begin(); expressionIterator != end;) {
 		response += (*expressionIterator)->toString();
 
 		if (++expressionIterator != end)
