@@ -25,8 +25,22 @@ ExpressionTailList::ExpressionTailList(ParserUtils *parserUtils) : ExpressionCom
 
 ExpressionTailList::~ExpressionTailList() {}
 
+void ExpressionTailList::parseEvaluation(Expression *expression) {
+	if (expression->getTag() == "Const") {
+		flattenedEnvironment.push_back(expression);
+	} else {
+		std::list<Expression*> expressionEnvironment = *(expression->evaluate()->getEnvironment());
+
+		for (std::list<Expression*>::iterator iterator = expressionEnvironment.begin() ;
+				iterator != expressionEnvironment.end() ; ++iterator) {
+			flattenedEnvironment.push_back(*iterator);
+			std::cout << "Getting element from " << getTag() << std::endl;
+		}
+	}
+}
+
 Expression * ExpressionTailList::evaluate() {
-	std::cout << getTag() << "::evaluate" << std::endl;
+	//std::cout << getTag() << "::evaluate" << std::endl;
 
 	clearValues();
 	//CDR
@@ -38,13 +52,11 @@ Expression * ExpressionTailList::evaluate() {
 
 	for (std::list<Expression*>::iterator innerIterator = environmentOfInner.begin(); innerIterator != environmentOfInner.end(); ++innerIterator) {
 		if (start) {
-			std::cout << "DELETING AN EXPRESSION OF TAG " << (*innerIterator)->getTag() << std::endl;
+		//	std::cout << "DELETING AN EXPRESSION OF TAG " << (*innerIterator)->getTag() << std::endl;
 			start = false;
 		} else {
-			flattenedEnvironment.push_back(*innerIterator);
-			std::cout << "Getting element from " << getTag() << std::endl;
+			parseEvaluation(*innerIterator);
 		}
-
 	}
 
 	appendToValues();
@@ -53,7 +65,7 @@ Expression * ExpressionTailList::evaluate() {
 }
 
 void ExpressionTailList::appendToValues() {
-	std::cout << getTag() << "::appendToValues" << std::endl;
+	//std::cout << getTag() << "::appendToValues" << std::endl;
 
 	clearValues();
 
@@ -79,7 +91,7 @@ std::list<Expression*> * ExpressionTailList::getEnvironment() {
 }
 
 std::string ExpressionTailList::toString() {
-	std::cout << getTag() << "::toString" << std::endl;
+//	std::cout << getTag() << "::toString" << std::endl;
 	std::string response;
 
 	if (values.size() != 1)

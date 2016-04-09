@@ -16,6 +16,8 @@ class ExpressionTailList : public ExpressionCommon {
 		std::list<Expression*> flattenedEnvironment;
 
 		void appendToValues();
+		void parseEvaluation(Expression *expression);
+
 	public:
 		ExpressionTailList(ParserUtils *parserUtils);
 		virtual ~ExpressionTailList();

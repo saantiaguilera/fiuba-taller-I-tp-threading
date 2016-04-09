@@ -26,6 +26,8 @@ ExpressionIf::ExpressionIf(ParserUtils *parserUtils) : ExpressionCommon(parserUt
 		trueExpression(NULL) , falseExpression(NULL) { }
 
 ExpressionIf::~ExpressionIf() {
+	environment.clear();
+
 	if (condition != NULL) {
 		delete condition;
 		condition = NULL;
@@ -57,6 +59,9 @@ Expression * ExpressionIf::evaluate() {
 	Expression* result = ((condition->evaluate())->getValues().size() > 0) ? trueExpression : falseExpression;
 
 	result->evaluate();
+
+	environment.clear();
+	environment.push_back(result);
 
 	return result;
 }

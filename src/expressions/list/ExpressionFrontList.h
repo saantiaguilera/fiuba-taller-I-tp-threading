@@ -16,6 +16,7 @@ class ExpressionFrontList : public ExpressionCommon {
 		std::list<Expression*> flattenedEnvironment;
 
 		void appendToValues();
+		void parseEvaluation(Expression *expression);
 
 	public:
 		ExpressionFrontList(ParserUtils *parserUtils);

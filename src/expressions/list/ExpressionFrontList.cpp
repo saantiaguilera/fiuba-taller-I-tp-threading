@@ -26,8 +26,22 @@ ExpressionFrontList::ExpressionFrontList(ParserUtils *parserUtils) : ExpressionC
 
 ExpressionFrontList::~ExpressionFrontList() {}
 
+void ExpressionFrontList::parseEvaluation(Expression *expression) {
+	if (expression->getTag() == "Const") {
+		flattenedEnvironment.push_back(expression);
+	} else {
+		std::list<Expression*> expressionEnvironment = *(expression->evaluate()->getEnvironment());
+
+		for (std::list<Expression*>::iterator iterator = expressionEnvironment.begin() ;
+				iterator != expressionEnvironment.end() ; ++iterator) {
+			flattenedEnvironment.push_back(*iterator);
+	//		std::cout << "Getting element from " << getTag() << std::endl;
+		}
+	}
+}
+
 Expression * ExpressionFrontList::evaluate() {
-	std::cout << getTag() << "::evaluate" << std::endl;
+//	std::cout << getTag() << "::evaluate" << std::endl;
 	clearValues();
 	bool done = false;
 	//CAR
@@ -37,20 +51,16 @@ Expression * ExpressionFrontList::evaluate() {
 	std::list<Expression*> environmentOfInner = *((*environment.begin())->evaluate()->getEnvironment());
 
 	for (std::list<Expression*>::iterator innerIterator = environmentOfInner.begin() ;
-			innerIterator != environmentOfInner.end() ;) {
+			innerIterator != environmentOfInner.end() ; ++innerIterator) {
 
 		if (*innerIterator != NULL) {
 			if (done) {
-				std::cout << "SKIPPING AN EXPRESSION OF TAG " << (*innerIterator)->getTag() << std::endl;
+	//			std::cout << "SKIPPING AN EXPRESSION OF TAG " << (*innerIterator)->getTag() << std::endl;
 			} else {
-				std::cout << "Getting element from " << getTag() << ":: " << std::endl;
 				done = true;
-
-				flattenedEnvironment.push_back(*innerIterator);
-
-				++innerIterator;
+				parseEvaluation(*innerIterator);
 			}
-		} else ++innerIterator;
+		}
 
 	}
 
@@ -60,7 +70,7 @@ Expression * ExpressionFrontList::evaluate() {
 }
 
 void ExpressionFrontList::appendToValues() {
-	std::cout << getTag() << "::appendToValues" << std::endl;
+	//std::cout << getTag() << "::appendToValues" << std::endl;
 
 	clearValues();
 
@@ -86,7 +96,7 @@ std::string ExpressionFrontList::getTag() {
 }
 
 std::string ExpressionFrontList::toString() {
-	std::cout << getTag() << "::toString" << std::endl;
+	//std::cout << getTag() << "::toString" << std::endl;
 	std::string response;
 
 	if (values.size() != 1)
