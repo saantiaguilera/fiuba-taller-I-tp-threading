@@ -1,29 +1,29 @@
-==00:00:00:00.000 11394== Memcheck, a memory error detector
-==00:00:00:00.000 11394== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
-==00:00:00:00.000 11394== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
-==00:00:00:00.000 11394== Command: ./tp
-==00:00:00:00.000 11394== Parent PID: 5304
-==00:00:00:00.000 11394== 
-==00:00:00:00.843 11394== 
-==00:00:00:00.843 11394== FILE DESCRIPTORS: 4 open at exit.
-==00:00:00:00.843 11394== Open file descriptor 3: /home/santiago/workspace/tp/Debug/ValgrindOut
-==00:00:00:00.843 11394==    <inherited from parent>
-==00:00:00:00.843 11394== 
-==00:00:00:00.843 11394== Open file descriptor 2: /dev/pts/10
-==00:00:00:00.843 11394==    <inherited from parent>
-==00:00:00:00.843 11394== 
-==00:00:00:00.843 11394== Open file descriptor 1: /dev/pts/10
-==00:00:00:00.843 11394==    <inherited from parent>
-==00:00:00:00.843 11394== 
-==00:00:00:00.843 11394== Open file descriptor 0: /home/santiago/workspace/tp/Debug/Invalid
-==00:00:00:00.843 11394==    <inherited from parent>
-==00:00:00:00.843 11394== 
-==00:00:00:00.843 11394== 
-==00:00:00:00.843 11394== HEAP SUMMARY:
-==00:00:00:00.843 11394==     in use at exit: 0 bytes in 0 blocks
-==00:00:00:00.843 11394==   total heap usage: 88 allocs, 88 frees, 5,136 bytes allocated
-==00:00:00:00.843 11394== 
-==00:00:00:00.843 11394== All heap blocks were freed -- no leaks are possible
-==00:00:00:00.843 11394== 
-==00:00:00:00.843 11394== For counts of detected and suppressed errors, rerun with: -v
-==00:00:00:00.843 11394== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==00:00:00:00.000 16018== Memcheck, a memory error detector
+==00:00:00:00.000 16018== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==00:00:00:00.000 16018== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==00:00:00:00.000 16018== Command: ./tp
+==00:00:00:00.000 16018== Parent PID: 5304
+==00:00:00:00.000 16018== 
+==00:00:00:01.072 16018== 
+==00:00:00:01.072 16018== FILE DESCRIPTORS: 4 open at exit.
+==00:00:00:01.072 16018== Open file descriptor 3: /home/santiago/workspace/tp/Debug/ValgrindOut
+==00:00:00:01.072 16018==    <inherited from parent>
+==00:00:00:01.072 16018== 
+==00:00:00:01.072 16018== Open file descriptor 2: /dev/pts/10
+==00:00:00:01.072 16018==    <inherited from parent>
+==00:00:00:01.072 16018== 
+==00:00:00:01.072 16018== Open file descriptor 1: /dev/pts/10
+==00:00:00:01.072 16018==    <inherited from parent>
+==00:00:00:01.072 16018== 
+==00:00:00:01.072 16018== Open file descriptor 0: /home/santiago/workspace/tp/Debug/Definitions
+==00:00:00:01.072 16018==    <inherited from parent>
+==00:00:00:01.072 16018== 
+==00:00:00:01.072 16018== 
+==00:00:00:01.072 16018== HEAP SUMMARY:
+==00:00:00:01.072 16018==     in use at exit: 0 bytes in 0 blocks
+==00:00:00:01.072 16018==   total heap usage: 1,433 allocs, 1,433 frees, 57,301 bytes allocated
+==00:00:00:01.072 16018== 
+==00:00:00:01.072 16018== All heap blocks were freed -- no leaks are possible
+==00:00:00:01.072 16018== 
+==00:00:00:01.072 16018== For counts of detected and suppressed errors, rerun with: -v
+==00:00:00:01.072 16018== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

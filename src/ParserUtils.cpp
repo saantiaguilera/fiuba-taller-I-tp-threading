@@ -102,6 +102,7 @@ ParserUtils::~ParserUtils() {
 }
 
 void ParserUtils::run(std::string &line) {
+	//This is done in the main thread, because we need to catch sync
 	Expression *expression = parseExpression(line);
 
 	//Because both are in runtime stuff, they

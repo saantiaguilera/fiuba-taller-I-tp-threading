@@ -17,7 +17,7 @@ class Expression;
 #include "ParserUtils.h"
 #include "Expression.h"
 
-#define ERROR_ARGUMENTS "ERROR: argumentos"
+#define ERROR_TYPE_ARGUMENTS "argumentos"
 #define ERROR_GENERIC "ERROR: "
 
 #define STATE_SUCCESS 0
@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
 	std::string line;
 
 	if (argc > 1) {
-		std::cout << ERROR_ARGUMENTS << std::endl;
+		std::cout << ERROR_GENERIC << ERROR_TYPE_ARGUMENTS << std::endl;
 		return STATE_WRONG_ARGS;
 	}
 
