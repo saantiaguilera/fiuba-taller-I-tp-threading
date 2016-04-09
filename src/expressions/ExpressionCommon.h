@@ -15,6 +15,14 @@ const char SYMBOL_QUOTATIONS = '"';
 
 #include <string>
 
+/**
+ * Abstract class that inherits Expression
+ * This class resembles a common expression being able to:
+ * - Parse the default body (Not setq/defun stuff)
+ * (Can parse inner expressions)
+ * - Inject the expression to a particular place.
+ * (By default its the environment, but its overridable)
+ */
 class ExpressionCommon: public Expression {
 private:
 	ExpressionCommon(const ExpressionCommon&);

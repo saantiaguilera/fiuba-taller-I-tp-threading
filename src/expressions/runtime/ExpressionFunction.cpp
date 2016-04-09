@@ -23,30 +23,52 @@ class Expression;
 #include "../../Expression.h"
 #include "ExpressionFunction.h"
 
+/**
+ * @Public
+ * @Constructor
+ */
 ExpressionFunction::ExpressionFunction(ParserUtils *parserUtils) :
 		Expression(parserUtils) {
 }
 
+/**
+ * @Public
+ * @Destructor
+ */
 ExpressionFunction::~ExpressionFunction() {
 }
 
+/**
+ * @Public
+ *
+ * @Note this just saves its body as raw texts.
+ * It never creates a function on its environment
+ */
 void ExpressionFunction::parseBody(std::string line) {
 	clearEnvironment();
 
-	//eg (setq var1 5)
+	//eg "op (list op 1)" --> from: (defun op (list op 1))
 	std::istringstream iss(line);
 	iss >> functionName; // "op1"
-	iss >> variableName; // "(lista)"
+	iss >> variableName; // "list "
 
 	//variableName has (). REMOVE EM'
 	variableName = variableName.substr(1, variableName.length() - 2);
 
-	getline(iss, body); // " 5"
-	body = body.substr(1); // "5"
+	getline(iss, body); // " op 1"
+	body = body.substr(1); // "op 1"
 
 	parserUtils->appendRuntimeFunction(functionName, this);
 }
 
+/**
+ * @Public
+ *
+ * @Note: Mutates from this Defun expression
+ * another expression of the body but the var
+ * changed for a value
+ *
+ */
 Expression * ExpressionFunction::mutate(std::string value) {
 	clearEnvironment();
 

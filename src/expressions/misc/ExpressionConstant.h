@@ -10,6 +10,10 @@
 
 #include <string>
 
+/**
+ * Expression that resembles a CONSTANT.
+ * This can be either a Literal or a Number.
+ */
 class ExpressionConstant: public Expression {
 private:
 	ExpressionConstant(const ExpressionConstant&);

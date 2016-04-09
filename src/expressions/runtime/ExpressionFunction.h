@@ -10,6 +10,16 @@
 
 #include <string>
 
+/**
+ * Expression that resembles the DEFUN
+ *
+ * @Note: This defun doesnt feature recursivness
+ * for itself (yes for others or even
+ * different runtime expressions inside of it)
+ *
+ * This means:
+ * (defun op (ENV) (* op (cdr ENV))) --> NO.
+ */
 class ExpressionFunction: public Expression {
 private:
 	ExpressionFunction(const ExpressionFunction&);

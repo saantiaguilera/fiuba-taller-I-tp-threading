@@ -10,6 +10,9 @@
 
 #include <string>
 
+/**
+ * Expression that resembles the PRINT
+ */
 class ExpressionPrint: public ExpressionCommon {
 private:
 	ExpressionPrint(const ExpressionPrint&);

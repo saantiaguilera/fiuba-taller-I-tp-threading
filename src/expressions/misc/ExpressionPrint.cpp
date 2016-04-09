@@ -24,13 +24,24 @@ class Expression;
 #include "../ExpressionCommon.h"
 #include "ExpressionPrint.h"
 
+/**
+ * @Public
+ * @Constructor
+ */
 ExpressionPrint::ExpressionPrint(ParserUtils *parserUtils) :
 		ExpressionCommon(parserUtils) {
 }
 
+/**
+ * @Public
+ * @Destructor
+ */
 ExpressionPrint::~ExpressionPrint() {
 }
 
+/**
+ * @Note Prints all that contains.
+ */
 Expression * ExpressionPrint::evaluate() {
 	clearValues();
 
@@ -44,6 +55,7 @@ Expression * ExpressionPrint::evaluate() {
 	std::list<Expression*>::const_iterator end = environment.end();
 	for (std::list<Expression*>::const_iterator expressionIterator =
 			environment.begin(); expressionIterator != end;) {
+		//Let the own environment print itself
 		std::cout << ((*expressionIterator)->evaluate())->toString();
 
 		//Space the values unless its the last
@@ -51,6 +63,7 @@ Expression * ExpressionPrint::evaluate() {
 			std::cout << SYMBOL_SPACE;
 	}
 
+	//Append a \n at the end
 	std::cout << std::endl;
 
 	return this;

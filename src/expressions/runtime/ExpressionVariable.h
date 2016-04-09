@@ -10,6 +10,9 @@
 
 #include <string>
 
+/**
+ * Expression that resembles the SETQ
+ */
 class ExpressionVariable: public ExpressionCommon {
 private:
 	ExpressionVariable(const ExpressionVariable&);

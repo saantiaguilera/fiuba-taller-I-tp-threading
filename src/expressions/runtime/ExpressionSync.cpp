@@ -24,13 +24,25 @@ class Expression;
 #include "../../Expression.h"
 #include "ExpressionSync.h"
 
+/**
+ * @Public
+ * @Constructor
+ */
 ExpressionSync::ExpressionSync(ParserUtils *parserUtils) :
 		Expression(parserUtils) {
 }
 
+/**
+ * @Public
+ * @Destructor
+ */
 ExpressionSync::~ExpressionSync() {
 }
 
+/**
+ * @Note: Does nothing
+ * Sync doesnt have a body
+ */
 void ExpressionSync::parseBody(std::string line) {
 }
 

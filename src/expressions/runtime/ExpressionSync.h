@@ -10,6 +10,9 @@
 
 #include <string>
 
+/**
+ * Expression that resembles the SYNC
+ */
 class ExpressionSync: public Expression {
 private:
 	ExpressionSync(const ExpressionSync&);

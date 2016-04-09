@@ -21,10 +21,18 @@ class Expression;
 #include "../../Expression.h"
 #include "ExpressionConstant.h"
 
+/**
+ * @Public
+ * @Constructor
+ */
 ExpressionConstant::ExpressionConstant(ParserUtils *parserUtils) :
 		Expression(parserUtils), value("") {
 }
 
+/**
+ * @Public
+ * @Destructor
+ */
 ExpressionConstant::~ExpressionConstant() {
 }
 
