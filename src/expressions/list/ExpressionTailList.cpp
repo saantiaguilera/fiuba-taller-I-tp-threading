@@ -39,7 +39,6 @@ void ExpressionTailList::parseEvaluation(Expression *expression) {
 				expressionEnvironment.begin();
 				iterator != expressionEnvironment.end(); ++iterator) {
 			flattenedEnvironment.push_back(*iterator);
-			std::cout << "Getting element from " << getTag() << std::endl;
 		}
 	}
 }

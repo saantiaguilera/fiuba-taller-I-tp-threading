@@ -1,9 +1,10 @@
 /*
- * ExpressionList.cpp
+ * ExpressionAppend.cpp
  *
- *  Created on: Apr 4, 2016
+ *  Created on: Apr 9, 2016
  *      Author: santiago
  */
+
 
 #include <string>
 #include <cstdio>
@@ -19,16 +20,16 @@ class Expression;
 #include "../../ParserUtils.h"
 #include "../../Expression.h"
 #include "../ExpressionCommon.h"
-#include "ExpressionList.h"
+#include "ExpressionAppend.h"
 
-ExpressionList::ExpressionList(ParserUtils *parserUtils) :
+ExpressionAppend::ExpressionAppend(ParserUtils *parserUtils) :
 		ExpressionCommon(parserUtils) {
 }
 
-ExpressionList::~ExpressionList() {
+ExpressionAppend::~ExpressionAppend() {
 }
 
-Expression * ExpressionList::evaluate() {
+Expression * ExpressionAppend::evaluate() {
 	clearValues();
 
 	for (std::list<Expression*>::const_iterator expressionIterator =
@@ -48,22 +49,22 @@ Expression * ExpressionList::evaluate() {
 	return this;
 }
 
-std::string ExpressionList::getTag() {
+std::string ExpressionAppend::getTag() {
 	return "List";
 }
 
-std::string ExpressionList::toString() {
+std::string ExpressionAppend::toString() {
 	std::string response;
 
 	response = "(";
 
-	std::list<Expression*>::const_iterator end = environment.end();
-	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin();
-			expressionIterator != end;) {
+	std::list<Element*>::const_iterator end = values.end();
+	for (std::list<Element*>::const_iterator elementIterator = values.begin();
+			elementIterator != end;) {
 
-		response += (*expressionIterator)->toString();
+		response += (**elementIterator);
 
-		if (++expressionIterator != end)
+		if (++elementIterator != end)
 			response += " ";
 	}
 

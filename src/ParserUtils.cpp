@@ -43,6 +43,7 @@ class Expression;
 #include "expressions/runtime/ExpressionFunction.h"
 #include "expressions/runtime/ExpressionVariable.h"
 #include "expressions/runtime/ExpressionSync.h"
+#include "expressions/list/ExpressionAppend.h"
 
 /**
  * Inner class for using as predicative
@@ -130,7 +131,7 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 	if (string == "cdr")
 		return new ExpressionTailList(this);
 	if (string == "append")
-		return new ExpressionList(this);
+		return new ExpressionAppend(this);
 	if (string == "if")
 		return new ExpressionIf(this);
 	if (string == "defun")

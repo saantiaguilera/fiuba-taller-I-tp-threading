@@ -16,9 +16,14 @@ class Expression;
 #include "ParserUtils.h"
 #include "Expression.h"
 
-int main() {
+int main(int argc, char *argv[]) {
 	ParserUtils parser;
 	std::string line;
+
+	if (argc > 1) {
+		std::cout << "ERROR: argumentos" << std::endl;
+		return 1;
+	}
 
 	while (std::getline(std::cin, line)) {
 		try {

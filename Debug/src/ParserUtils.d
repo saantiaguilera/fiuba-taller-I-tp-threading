@@ -17,7 +17,8 @@ src/ParserUtils.o: ../src/ParserUtils.cpp ../src/ParserUtils.h \
  ../src/expressions/misc/ExpressionPrint.h \
  ../src/expressions/runtime/ExpressionFunction.h \
  ../src/expressions/runtime/ExpressionVariable.h \
- ../src/expressions/runtime/ExpressionSync.h
+ ../src/expressions/runtime/ExpressionSync.h \
+ ../src/expressions/list/ExpressionAppend.h
 
 ../src/ParserUtils.h:
 
@@ -60,3 +61,5 @@ src/ParserUtils.o: ../src/ParserUtils.cpp ../src/ParserUtils.h \
 ../src/expressions/runtime/ExpressionVariable.h:
 
 ../src/expressions/runtime/ExpressionSync.h:
+
+../src/expressions/list/ExpressionAppend.h:
