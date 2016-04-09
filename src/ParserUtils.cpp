@@ -42,6 +42,7 @@ class Expression;
 #include "expressions/misc/ExpressionPrint.h"
 #include "expressions/runtime/ExpressionFunction.h"
 #include "expressions/runtime/ExpressionVariable.h"
+#include "expressions/runtime/ExpressionSync.h"
 
 /**
  * Inner class for using as predicative
@@ -139,7 +140,7 @@ Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
 	if (string == "setq")
 		return new ExpressionVariable(this);
 	if (string == "sync")
-		return 0;
+		return new ExpressionSync(this);
 
 	//If its a number or it has ""
 	if ((string.find_first_not_of("0123456789") == std::string::npos)

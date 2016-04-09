@@ -8,13 +8,15 @@
 #ifndef EXPRESSIONS_EXPRESSIONMULTIPLY_H_
 #define EXPRESSIONS_EXPRESSIONMULTIPLY_H_
 
+#include <string>
+
 class ExpressionMultiply: public ExpressionArithmetic {
 private:
 	ExpressionMultiply(const ExpressionMultiply&);
 	ExpressionMultiply& operator=(const ExpressionMultiply&);
 
 public:
-	ExpressionMultiply(ParserUtils *parserUtils);
+	explicit ExpressionMultiply(ParserUtils *parserUtils);
 	virtual ~ExpressionMultiply();
 	virtual int operate(int dest, int src);
 	virtual std::string getTag();

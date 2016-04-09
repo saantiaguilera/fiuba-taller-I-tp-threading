@@ -18,6 +18,9 @@
  * an own class
  */
 
+#include <string>
+#include <list>
+
 typedef std::string Element;
 
 class Expression {
@@ -34,7 +37,7 @@ protected:
 	void clearValues();
 
 public:
-	Expression(ParserUtils *parserUtils);
+	explicit Expression(ParserUtils *parserUtils);
 	virtual ~Expression();
 	virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
 	std::list<Element*> &getValues();

@@ -92,7 +92,6 @@ void ExpressionCommon::parseBody(std::string line) {
 
 			//Start again
 			i = 0;
-
 		}
 			break;
 		case ' ': //Do nothing, increment i
@@ -125,5 +124,4 @@ void ExpressionCommon::parseBody(std::string line) {
 			}
 		}
 	}
-
 }

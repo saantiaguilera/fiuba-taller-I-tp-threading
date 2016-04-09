@@ -8,6 +8,8 @@
 #ifndef EXPRESSIONS_EXPRESSIONCOMMON_H_
 #define EXPRESSIONS_EXPRESSIONCOMMON_H_
 
+#include <string>
+
 class ExpressionCommon: public Expression {
 private:
 	ExpressionCommon(const ExpressionCommon&);
@@ -16,7 +18,7 @@ private:
 	void parseInnerExpression(std::string &line, int startPosition);
 
 public:
-	ExpressionCommon(ParserUtils *parserUtils);
+	explicit ExpressionCommon(ParserUtils *parserUtils);
 	virtual ~ExpressionCommon();
 	virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
 
