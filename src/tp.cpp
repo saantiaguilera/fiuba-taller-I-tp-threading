@@ -28,8 +28,8 @@ int main() {
 		}
 	}
 
-	/*
-	std::string a = "(print (list 1 2 3)";
+/*
+	std::string a = "(print (cdr (car (list (list 1 2 3)))))";
 	try {
 		parser.run(a);
 	} catch (int exception) {

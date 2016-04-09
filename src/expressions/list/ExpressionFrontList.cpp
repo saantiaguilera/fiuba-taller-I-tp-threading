@@ -28,14 +28,20 @@ ExpressionFrontList::~ExpressionFrontList() {}
 
 Expression * ExpressionFrontList::evaluate() {
 	clearValues();
-
+	//CAR
 	std::list<Expression*>::const_iterator expressionIterator = environment.begin();
 
 	if(expressionIterator != environment.end()) {
-		std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
+		std::list<Expression*>::const_iterator innerExpressionIterator = ((*expressionIterator)->evaluate()->getEnvironment()).begin();
 
-		for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator)
-			getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
+		if (*innerExpressionIterator != NULL) {
+			std::list<Element*> values = (*innerExpressionIterator)->evaluate()->getValues();
+
+			for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
+				getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
+			//	std::cout << "Getting element from " << getTag() << ":: " << **elementIterator << std::endl;
+			}
+		}
 	}
 
 	return this;

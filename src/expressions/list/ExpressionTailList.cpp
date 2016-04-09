@@ -27,17 +27,23 @@ ExpressionTailList::~ExpressionTailList() {}
 
 Expression * ExpressionTailList::evaluate() {
 	clearValues();
-
+	//CDR
 	bool start = true;
 
 	for (std::list<Expression*>::const_iterator expressionIterator = environment.begin(); expressionIterator != environment.end(); ++expressionIterator) {
-		if (start)
-			start = false;
-		else {
-			std::list<Element*> values = ((*expressionIterator)->evaluate())->getValues();
+		std::list<Expression*>::const_iterator innerExpressionIterator = ((*expressionIterator)->getEnvironment()).begin();
 
-			for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator)
-				getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
+		if (*innerExpressionIterator != NULL) {
+			std::list<Element*> values = (*innerExpressionIterator)->evaluate()->getValues();
+
+			for (std::list<Element*>::const_iterator elementIterator = values.begin(); elementIterator != values.end(); ++elementIterator) {
+				if (start)
+					start = false;
+				else {
+					getValues().push_back(new Element(**elementIterator)); //Else it gets double deleted
+			//		std::cout << "Getting element from " << getTag() << ":: " << **elementIterator << std::endl;
+				}
+			}
 		}
 	}
 

@@ -64,6 +64,10 @@ void Expression::setEnvironment(std::list<Expression*> expressions) {
 	this->environment = expressions; //Todo check if this wont give a mem leak
 }
 
+std::list<Expression*> Expression::getEnvironment() {
+	return environment;
+}
+
 std::string Expression::toString() {
 	std::string returnString = "";
 
