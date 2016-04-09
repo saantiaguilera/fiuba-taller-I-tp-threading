@@ -1,3 +1,5 @@
 (print 1 2 3)
 (print (list 1 2 3)
 (+ 1 2)
+(print "Value: " 1 2 3)
+(print "Value: " "ERROR: (print (list 1 2 3)")
