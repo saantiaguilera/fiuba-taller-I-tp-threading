@@ -28,13 +28,5 @@ int main() {
 		}
 	}
 
-	/*
-	 std::string a = "(print (append (list) (list 1 2 3)))";
-	 try {
-	 parser.run(a);
-	 } catch (int exception) {
-	 std::cout << "ERROR: " << a << std::endl;
-	 }
-	 */
 	return 0;
 }
