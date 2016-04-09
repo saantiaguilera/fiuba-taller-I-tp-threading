@@ -19,10 +19,12 @@ private:
 public:
 	explicit ExpressionConstant(ParserUtils *parserUtils);
 	virtual ~ExpressionConstant();
+
 	virtual Expression * evaluate();
 	virtual void parseBody(std::string line);
-	virtual std::string getTag();
 	virtual std::string toString();
+
+	virtual std::string getTag();
 };
 
 #endif /* EXPRESSIONCONSTANT_H_ */

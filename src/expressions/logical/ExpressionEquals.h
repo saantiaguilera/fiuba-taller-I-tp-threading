@@ -15,10 +15,13 @@ private:
 	ExpressionEquals(const ExpressionEquals&);
 	ExpressionEquals& operator=(const ExpressionEquals&);
 
+protected:
+	virtual bool operate(int leftValue, int rightValue);
+
 public:
 	explicit ExpressionEquals(ParserUtils *parserUtils);
 	virtual ~ExpressionEquals();
-	virtual bool operate(int leftValue, int rightValue);
+
 	virtual std::string getTag();
 };
 

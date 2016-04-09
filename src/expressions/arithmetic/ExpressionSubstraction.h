@@ -15,10 +15,13 @@ private:
 	ExpressionSubstraction(const ExpressionSubstraction&);
 	ExpressionSubstraction& operator=(const ExpressionSubstraction&);
 
+protected:
+	virtual int operate(int dest, int src);
+
 public:
 	explicit ExpressionSubstraction(ParserUtils *parserUtils);
 	virtual ~ExpressionSubstraction();
-	virtual int operate(int dest, int src);
+
 	virtual std::string getTag();
 };
 

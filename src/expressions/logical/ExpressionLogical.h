@@ -15,12 +15,16 @@ private:
 	ExpressionLogical(const ExpressionLogical&);
 	ExpressionLogical& operator=(const ExpressionLogical&);
 
+protected:
+	virtual bool operate(int leftValue, int rightValue) = 0;
+
 public:
 	explicit ExpressionLogical(ParserUtils *parserUtils);
 	virtual ~ExpressionLogical();
-	virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
+
+	virtual std::string getTag() = 0;
+
 	virtual Expression * evaluate();
-	virtual bool operate(int leftValue, int rightValue) = 0;
 	virtual std::string toString();
 };
 

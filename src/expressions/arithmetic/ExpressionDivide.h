@@ -15,10 +15,13 @@ private:
 	ExpressionDivide(const ExpressionDivide&);
 	ExpressionDivide& operator=(const ExpressionDivide&);
 
+protected:
+	virtual int operate(int dest, int src);
+
 public:
 	explicit ExpressionDivide(ParserUtils *parserUtils);
 	virtual ~ExpressionDivide();
-	virtual int operate(int dest, int src);
+
 	virtual std::string getTag();
 };
 

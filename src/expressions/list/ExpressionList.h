@@ -18,7 +18,9 @@ private:
 public:
 	explicit ExpressionList(ParserUtils *parserUtils);
 	virtual ~ExpressionList();
-	virtual std::string getTag(); //known method ? NULL : runtime name tag
+
+	virtual std::string getTag();
+
 	virtual Expression * evaluate();
 	virtual std::string toString();
 };

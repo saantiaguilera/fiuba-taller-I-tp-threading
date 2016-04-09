@@ -15,10 +15,13 @@ private:
 	ExpressionMultiply(const ExpressionMultiply&);
 	ExpressionMultiply& operator=(const ExpressionMultiply&);
 
+protected:
+	virtual int operate(int dest, int src);
+
 public:
 	explicit ExpressionMultiply(ParserUtils *parserUtils);
 	virtual ~ExpressionMultiply();
-	virtual int operate(int dest, int src);
+
 	virtual std::string getTag();
 };
 

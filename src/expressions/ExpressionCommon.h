@@ -22,15 +22,16 @@ private:
 
 	void parseInnerExpression(std::string &line, int startPosition);
 
+protected:
+	virtual void injectExpression(Expression *expression);
+
 public:
 	explicit ExpressionCommon(ParserUtils *parserUtils);
 	virtual ~ExpressionCommon();
-	virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
+
+	virtual std::string getTag() = 0;
 
 	virtual void parseBody(std::string line);
-
-	virtual void injectExpression(Expression *expression);
-
 	virtual Expression * evaluate() = 0;
 };
 

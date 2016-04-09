@@ -24,10 +24,12 @@ private:
 public:
 	explicit ExpressionTailList(ParserUtils *parserUtils);
 	virtual ~ExpressionTailList();
-	virtual std::string getTag(); //known method ? NULL : runtime name tag
+
+	virtual std::string getTag();
+	virtual std::list<Expression*> * getEnvironment();
+
 	virtual Expression * evaluate();
 	virtual std::string toString();
-	virtual std::list<Expression*> * getEnvironment();
 };
 
 #endif /* EXPRESSIONS_LIST_EXPRESSIONTAILLIST_H_ */

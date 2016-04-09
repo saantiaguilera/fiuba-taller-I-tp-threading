@@ -22,12 +22,12 @@ private:
 public:
 	explicit ExpressionFunction(ParserUtils *parserUtils);
 	virtual ~ExpressionFunction();
+
 	virtual void parseBody(std::string line);
-	//Create a mutation of this expression (X-Method)
-	Expression * mutate(std::string variable);
-	//known method ? NULL : runtime name tag
-	virtual std::string getTag();
 	virtual Expression * evaluate();
+	Expression * mutate(std::string variable);
+
+	virtual std::string getTag();
 };
 
 #endif /* EXPRESSIONS_RUNTIME_EXPRESSIONFUNCTION_H_ */

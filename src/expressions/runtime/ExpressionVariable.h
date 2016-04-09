@@ -17,13 +17,16 @@ private:
 
 	std::string body;
 	std::string variableName;
+
 public:
 	explicit ExpressionVariable(ParserUtils *parserUtils);
 	virtual ~ExpressionVariable();
+
 	virtual void parseBody(std::string line);
-	virtual std::string getTag(); //known method ? NULL : runtime name tag
 	virtual Expression * evaluate();
 	Expression * mutate();
+
+	virtual std::string getTag();
 };
 
 #endif /* EXPRESSIONS_RUNTIME_EXPRESSIONVARIABLE_H_ */

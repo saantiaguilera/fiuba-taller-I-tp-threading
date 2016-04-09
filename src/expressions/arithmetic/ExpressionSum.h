@@ -15,10 +15,13 @@ private:
 	ExpressionSum(const ExpressionSum&);
 	ExpressionSum& operator=(const ExpressionSum&);
 
+protected:
+	virtual int operate(int dest, int src);
+
 public:
 	explicit ExpressionSum(ParserUtils *parserUtils);
 	virtual ~ExpressionSum();
-	virtual int operate(int dest, int src);
+
 	virtual std::string getTag();
 };
 

@@ -15,10 +15,13 @@ private:
 	ExpressionLower(const ExpressionLower&);
 	ExpressionLower& operator=(const ExpressionLower&);
 
+protected:
+	virtual bool operate(int leftValue, int rightValue);
+
 public:
 	explicit ExpressionLower(ParserUtils *parserUtils);
 	virtual ~ExpressionLower();
-	virtual bool operate(int leftValue, int rightValue);
+
 	virtual std::string getTag();
 };
 

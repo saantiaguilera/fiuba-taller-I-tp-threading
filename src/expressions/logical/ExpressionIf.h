@@ -17,16 +17,21 @@ class ExpressionIf: public ExpressionCommon {
 private:
 	ExpressionIf(const ExpressionIf&);
 	ExpressionIf& operator=(const ExpressionIf&);
+
 	Expression *condition;
 	Expression *trueExpression;
 	Expression *falseExpression;
 
+protected:
+	virtual void injectExpression(Expression *expression);
+
 public:
 	explicit ExpressionIf(ParserUtils *parserUtils);
 	virtual ~ExpressionIf();
-	virtual std::string getTag(); //known method ? NULL : runtime name tag
+
+	virtual std::string getTag();
+
 	virtual Expression * evaluate();
-	virtual void injectExpression(Expression *expression);
 	virtual std::string toString();
 };
 

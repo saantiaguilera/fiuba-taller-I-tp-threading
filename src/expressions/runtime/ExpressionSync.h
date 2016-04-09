@@ -18,8 +18,9 @@ private:
 public:
 	explicit ExpressionSync(ParserUtils *parserUtils);
 	virtual ~ExpressionSync();
+
 	virtual void parseBody(std::string line);
-	virtual std::string getTag(); //known method ? NULL : runtime name tag
+	virtual std::string getTag();
 	virtual Expression * evaluate();
 };
 

@@ -15,12 +15,16 @@ private:
 	ExpressionArithmetic(const ExpressionArithmetic&);
 	ExpressionArithmetic& operator=(const ExpressionArithmetic&);
 
+protected:
+	virtual int operate(int dest, int src) = 0;
+
 public:
 	explicit ExpressionArithmetic(ParserUtils *parserUtils);
 	virtual ~ExpressionArithmetic();
-	virtual std::string getTag() = 0; //known method ? NULL : runtime name tag
+
+	virtual std::string getTag() = 0;
+
 	virtual Expression * evaluate();
-	virtual int operate(int dest, int src) = 0;
 	virtual std::string toString();
 };
 

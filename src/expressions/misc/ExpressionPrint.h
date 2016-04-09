@@ -18,7 +18,9 @@ private:
 public:
 	explicit ExpressionPrint(ParserUtils *parserUtils);
 	virtual ~ExpressionPrint();
+
 	virtual Expression * evaluate();
+
 	virtual std::string getTag();
 };
 
