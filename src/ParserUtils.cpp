@@ -100,10 +100,11 @@ ParserUtils::~ParserUtils() {
 
 void ParserUtils::run(std::string &line) {
 	Expression *expression = parseExpression(line);
-	expression->evaluate();
 
 	if (expression->getTag() != "Defun" && expression->getTag() != "Setq")
 		history.push_back(expression);
+
+	expression->evaluate();
 }
 
 Expression * ParserUtils::expressionFromKnownStrings(std::string &string) {
@@ -201,11 +202,16 @@ Expression * ParserUtils::parseExpression(std::string &line) {
 			stuff = function;
 	}
 
-	if (expression != NULL) { //Runtime expression
-		expression = ((ExpressionFunction*) expression)->mutate(stuff);
-	} else { //Local expression
-		expression = expressionFromFunction(function);
-		expression->parseBody(stuff);
+	try {
+		if (expression != NULL) { //Runtime expression
+			expression = ((ExpressionFunction*) expression)->mutate(stuff);
+		} else { //Local expression
+			expression = expressionFromFunction(function);
+			expression->parseBody(stuff);
+		}
+	} catch (int exception) {
+		delete expression;
+		throw exception;
 	}
 
 	return expression;
